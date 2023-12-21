@@ -3079,7 +3079,6 @@ Style/ArgumentsForwarding:
   Description: 'Use arguments forwarding.'
   StyleGuide: '#arguments-forwarding'
   Enabled: pending
-  AllowOnlyRestArgument: true
   VersionAdded: '1.1'
 
 Style/ArrayCoercion:
