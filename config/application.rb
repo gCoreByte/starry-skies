@@ -33,6 +33,7 @@ module StarrySkies
       g.orm :active_record, primary_key_type: :uuid
       g.test_framework :rspec, fixture: true
       g.fixture_replacement :factory_bot, dir: 'spec/factories'
+      g.model_specs false
     end
   end
 end
