@@ -7,18 +7,14 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get 'up' => 'rails/health#show', as: :rails_health_check
 
-  authenticated :user do
-    root 'dashboard#index', as: :authenticated_root
-  end
+  resource :sessions
+  resource :admins
 
-  # Defines the root path route ("/")
-  unauthenticated do
-    scope module: 'unauthenticated' do
-      get '/about', to: 'home#about'
-      get '/contact_us', to: 'home#contact_us'
-      get '/pricing', to: 'home#pricing'
+  scope module: :unauthenticated do
+    get '/about', to: 'home#about'
+    get '/contact_us', to: 'home#contact_us'
+    get '/pricing', to: 'home#pricing'
 
-      root 'home#index'
-    end
+    root 'home#index'
   end
 end
