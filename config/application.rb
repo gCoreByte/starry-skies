@@ -34,6 +34,11 @@ module StarrySkies
       g.test_framework :rspec, fixture: true
       g.fixture_replacement :factory_bot, dir: 'spec/factories'
       g.model_specs false
+      g.jbuilder false
+      g.json false
+      g.helper_specs false
+      g.routing_specs false
+      g.view_specs false
     end
   end
 end

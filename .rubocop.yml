@@ -5618,3 +5618,9 @@ Style/ZeroLengthPredicate:
 Rails/WhereExists:
   Enabled: true
   EnforcedStyle: 'where'
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
