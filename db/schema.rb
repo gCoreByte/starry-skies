@@ -10,45 +10,104 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_21_064215) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_29_105645) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
+  create_table "admin_accounts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "display_name", null: false
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "password_digest", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "product_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "store_id", null: false
+    t.uuid "created_by_id", null: false
+    t.string "name", null: false
+    t.string "key", null: false
+    t.jsonb "translations", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_by_id"], name: "index_product_categories_on_created_by_id"
+    t.index ["store_id", "key"], name: "index_product_categories_on_store_id_and_key", unique: true
+    t.index ["store_id"], name: "index_product_categories_on_store_id"
+  end
+
+  create_table "product_prices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "locale", null: false
+    t.decimal "price", null: false
+    t.string "currency", null: false
+    t.datetime "deactivated_at"
+    t.uuid "store_id", null: false
+    t.uuid "created_by_id", null: false
+    t.uuid "product_version_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_by_id"], name: "index_product_prices_on_created_by_id"
+    t.index ["product_version_id", "locale", "currency"], name: "idx_on_product_version_id_locale_currency_42358d636c", unique: true, where: "(deactivated_at IS NOT NULL)"
+    t.index ["product_version_id"], name: "index_product_prices_on_product_version_id"
+    t.index ["store_id"], name: "index_product_prices_on_store_id"
+  end
+
+  create_table "product_versions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "store_id", null: false
+    t.uuid "product_id", null: false
+    t.uuid "created_by_id", null: false
+    t.text "description", null: false
+    t.integer "version", null: false
+    t.string "status", null: false
+    t.string "locales", default: [], null: false, array: true
+    t.datetime "activated_at"
+    t.datetime "deactivated_at"
+    t.jsonb "translations", default: {}, null: false
+    t.decimal "width"
+    t.decimal "length"
+    t.decimal "height"
+    t.decimal "weight"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_by_id"], name: "index_product_versions_on_created_by_id"
+    t.index ["product_id", "version"], name: "index_product_versions_on_product_id_and_version", unique: true
+    t.index ["product_id"], name: "index_product_versions_on_product_id"
+    t.index ["store_id"], name: "index_product_versions_on_store_id"
+  end
+
+  create_table "products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "store_id", null: false
+    t.string "name", null: false
+    t.string "key", null: false
+    t.integer "version", default: 0, null: false
+    t.string "status", null: false
+    t.datetime "activated_at"
+    t.datetime "deactivated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["store_id", "key"], name: "index_products_on_store_id_and_key", unique: true
+    t.index ["store_id"], name: "index_products_on_store_id"
+  end
+
   create_table "stores", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
+    t.string "key", null: false
     t.string "url"
+    t.string "locales", default: [], null: false, array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["key"], name: "index_stores_on_key", unique: true
+    t.index ["url"], name: "index_stores_on_url", unique: true, where: "(url IS NOT NULL)"
   end
 
-  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "store_id", null: false
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string "current_sign_in_ip"
-    t.string "last_sign_in_ip"
-    t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string "unconfirmed_email"
-    t.integer "failed_attempts", default: 0, null: false
-    t.string "unlock_token"
-    t.datetime "locked_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-    t.index ["email", "store_id"], name: "index_users_on_email_and_store_id", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["store_id"], name: "index_users_on_store_id"
-    t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
-  end
-
-  add_foreign_key "users", "stores"
+  add_foreign_key "product_categories", "admin_accounts", column: "created_by_id"
+  add_foreign_key "product_categories", "stores"
+  add_foreign_key "product_prices", "admin_accounts", column: "created_by_id"
+  add_foreign_key "product_prices", "product_versions"
+  add_foreign_key "product_prices", "stores"
+  add_foreign_key "product_versions", "admin_accounts", column: "created_by_id"
+  add_foreign_key "product_versions", "products"
+  add_foreign_key "product_versions", "stores"
+  add_foreign_key "products", "stores"
 end

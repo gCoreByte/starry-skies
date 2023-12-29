@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class CreateAdmins < ActiveRecord::Migration[7.1]
+class CreateAdminAccounts < ActiveRecord::Migration[7.1]
   def change
-    create_table :admins, id: :uuid do |t|
+    create_table :admin_accounts, id: :uuid do |t|
       t.string :display_name, null: false
       t.string :name, null: false
       t.string :email, null: false

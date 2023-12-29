@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Admin < ApplicationRecord
+class AdminAccount < ApplicationRecord
   has_secure_password
 
   validates :email, :display_name, :name, presence: true

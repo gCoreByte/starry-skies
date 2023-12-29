@@ -39,6 +39,7 @@ module StarrySkies
       g.helper_specs false
       g.routing_specs false
       g.view_specs false
+      g.helpers false
     end
   end
 end
