@@ -3,6 +3,11 @@
 class AdminAccount < ApplicationRecord
   has_secure_password
 
+  has_many :sessions, dependent: :destroy
+  has_many :admin_store_permissions, dependent: nil
+  has_many :admin_store_relationships, dependent: nil
+  has_many :stores, through: :admin_store_relationships
+
   validates :email, :display_name, :name, presence: true
   validates :email, length: { maximum: 100 }, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP },
                     allow_nil: true
@@ -20,8 +25,6 @@ class AdminAccount < ApplicationRecord
   generates_token_for :password_reset, expires_in: 20.minutes do
     password_salt.last(10)
   end
-
-  has_many :sessions, dependent: :destroy
 
   # FIXME: Move to service
   before_validation if: :email_changed?, on: :update do

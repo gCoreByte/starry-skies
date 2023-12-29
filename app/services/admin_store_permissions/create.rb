@@ -7,6 +7,8 @@ module AdminStorePermissions
     validates :admin_account, :store, :type_key, presence: true
 
     validate if: %i[admin_account store type_key] do
+      next errors.add(:base, :account_not_linked_to_store) unless admin_account.stores.include?(store)
+
       validate_model(admin_store_permission, :admin_account, :store, :type_key)
     end
 
