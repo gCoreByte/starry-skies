@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
+  # Authentication from auth-zero
   get  'sign_in', to: 'sessions#new'
   post 'sign_in', to: 'sessions#create'
   get  'sign_up', to: 'registrations#new'
@@ -19,8 +20,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get 'up' => 'rails/health#show', as: :rails_health_check
 
-  resource :admins
-
+  # Authenticated routes
   namespace :admin do
     resources :stores do
       resources :products do
