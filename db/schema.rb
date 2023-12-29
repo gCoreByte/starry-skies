@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_29_110817) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_29_134058) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -20,8 +20,32 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_29_110817) do
     t.string "name", null: false
     t.string "email", null: false
     t.string "password_digest", null: false
+    t.boolean "verified", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_admin_accounts_on_email", unique: true
+  end
+
+  create_table "admin_store_permissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "type_key", null: false
+    t.uuid "store_id", null: false
+    t.uuid "admin_account_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admin_account_id"], name: "index_admin_store_permissions_on_admin_account_id"
+    t.index ["store_id", "admin_account_id", "type_key"], name: "idx_on_store_id_admin_account_id_type_key_4b4085dd04", unique: true
+    t.index ["store_id"], name: "index_admin_store_permissions_on_store_id"
+  end
+
+  create_table "admin_store_relationships", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "store_id", null: false
+    t.uuid "admin_account_id", null: false
+    t.string "type_key", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admin_account_id"], name: "index_admin_store_relationships_on_admin_account_id"
+    t.index ["store_id", "admin_account_id"], name: "idx_on_store_id_admin_account_id_05666a13a8", unique: true
+    t.index ["store_id"], name: "index_admin_store_relationships_on_store_id"
   end
 
   create_table "product_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -110,6 +134,10 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_29_110817) do
     t.index ["url"], name: "index_stores_on_url", unique: true, where: "(url IS NOT NULL)"
   end
 
+  add_foreign_key "admin_store_permissions", "admin_accounts"
+  add_foreign_key "admin_store_permissions", "stores"
+  add_foreign_key "admin_store_relationships", "admin_accounts"
+  add_foreign_key "admin_store_relationships", "stores"
   add_foreign_key "product_categories", "admin_accounts", column: "created_by_id"
   add_foreign_key "product_categories", "stores"
   add_foreign_key "product_prices", "admin_accounts", column: "created_by_id"

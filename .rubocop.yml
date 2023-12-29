@@ -2841,7 +2841,7 @@ Naming/MemoizedInstanceVariableName:
   Enabled: true
   VersionAdded: '0.53'
   VersionChanged: '1.2'
-  EnforcedStyleForLeadingUnderscores: disallowed
+  EnforcedStyleForLeadingUnderscores: required
   SupportedStylesForLeadingUnderscores:
     - disallowed
     - required
@@ -3694,7 +3694,7 @@ Style/EmptyMethod:
   StyleGuide: '#no-single-line-methods'
   Enabled: true
   VersionAdded: '0.46'
-  EnforcedStyle: compact
+  EnforcedStyle: expanded
   SupportedStyles:
     - compact
     - expanded
@@ -3977,7 +3977,7 @@ Style/HashSyntax:
     # enforces both ruby19 and no_mixed_keys styles
     - ruby19_no_mixed_keys
   # Force hashes that have a hash value omission
-  EnforcedShorthandSyntax: always
+  EnforcedShorthandSyntax: never
   SupportedShorthandSyntax:
     # forces use of the 3.1 syntax (e.g. {foo:}) when the hash key and value are the same.
     - always
@@ -5623,4 +5623,8 @@ RSpec/MultipleExpectations:
   Enabled: false
 
 RSpec/ExampleLength:
+  Enabled: false
+
+Rails/UnknownEnv:
+  # local? not found
   Enabled: false

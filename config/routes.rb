@@ -30,6 +30,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
       end
 
       resources :product_categories
+      resources :admin_store_permissions, only: %i[index create destroy]
+      resources :admin_store_relationships, only: %i[index create destroy]
     end
   end
 

@@ -1,0 +1,17 @@
+store.manage:
+  features:
+    - base
+  description: Allows a user to manage the store.
+  experimental: true
+
+product.create:
+  features:
+    - base
+  description: Allows a user to create a product.
+  experimental: true
+
+product.delete:
+  features:
+    - base
+  description: Allows a user to delete a product.
+  experimental: true
