@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_29_134058) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_30_100924) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -46,6 +46,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_29_134058) do
     t.index ["admin_account_id"], name: "index_admin_store_relationships_on_admin_account_id"
     t.index ["store_id", "admin_account_id"], name: "idx_on_store_id_admin_account_id_05666a13a8", unique: true
     t.index ["store_id"], name: "index_admin_store_relationships_on_store_id"
+  end
+
+  create_table "packages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.decimal "price", precision: 20, scale: 2, null: false
+    t.string "name", null: false
+    t.string "key", null: false
+    t.string "features", default: [], null: false, array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["key"], name: "index_packages_on_key", unique: true
   end
 
   create_table "product_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
