@@ -48,27 +48,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_30_111122) do
     t.index ["store_id"], name: "index_admin_store_relationships_on_store_id"
   end
 
-  create_table "fingerprints", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "type_key", null: false
-    t.string "ip_address"
-    t.string "user_agent"
-    t.string "digest"
-    t.uuid "admin_account_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["admin_account_id"], name: "index_fingerprints_on_admin_account_id"
-  end
-
-  create_table "packages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.decimal "price", precision: 20, scale: 2, null: false
-    t.string "name", null: false
-    t.string "key", null: false
-    t.string "features", default: [], null: false, array: true
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["key"], name: "index_packages_on_key", unique: true
-  end
-
   create_table "product_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "store_id", null: false
     t.uuid "created_by_id", null: false
