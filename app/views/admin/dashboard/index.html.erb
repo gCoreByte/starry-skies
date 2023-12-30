@@ -1,0 +1,9 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Dashboard</h1>
+
+<div id="stores">
+  <% @stores.each do |store| %>
+    <%= render partial: 'admin/dashboard/store', locals: {store: store} %>
+  <% end %>
+</div>

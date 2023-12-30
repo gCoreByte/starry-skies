@@ -20,5 +20,9 @@ module Admin
       Current.user_agent = request.user_agent
       Current.ip_address = request.ip
     end
+
+    def current_user
+      Current.admin_account
+    end
   end
 end

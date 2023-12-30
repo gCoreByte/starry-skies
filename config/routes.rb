@@ -22,6 +22,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
   # Authenticated routes
   namespace :admin do
+    resources :dashboard, only: :index
     resources :stores do
       resources :products do
         resources :product_versions do
