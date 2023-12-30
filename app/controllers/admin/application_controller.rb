@@ -24,5 +24,9 @@ module Admin
     def current_user
       Current.admin_account
     end
+
+    def fingerprint
+      @_fingerprint ||= Fingerprint.from_user(current_user, Current.ip_address, Current.user_agent)
+    end
   end
 end
