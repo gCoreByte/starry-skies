@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
       @session = admin_account.sessions.create!
       cookies.signed.permanent[:session_token] = { value: @session.id, httponly: true }
 
-      redirect_to root_path
+      redirect_to admin_dashboard_index_path
     else
       redirect_to sign_in_path(email_hint: params[:email])
     end

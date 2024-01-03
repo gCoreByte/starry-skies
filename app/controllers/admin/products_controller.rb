@@ -1,20 +1,22 @@
 # frozen_string_literal: true
 
 module Admin
-  class ProductsController < ApplicationController
+  class ProductsController < Admin::ApplicationController
     before_action :set_product, only: %i[show edit update destroy]
 
     def index
       @products = Product.all
     end
 
-    def show; end
+    def show
+    end
 
     def new
       @product = Product.new
     end
 
-    def edit; end
+    def edit
+    end
 
     def create
       @product = Product.new(product_params)

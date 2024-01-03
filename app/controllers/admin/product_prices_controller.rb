@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ProductPricesController < ApplicationController
+class ProductPricesController < Admin::ApplicationController
   before_action :set_product_price, only: %i[show edit update destroy]
 
   # GET /product_prices or /product_prices.json
@@ -9,7 +9,8 @@ class ProductPricesController < ApplicationController
   end
 
   # GET /product_prices/1 or /product_prices/1.json
-  def show; end
+  def show
+  end
 
   # GET /product_prices/new
   def new
@@ -17,7 +18,8 @@ class ProductPricesController < ApplicationController
   end
 
   # GET /product_prices/1/edit
-  def edit; end
+  def edit
+  end
 
   # POST /product_prices or /product_prices.json
   def create

@@ -1,20 +1,22 @@
 # frozen_string_literal: true
 
 module Admin
-  class StoresController < ApplicationController
+  class StoresController < Admin::ApplicationController
     before_action :set_store, only: %i[show edit update destroy]
 
     def index
-      @stores = Store.all
+      @stores = current_user.stores.all
     end
 
-    def show; end
+    def show
+    end
 
     def new
       @store = Store.new
     end
 
-    def edit; end
+    def edit
+    end
 
     def create
       @store = Store.new(store_params)
@@ -47,7 +49,7 @@ module Admin
     end
 
     def store_params
-      params.require(:store).permit(:name)
+      params.require(:store).permit(:name, :key, :url, locales: [])
     end
   end
 end
