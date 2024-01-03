@@ -36,11 +36,9 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     end
   end
 
-  scope module: :unauthenticated do
-    get '/about', to: 'home#about'
-    get '/contact_us', to: 'home#contact_us'
-    get '/pricing', to: 'home#pricing'
+  get '/about', to: 'home#about'
+  get '/contact_us', to: 'home#contact_us'
+  get '/pricing', to: 'home#pricing'
 
-    root 'home#index'
-  end
+  root 'home#index'
 end

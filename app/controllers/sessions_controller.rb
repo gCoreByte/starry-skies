@@ -9,7 +9,8 @@ class SessionsController < ApplicationController
     @sessions = Current.admin_account.sessions.order(created_at: :desc)
   end
 
-  def new; end
+  def new
+  end
 
   def create # rubocop:disable Metrics/AbcSize
     if (admin_account = AdminAccount.authenticate_by(email: params[:email], password: params[:password]))

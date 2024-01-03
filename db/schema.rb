@@ -16,8 +16,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_30_111122) do
   enable_extension "plpgsql"
 
   create_table "admin_accounts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "display_name", null: false
-    t.string "name", null: false
     t.string "email", null: false
     t.string "password_digest", null: false
     t.boolean "verified", default: false, null: false

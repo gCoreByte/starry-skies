@@ -5,6 +5,8 @@ module Admin
     before_action :set_current_request_details
     before_action :authenticate
 
+    layout 'main'
+
     private
 
     def authenticate
@@ -22,7 +24,7 @@ module Admin
     end
 
     def current_user
-      Current.admin_account
+      @current_user ||= Current.admin_account # rubocop:disable Naming/MemoizedInstanceVariableName
     end
 
     def fingerprint
