@@ -19,4 +19,18 @@ module ViewHelper
     type = time.respond_to?(:sec) ? 'time' : 'date'
     I18n.t(:"#{type}.formats.#{key}", raise: true, object: time, locale: I18n.locale)
   end
+
+  def horizontal_form_for(record, options = {}, &)
+    simple_form_for(record, options.merge(wrapper_mappings: HORIZONTAL_FORM_CONFIG), &)
+  end
+
+  def vertical_form_for(record, options = {}, &)
+    simple_form_for(record, options.merge(wrapper_mappings: VERTICAL_FORM_CONFIG), &)
+  end
+
+  def inline_form_for(record, options = {}, &)
+    options[:html] ||= {}
+    options[:html][:class] = [options[:html][:class], 'form-inline'].compact
+    simple_form_for(record, options.merge(wrapper_mappings: INLINE_FORM_CONFIG), &)
+  end
 end
