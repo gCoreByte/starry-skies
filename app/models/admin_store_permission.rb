@@ -5,7 +5,7 @@ class AdminStorePermission < ApplicationRecord
   belongs_to :admin_account
 
   validates :type_key, presence: true
-  validates :type_key, inclusion: { in: self.class.type_keys }, allow_nil: true
+  validates :type_key, inclusion: { in: :type_keys }, allow_nil: true
 
   class << self
     def permissions
