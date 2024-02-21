@@ -1,9 +1,31 @@
 <p style="color: green"><%= notice %></p>
-
-<%= render @store %>
-
+<div class="row">
+  <div class="col-xl-6">
+    <div class="card mb-3 border">
+      <div class="card-header">
+        <h2 class="card-title">
+          Store Details
+        </h2>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <tbody>
+            <tr>
+              <th>Name</th>
+              <td><%= @store.name %></td>
+            </tr>
+            <tr>
+              <th>Package</th>
+              <td><%= @store.package&.name || 'None' %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 <div>
   <%= link_to "Edit this store", edit_admin_store_path(@store) %> |
   <%= link_to "Back to stores", admin_stores_path %> |
-  <%= link_to "Destroy this store", admin_store_path(@store), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
+  <%= link_to "Destroy this store", admin_store_path(@store), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %> |
 </div>

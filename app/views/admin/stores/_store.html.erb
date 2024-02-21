@@ -1,7 +1,16 @@
 <div id="<%= dom_id store %>">
-  <p>
-    <strong>Name:</strong>
-    <%= store.name %>
-  </p>
-
+  <div class="table-responsive">
+    <table class="table">
+      <tbody>
+        <tr>
+          <th>Name</th>
+          <td><%= @store.name %></td>
+        </tr>
+        <tr>
+          <th>Package</th>
+          <td><%= @store.package&.name || 'None' %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

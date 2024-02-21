@@ -144,12 +144,10 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_30_111122) do
 
   create_table "stores", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
-    t.string "key", null: false
     t.string "url"
     t.string "locales", default: [], null: false, array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["key"], name: "index_stores_on_key", unique: true
     t.index ["url"], name: "index_stores_on_url", unique: true, where: "(url IS NOT NULL)"
   end
 

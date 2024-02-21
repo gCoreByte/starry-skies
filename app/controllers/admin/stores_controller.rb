@@ -49,7 +49,7 @@ module Admin
     end
 
     def store_params
-      params.require(:store).permit(:name, :key, :url, locales: [])
+      params.require(:store).permit(:name, :url, locales: [])
     end
   end
 end
