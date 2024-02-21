@@ -92,7 +92,3 @@ gem 'bootstrap', '~> 5.3'
 gem 'sassc-rails', '~> 2.1'
 
 gem 'authentication-zero', '~> 3.0'
-
-gem 'simple_form', '~> 5.3'
-
-gem 'country_select', '~> 9.0'
