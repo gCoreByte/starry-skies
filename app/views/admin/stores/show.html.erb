@@ -15,8 +15,52 @@
               <td><%= @store.name %></td>
             </tr>
             <tr>
+              <th>URL</th>
+              <td><%= @store.url %></td>
+            </tr>
+            <tr>
               <th>Package</th>
               <td><%= @store.package&.name || 'None' %></td>
+            </tr>
+            <tr>
+              <th>Revenue</th>
+              <td><%= @store.revenue %></td>
+            </tr>
+            <tr>
+              <th>Sales</th>
+              <td><%= @store.sales %></td>
+            </tr>
+            <tr>
+              <th>Created at</th>
+              <td><%= time_tag(@store.created_at) %></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-6">
+    <div class="card mb-3 border">
+      <div class="card-header">
+        <h2 class="card-title">
+          Store Data
+        </h2>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <tbody>
+            <tr>
+              <%# <td><%= link_to "Products", admin_store_products_path(@store) %></td> %>
+            </tr>
+            <tr>
+              <%# <td><%= link_to "Orders", admin_store_orders_path(@store) %></td> %>
+            </tr>
+            <tr>
+              <%# <td><%= link_to "Notices", admin_store_notices_path(@store) %></td> %>
+            </tr>
+            <tr>
+              <%# <td><%= link_to "Settings", admin_store_settings_path(@store) %></td> %>
             </tr>
           </tbody>
         </table>

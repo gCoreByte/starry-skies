@@ -10,4 +10,14 @@ class Store < ApplicationRecord
   validates :name, presence: true
   validates :name, length: { minimum: 3, maximum: 100 }, allow_nil: true
   validates :url, length: { maximum: 100 }, allow_nil: true
+
+  def revenue
+    # FIXME
+    0
+  end
+
+  def sales
+    # FIXME
+    0
+  end
 end
