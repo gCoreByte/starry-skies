@@ -14,7 +14,10 @@ module Admin
     private
 
     def authenticate
-      redirect_to sign_in_path unless @current_user
+      return if @current_user
+
+      cookies[:store_id].delete
+      redirect_to sign_in_path
     end
 
     def set_current_user
@@ -26,7 +29,7 @@ module Admin
     end
 
     def set_store
-      Current.store = current_user.stores.find(cookies[:store_id])
+      Current.store = current_user.stores.find_by(id: cookies[:store_id])
       @store = Current.store
     end
 

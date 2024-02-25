@@ -25,4 +25,9 @@ class Store < ApplicationRecord
     # FIXME
     0
   end
+
+  def open_issues
+    # FIXME
+    0
+  end
 end
