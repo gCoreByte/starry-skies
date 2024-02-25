@@ -19,7 +19,7 @@ module Admin
     end
 
     def create
-      @store = Store.new(store_params)
+      @store = Store.new(create_params)
 
       if @store.save
         redirect_to admin_store_url(@store)
@@ -29,7 +29,7 @@ module Admin
     end
 
     def update
-      if @store.update(store_params)
+      if @store.update(update_params)
         redirect_to admin_store_url(@store)
       else
         render :edit, status: :unprocessable_entity
@@ -48,8 +48,12 @@ module Admin
       @store = Store.find(params[:id])
     end
 
-    def store_params
-      params.require(:store).permit(:name, :url, locales: []).merge!(created_by: fingerprint)
+    def create_params
+      params.require(:store).permit(:name, :url, locales: []).merge!(created_by: fingerprint, updated_by: fingerprint)
+    end
+
+    def update_params
+      params.require(:store).permit(:name, :url, locales: []).merge!(updated_by: fingerprint)
     end
   end
 end

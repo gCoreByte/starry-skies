@@ -7,6 +7,7 @@ class Store < ApplicationRecord
 
   belongs_to :package, optional: true
   belongs_to :created_by, class_name: 'Fingerprint'
+  belongs_to :updated_by, class_name: 'Fingerprint'
 
   validates :name, presence: true
   validates :name, length: { minimum: 3, maximum: 100 }, allow_nil: true
