@@ -19,9 +19,10 @@ module Admin
     end
 
     def create
-      @store = Store.new(create_params)
+      service = Stores::Create.new(admin_account: current_user, fingerprint: fingerprint, payload: create_params)
 
-      if @store.save
+      @store = service.store
+      if service.save!
         redirect_to admin_store_url(@store)
       else
         render :new, status: :unprocessable_entity

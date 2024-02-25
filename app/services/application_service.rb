@@ -5,15 +5,16 @@ class ApplicationService
   include ActiveModel::Attributes
   include Mixins::ValidateModel
 
-  attr_writer :fingerprint # Calling user
+  # FIXME: Reimplement features properly
+  # attr_writer :fingerprint # Calling user
 
-  validate do
-    errors.add(:base, :missing_feature) unless fingerprint.features.intersect?(features)
-  end
+  # validate do
+  #   errors.add(:base, :missing_feature) unless store.features.intersect?(features)
+  # end
 
-  def features
-    %w[base]
-  end
+  # def features
+  #   %w[base]
+  # end
 
   def save
     save!
