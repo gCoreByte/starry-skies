@@ -5,6 +5,6 @@ FactoryBot.define do
     price { '9.99' }
     name { 'MyString' }
     key { 'MyString' }
-    features { 'MyString' }
+    features { [Features::BASE] }
   end
 end

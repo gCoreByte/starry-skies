@@ -4,6 +4,6 @@ FactoryBot.define do
   factory :admin_store_relationship do
     store { association(:store) }
     admin_account { association(:admin_account) }
-    type_key { 'MyString' }
+    type_key { AdminStoreRelationship::TypeKeys::ADMIN }
   end
 end

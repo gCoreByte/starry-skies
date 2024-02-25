@@ -17,6 +17,7 @@ class ProductVersion < ApplicationRecord
   belongs_to :created_by, class_name: 'Fingerprint'
   belongs_to :updated_by, class_name: 'Fingerprint'
 
+  belongs_to :store
   belongs_to :product
 
   # FIXME: Move to mixin

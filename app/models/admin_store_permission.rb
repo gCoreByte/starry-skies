@@ -18,4 +18,8 @@ class AdminStorePermission < ApplicationRecord
       @_type_keys ||= permissions.keys
     end
   end
+
+  def type_keys
+    self.class.type_keys
+  end
 end

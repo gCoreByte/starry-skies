@@ -4,6 +4,7 @@ FactoryBot.define do
   factory :store do
     name { 'cool store' }
     url { 'https://www.example.com' }
-    key { 'cool_store' }
+    created_by { association(:fingerprint) }
+    updated_by { created_by }
   end
 end
