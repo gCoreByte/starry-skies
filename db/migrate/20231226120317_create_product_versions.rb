@@ -5,7 +5,8 @@ class CreateProductVersions < ActiveRecord::Migration[7.1]
     create_table :product_versions, id: :uuid do |t|
       t.references :store, null: false, foreign_key: true, type: :uuid, index: true
       t.references :product, null: false, foreign_key: true, type: :uuid, index: true
-      t.references :created_by, null: false, foreign_key: { to_table: :admin_accounts }, type: :uuid, index: true
+      t.references :created_by, foreign_key: { to_table: :fingerprints }, type: :uuid, null: false
+      t.references :updated_by, foreign_key: { to_table: :fingerprints }, type: :uuid, null: false
       t.text :description, null: false
       t.integer :version, null: false
       t.string :status, null: false

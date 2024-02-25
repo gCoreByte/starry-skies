@@ -7,6 +7,9 @@ class CreateStores < ActiveRecord::Migration[7.1]
       t.string :url, index: { unique: true, where: 'url IS NOT NULL' }
       t.string :locales, array: true, null: false, default: []
 
+      t.references :created_by, foreign_key: { to_table: :fingerprints }, type: :uuid, null: false
+      t.references :updated_by, foreign_key: { to_table: :fingerprints }, type: :uuid, null: false
+
       t.timestamps
     end
   end

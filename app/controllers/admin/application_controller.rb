@@ -28,5 +28,11 @@ module Admin
       Current.user_agent = request.user_agent
       Current.ip_address = request.ip
     end
+
+    def fingerprint
+      return unless defined?(@fingerprint)
+
+      @fingerprint = Fingerprint.from_user(@current_user, Current.ip_address, Current.user_agent)
+    end
   end
 end

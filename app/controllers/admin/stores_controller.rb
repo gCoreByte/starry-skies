@@ -49,7 +49,7 @@ module Admin
     end
 
     def store_params
-      params.require(:store).permit(:name, :url, locales: [])
+      params.require(:store).permit(:name, :url, locales: []).merge!(created_by: fingerprint)
     end
   end
 end

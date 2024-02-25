@@ -5,11 +5,12 @@ class Store < ApplicationRecord
   has_many :admin_store_relationships, dependent: nil
   has_many :admin_accounts, through: :admin_store_relationships
 
-  belongs_to :package
+  belongs_to :package, optional: true
+  belongs_to :created_by, class_name: 'Fingerprint'
 
   validates :name, presence: true
   validates :name, length: { minimum: 3, maximum: 100 }, allow_nil: true
-  validates :url, length: { maximum: 100 }, allow_nil: true
+  validates :url, length: { maximum: 100 }, allow_nil: true # FIXME: URL validation
 
   def revenue
     # FIXME

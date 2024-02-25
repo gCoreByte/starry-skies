@@ -8,7 +8,8 @@ class CreateProductPrices < ActiveRecord::Migration[7.1]
       t.string :currency, null: false
       t.datetime :deactivated_at
       t.references :store, null: false, foreign_key: true, type: :uuid, index: true
-      t.references :created_by, null: false, foreign_key: { to_table: :admin_accounts }, type: :uuid, index: true
+      t.references :created_by, foreign_key: { to_table: :fingerprints }, type: :uuid, null: false
+      t.references :updated_by, foreign_key: { to_table: :fingerprints }, type: :uuid, null: false
       t.references :product_version, null: false, foreign_key: true, type: :uuid, index: true
 
       t.timestamps
