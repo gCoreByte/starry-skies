@@ -9,8 +9,6 @@ class CreateProducts < ActiveRecord::Migration[7.1]
 
       t.string :name, null: false
       t.string :key, null: false
-      t.integer :version, null: false, default: 0
-      t.string :status, null: false
       t.datetime :activated_at
       t.datetime :deactivated_at
 

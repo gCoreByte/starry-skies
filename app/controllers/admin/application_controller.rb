@@ -30,9 +30,9 @@ module Admin
     end
 
     def fingerprint
-      return unless defined?(@fingerprint)
+      return @_fingerprint if defined?(@_fingerprint)
 
-      @fingerprint = Fingerprint.from_user(@current_user, Current.ip_address, Current.user_agent)
+      @_fingerprint = Fingerprint.from_user(@current_user, Current.ip_address, Current.user_agent)
     end
   end
 end

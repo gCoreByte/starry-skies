@@ -7,9 +7,8 @@ class CreateProductVersions < ActiveRecord::Migration[7.1]
       t.references :product, null: false, foreign_key: true, type: :uuid, index: true
       t.references :created_by, foreign_key: { to_table: :fingerprints }, type: :uuid, null: false
       t.references :updated_by, foreign_key: { to_table: :fingerprints }, type: :uuid, null: false
-      t.text :description, null: false
+      t.text :description
       t.integer :version, null: false
-      t.string :status, null: false
       t.string :locales, array: true, null: false, default: []
       t.datetime :activated_at
       t.datetime :deactivated_at
@@ -19,6 +18,9 @@ class CreateProductVersions < ActiveRecord::Migration[7.1]
       t.decimal :length
       t.decimal :height
       t.decimal :weight
+
+      t.string :weight_unit
+      t.string :size_unit
 
       t.timestamps
     end

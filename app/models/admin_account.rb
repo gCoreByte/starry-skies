@@ -9,10 +9,11 @@ class AdminAccount < ApplicationRecord
   has_many :stores, through: :admin_store_relationships
   has_many :fingerprints, dependent: nil
 
-  validates :email, presence: true
+  validates :email, :name, presence: true
   validates :email, length: { maximum: 100 }, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP },
                     allow_nil: true
   validates :password, length: { minimum: 8 }, allow_nil: true
+  validates :name, length: { minimum: 3, maximum: 100 }, allow_nil: true
 
   normalizes :email, with: ->(email) { email&.strip&.downcase }
 

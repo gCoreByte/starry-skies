@@ -24,9 +24,9 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   namespace :admin do
     resources :dashboard, only: :index
     resources :stores do
-      resources :products do
-        resources :product_versions do
-          resources :product_prices
+      resources :products, shallow: true do
+        resources :product_versions, shallow: true do
+          resources :product_prices, shallow: true
         end
       end
 

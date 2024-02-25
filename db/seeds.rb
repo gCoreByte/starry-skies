@@ -11,7 +11,9 @@
 #   end
 
 unless AdminAccount.find_by(email: 'admin@corebyte.ee')
-  AdminAccount.new(email: 'admin@corebyte.ee', password: 'password', password_confirmation: 'password').save!
+  AdminAccount.new(
+    email: 'admin@corebyte.ee', name: 'CoreByte', password: 'password', password_confirmation: 'password'
+  ).save!
 end
 
 # Packages

@@ -23,6 +23,19 @@ class Fingerprint < ApplicationRecord
     scope key.to_sym, -> { where(type_key: key) }
   end
 
+  def name
+    case type_key
+    when TypeKeys::SYSTEM
+      'system'
+    when TypeKeys::CONSOLE
+      'console'
+    when TypeKeys::USER
+      admin_account.name
+    else
+      raise "Unknown type_key: #{type_key}"
+    end
+  end
+
   class << self
     def from_user(admin_account, ip_address, user_agent)
       Fingerprint.find_or_create_by!(
