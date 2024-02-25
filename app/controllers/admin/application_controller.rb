@@ -4,6 +4,7 @@ module Admin
   class ApplicationController < ActionController::Base
     before_action :set_current_request_details
     before_action :set_current_user
+    before_action :set_store
     before_action :authenticate
 
     layout 'main'
@@ -22,6 +23,11 @@ module Admin
 
       Current.session = session_record
       @current_user ||= Current.admin_account # rubocop:disable Naming/MemoizedInstanceVariableName
+    end
+
+    def set_store
+      Current.store = current_user.stores.find(cookies[:store_id])
+      @store = Current.store
     end
 
     def set_current_request_details

@@ -47,6 +47,7 @@ module Admin
 
     def set_store
       @store = Store.find(params[:id])
+      cookies[:store_id] = @store.id
     end
 
     def create_params

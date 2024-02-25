@@ -2,7 +2,6 @@
 
 module Admin
   class ProductsController < Admin::ApplicationController
-    before_action :set_store, only: %i[index new create]
     before_action :set_product, only: %i[show edit update destroy]
 
     def index
@@ -45,12 +44,6 @@ module Admin
     end
 
     private
-
-    def set_store
-      @store = Store.find(params[:store_id])
-    rescue ActiveRecord::RecordNotFound
-      render :not_found, status: :not_found
-    end
 
     def set_product
       @product = Product.find(params[:id])
