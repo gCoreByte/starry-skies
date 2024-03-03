@@ -5,5 +5,6 @@ FactoryBot.define do
     type_key { 'product.create' }
     store { association(:store) }
     admin_account { association(:admin_account) }
+    created_by { association(:fingerprint) }
   end
 end

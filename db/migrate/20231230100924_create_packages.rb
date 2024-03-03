@@ -10,5 +10,9 @@ class CreatePackages < ActiveRecord::Migration[7.1]
 
       t.timestamps
     end
+
+    change_table :stores, bulk: true do |t|
+      t.references :package, foreign_key: true, type: :uuid, index: true, null: false
+    end
   end
 end

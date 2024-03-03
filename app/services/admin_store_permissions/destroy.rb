@@ -2,9 +2,9 @@
 
 module AdminStorePermissions
   class Destroy < ApplicationService
-    attr_accessor :admin_store_permission
+    attr_accessor :admin_store_permission, :fingerprint
 
-    validates :admin_store_permission, presence: true
+    validates :admin_store_permission, :fingerprint, presence: true
 
     protected
 

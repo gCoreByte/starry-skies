@@ -10,6 +10,7 @@ class AdminStoreRelationship < ApplicationRecord
 
   belongs_to :store
   belongs_to :admin_account
+  belongs_to :created_by, class_name: 'Fingerprint'
 
   validates :type_key, presence: true
   validates :type_key, inclusion: { in: TypeKeys::ALL }, allow_nil: true

@@ -5629,3 +5629,15 @@ RSpec/ExampleLength:
 Rails/UnknownEnv:
   # local? not found
   Enabled: false
+
+RSpec/NamedSubject:
+  Enabled: false
+
+RSpec/LetSetup:
+  Enabled: false
+
+RSpec/LeadingSubject:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Enabled: false

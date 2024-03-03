@@ -29,9 +29,11 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_30_100924) do
     t.string "type_key", null: false
     t.uuid "store_id", null: false
     t.uuid "admin_account_id", null: false
+    t.uuid "created_by_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["admin_account_id"], name: "index_admin_store_permissions_on_admin_account_id"
+    t.index ["created_by_id"], name: "index_admin_store_permissions_on_created_by_id"
     t.index ["store_id", "admin_account_id", "type_key"], name: "idx_on_store_id_admin_account_id_type_key_4b4085dd04", unique: true
     t.index ["store_id"], name: "index_admin_store_permissions_on_store_id"
   end
@@ -39,10 +41,12 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_30_100924) do
   create_table "admin_store_relationships", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "store_id", null: false
     t.uuid "admin_account_id", null: false
+    t.uuid "created_by_id", null: false
     t.string "type_key", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["admin_account_id"], name: "index_admin_store_relationships_on_admin_account_id"
+    t.index ["created_by_id"], name: "index_admin_store_relationships_on_created_by_id"
     t.index ["store_id", "admin_account_id"], name: "idx_on_store_id_admin_account_id_05666a13a8", unique: true
     t.index ["store_id"], name: "index_admin_store_relationships_on_store_id"
   end
@@ -160,14 +164,18 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_30_100924) do
     t.uuid "updated_by_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "package_id", null: false
     t.index ["created_by_id"], name: "index_stores_on_created_by_id"
+    t.index ["package_id"], name: "index_stores_on_package_id"
     t.index ["updated_by_id"], name: "index_stores_on_updated_by_id"
     t.index ["url"], name: "index_stores_on_url", unique: true, where: "(url IS NOT NULL)"
   end
 
   add_foreign_key "admin_store_permissions", "admin_accounts"
+  add_foreign_key "admin_store_permissions", "fingerprints", column: "created_by_id"
   add_foreign_key "admin_store_permissions", "stores"
   add_foreign_key "admin_store_relationships", "admin_accounts"
+  add_foreign_key "admin_store_relationships", "fingerprints", column: "created_by_id"
   add_foreign_key "admin_store_relationships", "stores"
   add_foreign_key "fingerprints", "admin_accounts"
   add_foreign_key "product_categories", "fingerprints", column: "created_by_id"
@@ -187,4 +195,5 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_30_100924) do
   add_foreign_key "sessions", "admin_accounts"
   add_foreign_key "stores", "fingerprints", column: "created_by_id"
   add_foreign_key "stores", "fingerprints", column: "updated_by_id"
+  add_foreign_key "stores", "packages"
 end
