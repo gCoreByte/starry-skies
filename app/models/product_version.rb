@@ -35,6 +35,10 @@ class ProductVersion < ApplicationRecord
 
   # FIXME: Add validation to disallow unit without values
 
+  def title
+    "#{product.name} V#{version}"
+  end
+
   def set_version
     return unless product
 

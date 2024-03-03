@@ -47,12 +47,14 @@
     <div class="card mb-3 border">
       <div class="card-header">
         <h2 class="card-title">
-          Store Data
+          Product Data
         </h2>
       </div>
       <div class="table-responsive">
         <table class="table table-bordered table-striped">
           <tbody>
+            <th>Active version</th>
+            <td><%= link_to(@product.product_version.title, admin_product_version_path(@product.product_version)) if @product.product_version %></td>
           </tbody>
         </table>
       </div>
