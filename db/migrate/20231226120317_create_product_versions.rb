@@ -11,7 +11,9 @@ class CreateProductVersions < ActiveRecord::Migration[7.1]
       t.integer :version, null: false
       t.string :locales, array: true, null: false, default: []
       t.datetime :activated_at
+      t.references :activated_by, foreign_key: { to_table: :fingerprints }, type: :uuid, null: true
       t.datetime :deactivated_at
+      t.references :deactivated_by, foreign_key: { to_table: :fingerprints }, type: :uuid, null: true
       t.jsonb :translations, null: false, default: {}
 
       t.decimal :width

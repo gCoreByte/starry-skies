@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_30_100924) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_06_122349) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -105,6 +105,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_30_100924) do
     t.index ["updated_by_id"], name: "index_product_prices_on_updated_by_id"
   end
 
+  create_table "product_version_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "product_category_id", null: false
+    t.uuid "product_version_id", null: false
+    t.uuid "created_by_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_by_id"], name: "index_product_version_categories_on_created_by_id"
+    t.index ["product_category_id"], name: "index_product_version_categories_on_product_category_id"
+    t.index ["product_version_id"], name: "index_product_version_categories_on_product_version_id"
+  end
+
   create_table "product_versions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "store_id", null: false
     t.uuid "product_id", null: false
@@ -114,7 +125,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_30_100924) do
     t.integer "version", null: false
     t.string "locales", default: [], null: false, array: true
     t.datetime "activated_at"
+    t.uuid "activated_by_id"
     t.datetime "deactivated_at"
+    t.uuid "deactivated_by_id"
     t.jsonb "translations", default: {}, null: false
     t.decimal "width"
     t.decimal "length"
@@ -124,7 +137,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_30_100924) do
     t.string "size_unit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["activated_by_id"], name: "index_product_versions_on_activated_by_id"
     t.index ["created_by_id"], name: "index_product_versions_on_created_by_id"
+    t.index ["deactivated_by_id"], name: "index_product_versions_on_deactivated_by_id"
     t.index ["product_id", "version"], name: "index_product_versions_on_product_id_and_version", unique: true
     t.index ["product_id"], name: "index_product_versions_on_product_id"
     t.index ["store_id"], name: "index_product_versions_on_store_id"
@@ -185,7 +200,12 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_30_100924) do
   add_foreign_key "product_prices", "fingerprints", column: "updated_by_id"
   add_foreign_key "product_prices", "product_versions"
   add_foreign_key "product_prices", "stores"
+  add_foreign_key "product_version_categories", "fingerprints", column: "created_by_id"
+  add_foreign_key "product_version_categories", "product_categories"
+  add_foreign_key "product_version_categories", "product_versions"
+  add_foreign_key "product_versions", "fingerprints", column: "activated_by_id"
   add_foreign_key "product_versions", "fingerprints", column: "created_by_id"
+  add_foreign_key "product_versions", "fingerprints", column: "deactivated_by_id"
   add_foreign_key "product_versions", "fingerprints", column: "updated_by_id"
   add_foreign_key "product_versions", "products"
   add_foreign_key "product_versions", "stores"

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ProductVersion < ApplicationRecord
+  include Mixins::Activatable
+
   module SizeUnits
     MM = 'mm'
     CM = 'cm'
@@ -14,14 +16,14 @@ class ProductVersion < ApplicationRecord
     ALL = [G, KG].freeze
   end
 
+  has_many :product_version_categories, dependent: nil
+  has_many :product_categories, through: :product_version_categories
+  has_many :product_prices, dependent: nil
   belongs_to :created_by, class_name: 'Fingerprint'
   belongs_to :updated_by, class_name: 'Fingerprint'
 
   belongs_to :store
   belongs_to :product
-
-  # FIXME: Move to mixin
-  scope :active, -> { where.not(activated_at: nil).where(deactivated_at: nil) }
 
   validates :version, presence: true
   validates :version, numericality: { minimum: 0, maximum: 999 }, allow_nil: true
@@ -32,6 +34,13 @@ class ProductVersion < ApplicationRecord
             numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 50_000 }, allow_nil: true
   validates :size_unit, inclusion: { in: SizeUnits::ALL }, allow_nil: true
   validates :weight_unit, inclusion: { in: WeightUnits::ALL }, allow_nil: true
+
+  validate if: %i[store product] do
+    validate_record_store(product)
+  end
+
+  # FIXME: Move to create service
+  before_validation :set_version, on: :create
 
   # FIXME: Add validation to disallow unit without values
 
