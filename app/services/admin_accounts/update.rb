@@ -5,12 +5,15 @@ module AdminAccounts
     ATTRIBUTES = %i[email name password password_confirmation].freeze
 
     attr_writer :admin_account, :payload
+    attr_accessor :fingerprint
 
-    validates :admin_account, presence: true
+    validates :admin_account, :fingerprint, presence: true
 
     validate if: :admin_account do
       validate_model(admin_account, :base, *ATTRIBUTES)
     end
+
+    delegate(*ATTRIBUTES, to: :admin_account)
 
     def admin_account
       @_admin_account ||= @admin_account.tap do |admin_account|
@@ -18,6 +21,10 @@ module AdminAccounts
           payload.slice(*ATTRIBUTES)
         )
       end
+    end
+
+    def payload
+      @_payload ||= @payload || {}
     end
 
     protected
