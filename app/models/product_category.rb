@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ProductCategory < ApplicationRecord
+  belongs_to :store
   belongs_to :created_by, class_name: 'Fingerprint'
   belongs_to :updated_by, class_name: 'Fingerprint'
   has_many :product_version_categories, dependent: nil
