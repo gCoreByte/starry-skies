@@ -152,8 +152,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_06_122349) do
     t.uuid "updated_by_id", null: false
     t.string "name", null: false
     t.string "key", null: false
-    t.datetime "activated_at"
-    t.datetime "deactivated_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["created_by_id"], name: "index_products_on_created_by_id"
