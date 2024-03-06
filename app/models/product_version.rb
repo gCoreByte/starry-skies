@@ -39,18 +39,9 @@ class ProductVersion < ApplicationRecord
     validate_record_store(product)
   end
 
-  # FIXME: Move to create service
-  before_validation :set_version, on: :create
-
   # FIXME: Add validation to disallow unit without values
 
   def title
     "#{product.name} V#{version}"
-  end
-
-  def set_version
-    return unless product
-
-    self.version = product.product_versions.maximum(:version).to_i + 1
   end
 end
