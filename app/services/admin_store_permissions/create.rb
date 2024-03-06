@@ -2,9 +2,9 @@
 
 module AdminStorePermissions
   class Create < ApplicationService
-    attr_accessor :admin_account, :store, :type_key
+    attr_accessor :admin_account, :store, :type_key, :fingerprint
 
-    validates :admin_account, :store, :type_key, presence: true
+    validates :admin_account, :store, :type_key, :fingerprint, presence: true
 
     validate if: %i[admin_account store type_key] do
       next errors.add(:base, :account_not_linked_to_store) unless admin_account.stores.include?(store)
@@ -16,7 +16,8 @@ module AdminStorePermissions
       @_admin_store_permission ||= AdminStorePermission.new(
         admin_account: admin_account,
         store: store,
-        type_key: type_key
+        type_key: type_key,
+        created_by: fingerprint
       )
     end
 

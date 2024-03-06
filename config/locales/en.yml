@@ -28,4 +28,7 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  errors:
+    attributes:
+      base:
+        cannot_have_any_admin_relationships: Cannot have any admin relationships

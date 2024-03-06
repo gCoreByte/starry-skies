@@ -38,7 +38,8 @@ module Stores
       @_relationship_service ||= AdminStoreRelationships::Create.new(
         admin_account: admin_account,
         store: store,
-        type_key: AdminStoreRelationship::TypeKeys::ADMIN
+        type_key: AdminStoreRelationship::TypeKeys::ADMIN,
+        fingerprint: fingerprint
       )
     end
   end
