@@ -12,4 +12,8 @@ class Product < ApplicationRecord
   validates :name, length: { minimum: 3, maximum: 100 }, allow_nil: true
   validates :key, length: { minimum: 3, maximum: 100 }, allow_nil: true
   validates :key, uniqueness: { scope: :store_id }
+
+  def active?
+    product_version.present?
+  end
 end
