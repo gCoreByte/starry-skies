@@ -36,6 +36,11 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     end
   end
 
+  namespace :user do
+    resources :user_accounts, only: %i[new create]
+    resources :user_sessions, only: %i[new create destroy]
+  end
+
   get '/about', to: 'home#about'
   get '/contact_us', to: 'home#contact_us'
   get '/pricing', to: 'home#pricing'

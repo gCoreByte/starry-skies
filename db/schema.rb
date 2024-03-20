@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_16_133548) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_20_104724) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -76,7 +76,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_16_133548) do
     t.uuid "admin_account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "user_session_id"
+    t.uuid "user_account_id"
     t.index ["admin_account_id"], name: "index_fingerprints_on_admin_account_id"
+    t.index ["user_account_id"], name: "index_fingerprints_on_user_account_id"
+    t.index ["user_session_id"], name: "index_fingerprints_on_user_session_id"
   end
 
   create_table "packages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -256,8 +260,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_16_133548) do
     t.index ["url"], name: "index_stores_on_url", unique: true, where: "(url IS NOT NULL)"
   end
 
-  add_foreign_key "addresses", "fingerprints", column: "created_by_id"
-  add_foreign_key "addresses", "stores"
   add_foreign_key "admin_store_permissions", "admin_accounts"
   add_foreign_key "admin_store_permissions", "fingerprints", column: "created_by_id"
   add_foreign_key "admin_store_permissions", "stores"
@@ -265,6 +267,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_16_133548) do
   add_foreign_key "admin_store_relationships", "fingerprints", column: "created_by_id"
   add_foreign_key "admin_store_relationships", "stores"
   add_foreign_key "fingerprints", "admin_accounts"
+  add_foreign_key "fingerprints", "user_accounts"
+  add_foreign_key "fingerprints", "user_sessions"
   add_foreign_key "product_categories", "fingerprints", column: "created_by_id"
   add_foreign_key "product_categories", "fingerprints", column: "updated_by_id"
   add_foreign_key "product_categories", "stores"
@@ -300,4 +304,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_16_133548) do
   add_foreign_key "stores", "fingerprints", column: "created_by_id"
   add_foreign_key "stores", "fingerprints", column: "updated_by_id"
   add_foreign_key "stores", "packages"
+  add_foreign_key "user_accounts", "stores"
+  add_foreign_key "user_sessions", "stores"
+  add_foreign_key "user_sessions", "user_accounts"
 end
