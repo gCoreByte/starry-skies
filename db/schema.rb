@@ -10,10 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_06_122349) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_20_104724) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "addresses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "store_id", null: false
+    t.uuid "created_by_id", null: false
+    t.string "record_type", null: false
+    t.uuid "record_id", null: false
+    t.string "address", null: false
+    t.string "city"
+    t.string "state"
+    t.string "country", null: false
+    t.string "postal_code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_by_id"], name: "index_addresses_on_created_by_id"
+    t.index ["record_type", "record_id"], name: "index_addresses_on_record"
+    t.index ["store_id"], name: "index_addresses_on_store_id"
+  end
 
   create_table "admin_accounts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
@@ -59,7 +76,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_06_122349) do
     t.uuid "admin_account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "user_session_id"
+    t.uuid "user_account_id"
     t.index ["admin_account_id"], name: "index_fingerprints_on_admin_account_id"
+    t.index ["user_account_id"], name: "index_fingerprints_on_user_account_id"
+    t.index ["user_session_id"], name: "index_fingerprints_on_user_session_id"
   end
 
   create_table "packages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -160,6 +181,61 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_06_122349) do
     t.index ["updated_by_id"], name: "index_products_on_updated_by_id"
   end
 
+  create_table "purchase_billings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "store_id", null: false
+    t.uuid "purchase_order_id", null: false
+    t.uuid "created_by_id", null: false
+    t.string "first_name", null: false
+    t.string "surname", null: false
+    t.string "phone_number", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_by_id"], name: "index_purchase_billings_on_created_by_id"
+    t.index ["purchase_order_id"], name: "index_purchase_billings_on_purchase_order_id"
+    t.index ["store_id"], name: "index_purchase_billings_on_store_id"
+  end
+
+  create_table "purchase_cart_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "store_id", null: false
+    t.uuid "purchase_cart_id", null: false
+    t.uuid "product_version_id", null: false
+    t.uuid "product_price_id", null: false
+    t.integer "quantity", null: false
+    t.decimal "total_price", precision: 10, scale: 2, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_price_id"], name: "index_purchase_cart_items_on_product_price_id"
+    t.index ["product_version_id"], name: "index_purchase_cart_items_on_product_version_id"
+    t.index ["purchase_cart_id"], name: "index_purchase_cart_items_on_purchase_cart_id"
+    t.index ["store_id"], name: "index_purchase_cart_items_on_store_id"
+  end
+
+  create_table "purchase_carts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "store_id", null: false
+    t.uuid "created_by_id", null: false
+    t.uuid "updated_by_id", null: false
+    t.string "status", null: false
+    t.datetime "expires_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_by_id"], name: "index_purchase_carts_on_created_by_id"
+    t.index ["store_id"], name: "index_purchase_carts_on_store_id"
+    t.index ["updated_by_id"], name: "index_purchase_carts_on_updated_by_id"
+  end
+
+  create_table "purchase_orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "store_id", null: false
+    t.uuid "purchase_cart_id", null: false
+    t.string "status", null: false
+    t.string "first_name", null: false
+    t.string "surname", null: false
+    t.string "phone_number", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["purchase_cart_id"], name: "index_purchase_orders_on_purchase_cart_id"
+    t.index ["store_id"], name: "index_purchase_orders_on_store_id"
+  end
+
   create_table "sessions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "admin_account_id", null: false
     t.string "user_agent"
@@ -184,6 +260,31 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_06_122349) do
     t.index ["url"], name: "index_stores_on_url", unique: true, where: "(url IS NOT NULL)"
   end
 
+  create_table "user_accounts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "store_id", null: false
+    t.string "email", null: false
+    t.string "password_digest", null: false
+    t.boolean "verified", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["store_id", "email"], name: "index_user_accounts_on_store_id_and_email", unique: true
+    t.index ["store_id"], name: "index_user_accounts_on_store_id"
+  end
+
+  create_table "user_sessions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "cookie", null: false
+    t.datetime "expires_at", null: false
+    t.uuid "store_id", null: false
+    t.uuid "user_account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["store_id", "cookie"], name: "index_user_sessions_on_store_id_and_cookie", unique: true
+    t.index ["store_id"], name: "index_user_sessions_on_store_id"
+    t.index ["user_account_id"], name: "index_user_sessions_on_user_account_id"
+  end
+
+  add_foreign_key "addresses", "fingerprints", column: "created_by_id"
+  add_foreign_key "addresses", "stores"
   add_foreign_key "admin_store_permissions", "admin_accounts"
   add_foreign_key "admin_store_permissions", "fingerprints", column: "created_by_id"
   add_foreign_key "admin_store_permissions", "stores"
@@ -191,6 +292,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_06_122349) do
   add_foreign_key "admin_store_relationships", "fingerprints", column: "created_by_id"
   add_foreign_key "admin_store_relationships", "stores"
   add_foreign_key "fingerprints", "admin_accounts"
+  add_foreign_key "fingerprints", "user_accounts"
+  add_foreign_key "fingerprints", "user_sessions"
   add_foreign_key "product_categories", "fingerprints", column: "created_by_id"
   add_foreign_key "product_categories", "fingerprints", column: "updated_by_id"
   add_foreign_key "product_categories", "stores"
@@ -210,8 +313,23 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_06_122349) do
   add_foreign_key "products", "fingerprints", column: "created_by_id"
   add_foreign_key "products", "fingerprints", column: "updated_by_id"
   add_foreign_key "products", "stores"
+  add_foreign_key "purchase_billings", "fingerprints", column: "created_by_id"
+  add_foreign_key "purchase_billings", "purchase_orders"
+  add_foreign_key "purchase_billings", "stores"
+  add_foreign_key "purchase_cart_items", "product_prices"
+  add_foreign_key "purchase_cart_items", "product_versions"
+  add_foreign_key "purchase_cart_items", "purchase_carts"
+  add_foreign_key "purchase_cart_items", "stores"
+  add_foreign_key "purchase_carts", "fingerprints", column: "created_by_id"
+  add_foreign_key "purchase_carts", "fingerprints", column: "updated_by_id"
+  add_foreign_key "purchase_carts", "stores"
+  add_foreign_key "purchase_orders", "purchase_carts"
+  add_foreign_key "purchase_orders", "stores"
   add_foreign_key "sessions", "admin_accounts"
   add_foreign_key "stores", "fingerprints", column: "created_by_id"
   add_foreign_key "stores", "fingerprints", column: "updated_by_id"
   add_foreign_key "stores", "packages"
+  add_foreign_key "user_accounts", "stores"
+  add_foreign_key "user_sessions", "stores"
+  add_foreign_key "user_sessions", "user_accounts"
 end
