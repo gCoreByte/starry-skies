@@ -260,6 +260,31 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_20_104724) do
     t.index ["url"], name: "index_stores_on_url", unique: true, where: "(url IS NOT NULL)"
   end
 
+  create_table "user_accounts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "store_id", null: false
+    t.string "email", null: false
+    t.string "password_digest", null: false
+    t.boolean "verified", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["store_id", "email"], name: "index_user_accounts_on_store_id_and_email", unique: true
+    t.index ["store_id"], name: "index_user_accounts_on_store_id"
+  end
+
+  create_table "user_sessions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "cookie", null: false
+    t.datetime "expires_at", null: false
+    t.uuid "store_id", null: false
+    t.uuid "user_account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["store_id", "cookie"], name: "index_user_sessions_on_store_id_and_cookie", unique: true
+    t.index ["store_id"], name: "index_user_sessions_on_store_id"
+    t.index ["user_account_id"], name: "index_user_sessions_on_user_account_id"
+  end
+
+  add_foreign_key "addresses", "fingerprints", column: "created_by_id"
+  add_foreign_key "addresses", "stores"
   add_foreign_key "admin_store_permissions", "admin_accounts"
   add_foreign_key "admin_store_permissions", "fingerprints", column: "created_by_id"
   add_foreign_key "admin_store_permissions", "stores"
