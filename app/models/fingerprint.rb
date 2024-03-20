@@ -5,10 +5,12 @@ class Fingerprint < ApplicationRecord
     SYSTEM = 'system'
     CONSOLE = 'console'
     USER = 'user'
-    ALL = [SYSTEM, CONSOLE, USER].freeze
+    ADMIN = 'admin'
+    ALL = [SYSTEM, CONSOLE, USER, ADMIN].freeze
   end
 
   belongs_to :admin_account, optional: true
+  belongs_to :user_account, optional: true
 
   validates :type_key, presence: true
   validates :ip_address, length: { maximum: 15 }, allow_nil: true
@@ -23,24 +25,37 @@ class Fingerprint < ApplicationRecord
     scope key.to_sym, -> { where(type_key: key) }
   end
 
-  def name
+  def name # rubocop:disable Metrics/MethodLength
     case type_key
     when TypeKeys::SYSTEM
       'system'
     when TypeKeys::CONSOLE
       'console'
-    when TypeKeys::USER
+    when TypeKeys::ADMIN
       admin_account.name
+    when TypeKeys::USER
+      user_account&.email || 'Anonymous User'
     else
       raise "Unknown type_key: #{type_key}"
     end
   end
 
   class << self
-    def from_user(admin_account, ip_address, user_agent)
+    def from_admin(admin_account, ip_address, user_agent)
+      Fingerprint.find_or_create_by!(
+        type_key: TypeKeys::ADMIN,
+        admin_account: admin_account,
+        ip_address: ip_address,
+        user_agent: user_agent,
+        digest: Digest::SHA256.hexdigest("#{ip_address}#{user_agent}")
+      )
+    end
+
+    def from_user(user_session, ip_address, user_agent)
       Fingerprint.find_or_create_by!(
         type_key: TypeKeys::USER,
-        admin_account: admin_account,
+        user_session: user_session,
+        user_account: user_session.user_account,
         ip_address: ip_address,
         user_agent: user_agent,
         digest: Digest::SHA256.hexdigest("#{ip_address}#{user_agent}")
