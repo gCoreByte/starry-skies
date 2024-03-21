@@ -30,4 +30,8 @@ class Store < ApplicationRecord
     # FIXME
     0
   end
+
+  def variable_provider
+    @_variable_provider ||= VariableProvider.new(record: self)
+  end
 end
