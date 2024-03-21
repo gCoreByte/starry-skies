@@ -13,7 +13,14 @@ class Product < ApplicationRecord
   validates :key, length: { minimum: 3, maximum: 100 }, allow_nil: true
   validates :key, uniqueness: { scope: :store_id }
 
+  scope :active, -> { joins(:product_version) }
+
   def active?
     product_version.present?
+  end
+
+  # TODO: translations logic
+  def title
+    name
   end
 end

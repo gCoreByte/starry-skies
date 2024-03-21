@@ -92,3 +92,5 @@ gem 'bootstrap', '~> 5.3'
 gem 'sassc-rails', '~> 2.1'
 
 gem 'authentication-zero', '~> 3.0'
+
+gem 'liquid', '~> 5.4'
