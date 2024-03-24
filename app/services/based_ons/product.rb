@@ -2,13 +2,11 @@
 
 module BasedOns
   class Product < BasedOns::Base
-    PROVIDES = %w[store product product_version].freeze
+    delegate :store, :product_version, to: :record
 
     def provides
-      PROVIDES
+      %w[store product product_version]
     end
-
-    delegate :store, :product_version, to: :record
 
     def product
       record

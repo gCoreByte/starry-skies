@@ -2,10 +2,8 @@
 
 module Variables
   class Product < Variables::Base
-    VARIABLES = %w[name key active? description width length height weight size_unit weight_unit title].freeze
-
     def variables
-      VARIABLES
+      %w[name key active? description width length height weight size_unit weight_unit title]
     end
 
     delegate :name, :key, :active?, :title, to: :record
@@ -36,6 +34,14 @@ module Variables
 
     def weight_unit
       record.product_version&.weight_unit
+    end
+
+    def store
+      Variables::VariableProvider.new(record: based_on_service.store)
+    end
+
+    def product_version
+      Variables::VariableProvider.new(record: based_on_service.product_version)
     end
   end
 end

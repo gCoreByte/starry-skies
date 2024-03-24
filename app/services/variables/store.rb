@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 module Variables
-  class Store < BasedOns::Base
-    VARIABLES = %w[products].freeze
-
+  class Store < Variables::Base
     def variables
-      VARIABLES
+      %w[name products]
     end
+
+    delegate :name, to: :record
 
     def products
       @_products ||= record.products.active.map do |product|

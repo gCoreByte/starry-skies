@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_20_104724) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_21_151930) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -91,6 +91,70 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_20_104724) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["key"], name: "index_packages_on_key", unique: true
+  end
+
+  create_table "page_components", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "store_id", null: false
+    t.uuid "created_by_id", null: false
+    t.uuid "updated_by_id"
+    t.text "content", null: false
+    t.string "based_on", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_by_id"], name: "index_page_components_on_created_by_id"
+    t.index ["store_id"], name: "index_page_components_on_store_id"
+    t.index ["updated_by_id"], name: "index_page_components_on_updated_by_id"
+  end
+
+  create_table "page_template_changes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "store_id", null: false
+    t.uuid "created_by_id", null: false
+    t.uuid "page_template_id", null: false
+    t.text "content", null: false
+    t.string "status", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_by_id"], name: "index_page_template_changes_on_created_by_id"
+    t.index ["page_template_id"], name: "index_page_template_changes_on_page_template_id"
+    t.index ["store_id"], name: "index_page_template_changes_on_store_id"
+  end
+
+  create_table "page_templates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "store_id", null: false
+    t.uuid "created_by_id", null: false
+    t.uuid "updated_by_id"
+    t.string "key", null: false
+    t.text "content", null: false
+    t.string "status", null: false
+    t.string "based_on", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_by_id"], name: "index_page_templates_on_created_by_id"
+    t.index ["store_id", "key"], name: "index_page_templates_on_store_id_and_key", unique: true
+    t.index ["store_id"], name: "index_page_templates_on_store_id"
+    t.index ["updated_by_id"], name: "index_page_templates_on_updated_by_id"
+  end
+
+  create_table "pages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "store_id", null: false
+    t.uuid "created_by_id", null: false
+    t.uuid "updated_by_id"
+    t.uuid "page_template_id", null: false
+    t.string "record_type"
+    t.uuid "record_id"
+    t.string "status", null: false
+    t.boolean "dynamic", default: false, null: false
+    t.string "key", null: false
+    t.string "url", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_by_id"], name: "index_pages_on_created_by_id"
+    t.index ["page_template_id"], name: "index_pages_on_page_template_id"
+    t.index ["record_type", "record_id"], name: "index_pages_on_record"
+    t.index ["store_id", "key"], name: "index_pages_on_store_id_and_key", unique: true
+    t.index ["store_id", "url"], name: "index_pages_on_store_id_and_url", unique: true
+    t.index ["store_id"], name: "index_pages_on_store_id"
+    t.index ["updated_by_id"], name: "index_pages_on_updated_by_id"
   end
 
   create_table "product_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -294,6 +358,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_20_104724) do
   add_foreign_key "fingerprints", "admin_accounts"
   add_foreign_key "fingerprints", "user_accounts"
   add_foreign_key "fingerprints", "user_sessions"
+  add_foreign_key "page_components", "fingerprints", column: "created_by_id"
+  add_foreign_key "page_components", "fingerprints", column: "updated_by_id"
+  add_foreign_key "page_components", "stores"
+  add_foreign_key "page_template_changes", "fingerprints", column: "created_by_id"
+  add_foreign_key "page_template_changes", "page_templates"
+  add_foreign_key "page_template_changes", "stores"
+  add_foreign_key "page_templates", "fingerprints", column: "created_by_id"
+  add_foreign_key "page_templates", "fingerprints", column: "updated_by_id"
+  add_foreign_key "page_templates", "stores"
+  add_foreign_key "pages", "fingerprints", column: "created_by_id"
+  add_foreign_key "pages", "fingerprints", column: "updated_by_id"
+  add_foreign_key "pages", "page_templates"
+  add_foreign_key "pages", "stores"
   add_foreign_key "product_categories", "fingerprints", column: "created_by_id"
   add_foreign_key "product_categories", "fingerprints", column: "updated_by_id"
   add_foreign_key "product_categories", "stores"

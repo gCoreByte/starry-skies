@@ -2,10 +2,8 @@
 
 module BasedOns
   class Store < BasedOns::Base
-    PROVIDES = %w[store].freeze
-
     def provides
-      PROVIDES
+      %w[store]
     end
 
     def store
