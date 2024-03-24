@@ -9,8 +9,12 @@ module BasedOns
 
     validates :record, presence: true
 
-    def provides(record)
+    def provides
       raise NotImplementedError
+    end
+
+    def provides_without_self
+      provides - [record.class.name.underscore]
     end
   end
 end

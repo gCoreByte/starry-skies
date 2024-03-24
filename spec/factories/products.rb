@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :product do
     name { 'MyString' }
-    key { 'test_string' }
+    sequence(:key) { |n| "product_#{n}" }
     store { association(:store) }
     created_by { association(:fingerprint) }
     updated_by { created_by }
