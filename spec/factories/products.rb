@@ -7,5 +7,7 @@ FactoryBot.define do
     store { association(:store) }
     created_by { association(:fingerprint) }
     updated_by { created_by }
+
+    translations { { 'en' => { 'name' => 'translated english' }, 'et' => { 'name' => 'translated estonian' } } }
   end
 end

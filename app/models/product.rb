@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class Product < ApplicationRecord
+  include Mixins::Translatable
+
+  TRANSLATABLE_KEYS = %w[name].freeze
+
   belongs_to :store
   belongs_to :created_by, class_name: 'Fingerprint'
   belongs_to :updated_by, class_name: 'Fingerprint'
@@ -17,10 +21,5 @@ class Product < ApplicationRecord
 
   def active?
     product_version.present?
-  end
-
-  # TODO: translations logic
-  def title
-    name
   end
 end
