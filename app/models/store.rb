@@ -6,6 +6,7 @@ class Store < ApplicationRecord
   has_many :admin_accounts, through: :admin_store_relationships
 
   has_many :products, dependent: nil
+  has_many :product_versions, dependent: nil
 
   belongs_to :package, optional: true
   belongs_to :created_by, class_name: 'Fingerprint'

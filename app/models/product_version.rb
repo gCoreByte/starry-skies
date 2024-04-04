@@ -16,6 +16,8 @@ class ProductVersion < ApplicationRecord
     ALL = [G, KG].freeze
   end
 
+  nullify_attributes :description, :width, :length, :height, :weight, :size_unit, :weight_unit
+
   has_many :product_version_categories, dependent: nil
   has_many :product_categories, through: :product_version_categories
   has_many :product_prices, dependent: nil

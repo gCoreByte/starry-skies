@@ -1,4 +1,10 @@
 <p style="color: green"><%= notice %></p>
+
+<%= page_title(@store.name) do %>
+  <%= link_to '', edit_admin_store_path(@store), class: 'btn btn-warning fas fa-pencil', data: { turbo: true, turbo_frame: 'modal' } %>
+  <%= link_to '', admin_store_path(@store), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}, class: 'btn btn-danger fas fa-trash' %>
+<% end %>
+
 <div class="row">
   <div class="col-xl-6">
     <div class="card mb-3 border">
@@ -9,33 +15,7 @@
       </div>
       <div class="table-responsive">
         <table class="table table-bordered table-striped">
-          <tbody>
-            <tr>
-              <th>Name</th>
-              <td><%= @store.name %></td>
-            </tr>
-            <tr>
-              <th>URL</th>
-              <td><%= @store.url %></td>
-            </tr>
-            <tr>
-              <th>Package</th>
-              <td><%= @store.package&.name || 'None' %></td>
-            </tr>
-            <tr>
-              <th>Revenue</th>
-              <td><%= @store.revenue %></td>
-            </tr>
-            <tr>
-              <th>Sales</th>
-              <td><%= @store.sales %></td>
-            </tr>
-            <tr>
-              <th>Created at</th>
-              <td><%= time_tag(@store.created_at) %></td>
-            </tr>
-
-          </tbody>
+          <%= render 'show', locals: { store: @store } %>
         </table>
       </div>
     </div>
@@ -51,7 +31,11 @@
         <table class="table table-bordered table-striped">
           <tbody>
             <tr>
-              <td><%= link_to "Products", admin_store_products_path(@store) %></td>
+              <td>
+                <%= link_to admin_store_products_path(@store), class: 'btn btn-primary' do %>
+                  <i class="fas fa-box"></i> Products
+                <% end %>
+              </td>
             </tr>
             <tr>
               <%# <td><%= link_to "Orders", admin_store_orders_path(@store) %></td>
@@ -67,9 +51,4 @@
       </div>
     </div>
   </div>
-</div>
-<div>
-  <%= link_to "Edit this store", edit_admin_store_path(@store) %> |
-  <%= link_to "Back to dashboard", admin_dashboard_index_path %> |
-  <%= link_to "Destroy this store", admin_store_path(@store), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %> |
 </div>

@@ -1,0 +1,46 @@
+<%= form_with(model: [:admin, @product, @product_version], scope: :product_version) do |form| %>
+  <div class='modal-body'>
+    <% if @service.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(@service.errors.count, "error") %> prohibited this product version from being saved:</h2>
+        <ul>
+          <% @service.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class='mb-3'>
+      <%= form.label :description, { class: 'form-label' } %>
+      <%= form.text_area :description, { class: 'form-control' } %>
+    </div>
+    <div class='mb-3'>
+      <%= form.label :width, { class: 'form-label' } %>
+      <%= form.number_field :width, { class: 'form-control' } %>
+    </div>
+    <div class='mb-3'>
+      <%= form.label :height, { class: 'form-label' } %>
+      <%= form.number_field :height, { class: 'form-control' } %>
+    </div>
+    <div class='mb-3'>
+      <%= form.label :length, { class: 'form-label' } %>
+      <%= form.number_field :length, { class: 'form-control' } %>
+    </div>
+    <div class='mb-3'>
+      <%= form.label :weight, { class: 'form-label' } %>
+      <%= form.number_field :weight, { class: 'form-control' } %>
+    </div>
+    <div class='mb-3'>
+      <%= form.label :weight_unit, { class: 'form-label' } %>
+      <%= form.select :weight_unit, ProductVersion::WeightUnits::ALL, { include_blank: true }, { class: 'form-select' } %>
+    </div>
+    <div class='mb-3'>
+      <%= form.label :size_unit, { class: 'form-label' } %>
+      <%= form.select :size_unit, ProductVersion::SizeUnits::ALL, { include_blank: true }, { class: 'form-select' } %>
+    </div>
+  </div>
+
+  <div class='modal-footer'>
+    <%= form.submit 'Save', class: 'btn btn-primary' %>
+  </div>
+<% end %>

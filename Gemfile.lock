@@ -129,6 +129,8 @@ GEM
     faker (3.2.3)
       i18n (>= 1.8.11, < 2)
     ffi (1.16.3)
+    font-awesome-sass (6.5.1)
+      sassc (~> 2.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     hashdiff (1.1.0)
@@ -370,6 +372,7 @@ DEPENDENCIES
   debug
   factory_bot_rails
   faker
+  font-awesome-sass (~> 6.5)
   importmap-rails
   liquid (~> 5.4)
   overcommit

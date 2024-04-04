@@ -28,6 +28,12 @@
 #       enabled: "ON"
 
 en:
+  date:
+    formats:
+      default: "%Y-%m-%d"
+  time:
+    formats:
+      default: "%Y-%m-%d %H:%M"
   errors:
     attributes:
       base:

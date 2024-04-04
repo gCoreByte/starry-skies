@@ -9,36 +9,7 @@
       </div>
       <div class="table-responsive">
         <table class="table table-bordered table-striped">
-          <tbody>
-            <tr>
-              <th>Name</th>
-              <td><%= @product.name %></td>
-            </tr>
-            <tr>
-              <th>Key</th>
-              <td><%= @product.key %></td>
-            </tr>
-            <tr>
-              <th>Created by</th>
-              <td><%= @product.created_by.name %></td>
-            </tr>
-            <tr>
-              <th>Updated by</th>
-              <td><%= @product.updated_by.name %></td>
-            </tr>
-            <tr>
-              <th>Activated at</th>
-              <td><%= time_tag(@product.activated_at) %></td>
-            </tr>
-            <tr>
-              <th>Deactivated at</th>
-              <td><%= time_tag(@product.deactivated_at) %></td>
-            </tr>
-            <tr>
-              <th>Created at</th>
-              <td><%= time_tag(@product.created_at) %></td>
-            </tr>
-          </tbody>
+          <%= render 'show', locals: { product: @product } %>
         </table>
       </div>
     </div>
@@ -46,9 +17,9 @@
   <div class="col-xl-6">
     <div class="card mb-3 border">
       <div class="card-header">
-        <h2 class="card-title">
-          Product Data
-        </h2>
+        <%= card_title('Active version') do %>
+          <%= link_to '', new_admin_product_product_version_path(@product), class: 'btn btn-warning fas fa-pencil', data: { turbo: true, turbo_frame: 'modal' } %>
+        <% end %>
       </div>
       <div class="table-responsive">
         <table class="table table-bordered table-striped">
@@ -59,12 +30,29 @@
         </table>
       </div>
     </div>
+    <div class="card mb-3 border">
+      <div class="card-header">
+        <%= card_title('Product versions') do %>
+          <%= link_to '', new_admin_product_product_version_path(@product), class: 'btn btn-success fas fa-plus', data: { turbo: true, turbo_frame: 'modal' } %>
+        <% end %>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <th>Version</th>
+            <th>Activated at</th>
+            <th>Deactivated at</th>
+            <th>Actions</th>
+          <tbody id='product_versions'>
+            <%= render @product_versions %>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>
-
 <div>
   <%= link_to "Edit this product", edit_admin_product_path(@product) %> |
   <%= link_to "Back to products", admin_store_products_path(@product.store) %>
-
-  <%= button_to "Destroy this product", admin_product_path(@product), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
+  <%= link_to "Destroy this product", admin_product_path(@product), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
 </div>

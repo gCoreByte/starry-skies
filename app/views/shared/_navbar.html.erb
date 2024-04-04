@@ -52,7 +52,7 @@
       <% if @current_user.present? %>
         <ul class="navbar-nav gap-3">
           <li class="nav-item">
-            <%= link_to 'Sign Out', session_path(Current.session), data: { turbo_method: :delete }, class: 'nav-link' %>
+            <%= button_to 'Sign Out', session_path(Current.session), method: :delete, class: 'nav-link' %>
           </li>
         </ul>
       <% end %>

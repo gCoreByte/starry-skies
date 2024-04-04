@@ -1,0 +1,11 @@
+<tr>
+  <td><%= link_to "Version #{product_version.version}", admin_product_version_path(product_version) %></td>
+  <td><%= time_tag(product_version.activated_at) %></td>
+  <td><%= time_tag(product_version.deactivated_at) %></td>
+  <td>
+    <%= page_controls do %>
+      <%= link_to '', admin_product_version_path(product_version), class: 'btn btn-primary fas fa-eye' %>
+      <%= link_to '', admin_product_version_path(product_version), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}, class: 'btn btn-danger fas fa-trash' %>
+    <% end%>
+  </td>
+</tr>

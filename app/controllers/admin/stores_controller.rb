@@ -4,10 +4,6 @@ module Admin
   class StoresController < Admin::ApplicationController
     before_action :set_store, only: %i[show edit update destroy]
 
-    def index
-      @stores = current_user.stores.all
-    end
-
     def show
     end
 
@@ -18,12 +14,16 @@ module Admin
     def edit
     end
 
-    def create
+    def create # rubocop:disable Metrics/MethodLength
       service = Stores::Create.new(admin_account: current_user, fingerprint: fingerprint, payload: create_params)
 
       @store = service.store
-      if service.save!
-        redirect_to admin_store_url(@store)
+      if service.valid?
+        service.save!
+        respond_to do |format|
+          format.html { redirect_to admin_store_url(@store) }
+          format.turbo_stream
+        end
       else
         render :new, status: :unprocessable_entity
       end
@@ -31,22 +31,27 @@ module Admin
 
     def update
       if @store.update(update_params)
-        redirect_to admin_store_url(@store)
+        respond_to do |format|
+          format.html { redirect_to admin_store_url(@store) }
+          format.turbo_stream
+        end
       else
         render :edit, status: :unprocessable_entity
       end
     end
 
     def destroy
+      @store.admin_store_relationships.destroy_all
       @store.destroy!
+      cookies.delete(:store_id)
 
-      redirect_to admin_stores_url
+      redirect_to admin_dashboard_index_url
     end
 
     private
 
     def set_store
-      @store = Store.find(params[:id])
+      @store = current_user.stores.find(params[:id])
       cookies[:store_id] = @store.id
     end
 

@@ -1,0 +1,22 @@
+<tbody id='product'>
+  <tr>
+    <th>Name</th>
+    <td><%= @product.name %></td>
+  </tr>
+  <tr>
+    <th>Key</th>
+    <td><%= @product.key %></td>
+  </tr>
+  <tr>
+    <th>Created by</th>
+    <td><%= @product.created_by.name %></td>
+  </tr>
+  <tr>
+    <th>Updated by</th>
+    <td><%= @product.updated_by.name %></td>
+  </tr>
+  <tr>
+    <th>Created at</th>
+    <td><%= time_tag(@product.created_at) %></td>
+  </tr>
+</tbody>

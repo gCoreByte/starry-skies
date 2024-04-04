@@ -94,3 +94,5 @@ gem 'sassc-rails', '~> 2.1'
 gem 'authentication-zero', '~> 3.0'
 
 gem 'liquid', '~> 5.4'
+
+gem 'font-awesome-sass', '~> 6.5'

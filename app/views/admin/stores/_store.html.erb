@@ -1,16 +1,12 @@
-<div id="<%= dom_id store %>">
-  <div class="table-responsive">
-    <table class="table">
-      <tbody>
-        <tr>
-          <th>Name</th>
-          <td><%= @store.name %></td>
-        </tr>
-        <tr>
-          <th>Package</th>
-          <td><%= @store.package&.name || 'None' %></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+
+<tr>
+  <td><%= link_to store.name, admin_store_path(store) %></td>
+  <td><%= store.revenue %></td>
+  <td><%= store.open_issues %></td>
+  <td><%= store.sales %></td>
+  <td>
+    <%= page_controls do %>
+      <%= link_to '', admin_store_path(store), class: 'btn btn-primary fas fa-eye' %>
+    <% end%>
+  </td>
+</tr>

@@ -7,7 +7,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   get  'sign_up', to: 'registrations#new'
   post 'sign_up', to: 'registrations#create'
 
-  resources :sessions, only: %i[index show destroy]
+  resources :sessions, only: %i[index destroy]
   resource  :password, only: %i[edit update]
   namespace :identity do
     resource :email,              only: %i[edit update]
@@ -23,9 +23,13 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   # Authenticated routes
   namespace :admin do
     resources :dashboard, only: :index
-    resources :stores do
+    resources :stores, except: :index do
       resources :products, shallow: true do
         resources :product_versions, shallow: true do
+          member do
+            patch :activate
+            patch :deactivate
+          end
           resources :product_prices, shallow: true
         end
       end
