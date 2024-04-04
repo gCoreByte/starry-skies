@@ -6,13 +6,13 @@
       <div class="card-header">
 
         <%= card_title('Product version details') do %>
-          <%= link_to '', edit_admin_product_version_path(@product_version), class: 'btn btn-warning fas fa-pencil', data: { turbo: true, turbo_frame: 'modal' } %>
-          <%= link_to '', admin_product_version_path(@product_version), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}, class: 'btn btn-danger fas fa-trash' %>
+          <%= edit_button([:admin, @product_version]) %>
+          <%= destroy_button([:admin, @product_version]) %>
           <% if @product_version.draft? %>
-            <%= link_to '', activate_admin_product_version_path(@product_version), data: {turbo_method: :patch, turbo_confirm: 'Are you sure?'}, class: 'btn btn-success fas fa-play' %>
+            <%= activate_button([:admin, @product_version]) %>
           <% end %>
           <% if @product_version.active? %>
-            <%= link_to '', deactivate_admin_product_version_path(@product_version), data: {turbo_method: :patch, turbo_confirm: 'Are you sure?'}, class: 'btn btn-danger fas fa-stop' %>
+            <%= deactivate_button([:admin, @product_version]) %>
           <% end %>
         <% end %>
       </div>

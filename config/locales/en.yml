@@ -28,6 +28,7 @@
 #       enabled: "ON"
 
 en:
+  back: Back
   date:
     formats:
       default: "%Y-%m-%d"

@@ -10,6 +10,7 @@ module ApplicationHelper
 
   def page_controls(&block)
     content_tag(:div) do
+      concat back_button
       concat capture(&block) if block_given?
     end
   end
