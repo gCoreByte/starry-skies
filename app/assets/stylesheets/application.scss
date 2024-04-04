@@ -22,3 +22,15 @@
   border-color: hsla(210, 8, 51, .2);
   box-shadow: inset 0 1px 0 hsla(0, 0%, 100%, .15), 0 1px 1px rgba(0, 0, 0, .075);
 }
+
+.page_controls {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+
+  >* {
+    margin-left: 0.3rem;
+  }
+}

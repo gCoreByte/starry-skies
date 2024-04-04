@@ -1,4 +1,10 @@
 <p style="color: green"><%= notice %></p>
+
+<%= page_title(@product.name) do %>
+  <%= edit_button(:admin, @product) %>
+  <%= destroy_button(:admin, @product) %>
+<% end %>
+
 <div class="row">
   <div class="col-xl-6">
     <div class="card mb-3 border">

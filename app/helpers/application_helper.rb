@@ -2,14 +2,14 @@
 
 module ApplicationHelper
   def page_title(title, &block)
-    content_tag(:div, class: 'd-flex justify-content-between') do
+    content_tag(:div, class: 'd-flex justify-content-between px-3 py-2') do
       concat content_tag(:h1, title)
-      concat page_controls(&block) if block_given?
+      concat page_controls(&block)
     end
   end
 
   def page_controls(&block)
-    content_tag(:div) do
+    content_tag(:div, class: 'page_controls') do
       concat back_button
       concat capture(&block) if block_given?
     end

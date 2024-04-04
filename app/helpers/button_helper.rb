@@ -16,24 +16,24 @@ module ButtonHelper
 
   def show_button(*path)
     path = path.flatten
-    link_to '', polymorphic_path(path), class: 'btn btn-primary fas fa-eye'
+    link_to '', polymorphic_path(path), class: 'btn btn-sm btn-primary fas fa-eye'
   end
 
   def edit_button(*path)
     path = path.flatten
-    link_to '', edit_polymorphic_path(path), class: 'btn btn-warning fas fa-edit',
+    link_to '', edit_polymorphic_path(path), class: 'btn btn-sm btn-warning fas fa-edit',
                                              data: { turbo: true, turbo_frame: 'modal' }
   end
 
   def destroy_button(*path)
     path = path.flatten
     link_to '', polymorphic_path(path), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
-                                        class: 'btn btn-danger fas fa-trash'
+                                        class: 'btn btn-sm btn-danger fas fa-trash'
   end
 
   def activate_button(*path)
     path = path.flatten
-    link_to '', polymorphic_path(path, action: :activate), class: 'btn btn-success fas fa-play',
+    link_to '', polymorphic_path(path, action: :activate), class: 'btn btn-sm btn-success fas fa-play',
                                                            data: {
                                                              turbo_method: :patch, turbo_confirm: t('are_you_sure')
                                                            }
@@ -41,7 +41,7 @@ module ButtonHelper
 
   def deactivate_button(*path)
     path = path.flatten
-    link_to '', polymorphic_path(path, action: :deactivate), class: 'btn btn-danger fas fa-stop',
+    link_to '', polymorphic_path(path, action: :deactivate), class: 'btn btn-sm btn-danger fas fa-stop',
                                                              data: {
                                                                turbo_method: :patch, turbo_confirm: t('are_you_sure')
                                                              }
