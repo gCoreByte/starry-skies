@@ -1,63 +1,86 @@
 # frozen_string_literal: true
 
-class ProductPricesController < Admin::ApplicationController
-  before_action :set_product_price, only: %i[show edit update destroy]
+module Admin
+  class ProductPricesController < Admin::ApplicationController
+    before_action :set_product_price, only: %i[show edit update destroy]
+    before_action :set_product_version, only: %i[new create]
 
-  # GET /product_prices or /product_prices.json
-  def index
-    @product_prices = ProductPrice.all
-  end
-
-  # GET /product_prices/1 or /product_prices/1.json
-  def show
-  end
-
-  # GET /product_prices/new
-  def new
-    @product_price = ProductPrice.new
-  end
-
-  # GET /product_prices/1/edit
-  def edit
-  end
-
-  # POST /product_prices or /product_prices.json
-  def create
-    @product_price = ProductPrice.new(product_price_params)
-
-    if @product_price.save
-      redirect_to product_price_url(@product_price)
-    else
-      render :new, status: :unprocessable_entity
+    def show
     end
-  end
 
-  # PATCH/PUT /product_prices/1 or /product_prices/1.json
-  def update
-    if @product_price.update(product_price_params)
-      redirect_to product_price_url(@product_price)
-    else
-      render :edit, status: :unprocessable_entity
+    def new
+      @service = ProductPrices::Create.new(
+        product_version: @product_version, fingerprint: fingerprint
+      )
+      @product_price = @service.product_price
     end
-  end
 
-  # DELETE /product_prices/1 or /product_prices/1.json
-  def destroy
-    @product_price.destroy!
+    def edit
+      @service = ProductPrices::Update.new(
+        product_price: @product_price, fingerprint: fingerprint
+      )
+    end
 
-    redirect_to product_prices_url
-  end
+    def create # rubocop:disable Metrics/MethodLength
+      @service = ProductPrices::Create.new(
+        product_version: @product_version, fingerprint: fingerprint, payload: create_params
+      )
+      @product_price = @service.product_price
+      if @service.save
+        respond_to do |format|
+          format.html { redirect_to admin_product_version_url(@product_version) }
+          format.turbo_stream
+        end
+      else
+        render :new, status: :unprocessable_entity
+      end
+    end
 
-  private
+    def update # rubocop:disable Metrics/MethodLength
+      @service = ProductPrices::Update.new(
+        product_price: @product_price, fingerprint: fingerprint, payload: update_params
+      )
+      if service.save
+        respond_to do |format|
+          format.html { redirect_to admin_product_version_url(@product_version) }
+          format.turbo_stream
+        end
+      else
+        render :edit, status: :unprocessable_entity
+      end
+    end
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_product_price
-    @product_price = ProductPrice.find(params[:id])
-  end
+    def destroy
+      @service = ProductPrices::Destroy.new(product_price: @product_price, fingerprint: fingerprint)
+      @product_version = @product_price.product_version
+      if @service.save
+        flash.notice = 'Product price was successfully destroyed.'
+      else
+        flash.alert = 'Product price could not be destroyed.'
+      end
+      redirect_to admin_product_version_url(@product_version)
+    end
 
-  # Only allow a list of trusted parameters through.
-  def product_price_params
-    params.require(:product_price).permit(:locale, :price, :currency, :deactivated_at, :store_id, :created_by_id,
-                                          :product_version_id)
+    private
+
+    def set_product_price
+      @product_price = @store.product_prices.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      render_404
+    end
+
+    def set_product_version
+      @product_version = @store.product_versions.find(params[:product_version_id])
+    rescue ActiveRecord::RecordNotFound
+      render_404
+    end
+
+    def create_params
+      params.require(:product_price).permit(*ProductPrices::Create::ATTRIBUTES)
+    end
+
+    def update_params
+      params.require(:product_price).permit(*ProductPrices::Update::ATTRIBUTES)
+    end
   end
 end

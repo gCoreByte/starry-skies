@@ -32,8 +32,15 @@
           <tbody>
             <tr>
               <td>
-                <%= link_to admin_store_products_path(@store), class: 'btn btn-primary' do %>
+                <%= link_to admin_store_products_path(@store), class: 'btn btn-sm btn-primary' do %>
                   <i class="fas fa-box"></i> Products
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <%= link_to admin_store_product_categories_path(@store), class: 'btn btn-sm btn-primary' do %>
+                  <i class="fas fa-table-columns"></i> Categories
                 <% end %>
               </td>
             </tr>

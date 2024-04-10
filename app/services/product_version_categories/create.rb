@@ -2,9 +2,9 @@
 
 module ProductVersionCategories
   class Create < ApplicationService
-    attr_accessor :product_version, :product_category, :fingerprint
+    attr_accessor :product_version, :product_category, :store, :fingerprint
 
-    validates :product_version, :product_category, :fingerprint, presence: true
+    validates :product_version, :product_category, :store, :fingerprint, presence: true
 
     validate do
       validate_model(product_version_category, :base)
@@ -14,6 +14,7 @@ module ProductVersionCategories
       @_product_version_category ||= ProductVersionCategory.new(
         product_category: product_category,
         product_version: product_version,
+        store: store,
         created_by: fingerprint
       )
     end

@@ -11,6 +11,7 @@ class Fingerprint < ApplicationRecord
 
   belongs_to :admin_account, optional: true
   belongs_to :user_account, optional: true
+  belongs_to :user_session, optional: true
 
   validates :type_key, presence: true
   validates :ip_address, length: { maximum: 15 }, allow_nil: true

@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 class PurchaseCart < ApplicationRecord
+  EXPIRY_PERIOD = 24.hours
+
   module Statuses
     CREATED = 'created'
     BOOKED = 'booked'
     BILLED = 'billed'
     EXPIRED = 'expired'
     ALL = [CREATED, BOOKED, BILLED, EXPIRED].freeze
-    EXPIRABLE = [CREATED, BOOKED].freeze
     FINAL = [BILLED, EXPIRED].freeze
   end
 
@@ -19,11 +20,6 @@ class PurchaseCart < ApplicationRecord
 
   validates :status, presence: true
   validates :status, inclusion: { in: Statuses::ALL }, allow_nil: true
-  validates :expires_at, presence: true, if: :expirable?
-
-  def expirable?
-    status.in?(Statuses::EXPIRABLE)
-  end
 
   def final?
     status.in?(Statuses::FINAL)

@@ -46,4 +46,8 @@ class ProductVersion < ApplicationRecord
   def title
     "#{product.name} V#{version}"
   end
+
+  def available_categories
+    store.product_categories.where.not(id: product_categories.pluck(:id))
+  end
 end

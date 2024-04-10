@@ -80,5 +80,5 @@ test:
 production:
   <<: *default
   database: starry_skies_production
-  username: starry_skies
-  password: <%= ENV["STARRY_SKIES_DATABASE_PASSWORD"] %>
+  # username: starry_skies
+  # password: <%= ENV["STARRY_SKIES_DATABASE_PASSWORD"] %>

@@ -30,13 +30,22 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
             patch :activate
             patch :deactivate
           end
-          resources :product_prices, shallow: true
+          resources :product_version_categories, only: %i[new create destroy], shallow: true
+          resources :product_prices, shallow: true, except: %i[index]
         end
       end
 
-      resources :product_categories
+      resources :product_categories, shallow: true
       resources :admin_store_permissions, only: %i[index create destroy]
       resources :admin_store_relationships, only: %i[index create destroy]
+      resources :purchase_orders, shallow: true do
+        member do
+          patch :processing
+          patch :in_transit
+          patch :completed
+          patch :failed
+        end
+      end
     end
   end
 

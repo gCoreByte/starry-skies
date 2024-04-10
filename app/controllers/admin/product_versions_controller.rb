@@ -10,6 +10,8 @@ module Admin
     end
 
     def show
+      @product_version_categories = @product_version.product_version_categories
+      @product_prices = @product_version.product_prices.order(locale: :desc, currency: :desc)
     end
 
     def new
@@ -18,7 +20,7 @@ module Admin
     end
 
     def edit
-      @service = ProductVersions::Create.new(product: @product, fingerprint: fingerprint)
+      @service = ProductVersions::Update.new(product_version: @product_version, fingerprint: fingerprint)
     end
 
     def create

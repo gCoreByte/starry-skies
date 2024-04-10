@@ -1,0 +1,22 @@
+<%= form_with(model: [:admin, @product_version, @product_version_category]) do |form| %>
+  <div class='modal-body'>
+    <% if @service.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(@service.errors.count, "error") %> prohibited this from being saved:</h2>
+        <ul>
+          <% @service.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class='mb-3'>
+      <%= form.label :product_category_id, { class: 'form-label' } %>
+      <%= form.collection_select :product_category_id, @product_version.available_categories, :id, :name, {}, { class: 'form-select' } %>
+    </div>
+  </div>
+
+  <div class='modal-footer'>
+    <%= form.submit 'Save', class: 'btn btn-primary' %>
+  </div>
+<% end %>

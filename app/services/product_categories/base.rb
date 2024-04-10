@@ -13,6 +13,8 @@ module ProductCategories
       validate_model(product_category, :base, *ATTRIBUTES)
     end
 
+    delegate(*ATTRIBUTES, to: :product_category)
+
     def product_category
       raise 'Implement in subclass'
     end

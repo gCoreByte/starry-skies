@@ -1,0 +1,26 @@
+<tbody id='product_category'>
+  <tr>
+    <th>Name</th>
+    <td><%= @product_category.name %></td>
+  </tr>
+  <tr>
+    <th>Key</th>
+    <td><%= @product_category.key %></td>
+  </tr>
+  <tr>
+    <th>Created by</th>
+    <td><%= @product_category.created_by.name %></td>
+  </tr>
+  <tr>
+    <th>Created at</th>
+    <td><%= time_tag(@product_category.created_at) %></td>
+  </tr>
+  <tr>
+    <th>Updated by</th>
+    <td><%= @product_category.updated_by.name %></td>
+  </tr>
+  <tr>
+    <th>Updated at</th>
+    <td><%= time_tag(@product_category.updated_at) %></td>
+  </tr>
+</tbody>

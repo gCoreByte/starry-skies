@@ -7,6 +7,9 @@ class Store < ApplicationRecord
 
   has_many :products, dependent: nil
   has_many :product_versions, dependent: nil
+  has_many :product_categories, dependent: nil
+  has_many :product_version_categories, dependent: nil
+  has_many :product_prices, dependent: nil
 
   belongs_to :package, optional: true
   belongs_to :created_by, class_name: 'Fingerprint'

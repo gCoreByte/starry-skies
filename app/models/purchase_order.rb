@@ -15,7 +15,7 @@ class PurchaseOrder < ApplicationRecord
   belongs_to :purchase_cart
   has_one :address, as: :record, dependent: nil
 
-  validates :status, :first_name, :surname, :phone_number, presence: true
+  validates :status, :first_name, :surname, :phone_number, :source, presence: true
   validates :status, inclusion: { in: Statuses::ALL }, allow_nil: true
   # FIXME: add better name validation
   validates :first_name, length: { maximum: 255 }, allow_nil: true

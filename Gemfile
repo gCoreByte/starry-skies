@@ -56,14 +56,13 @@ end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
-  gem 'web-console'
-
   gem 'brakeman', require: false
   gem 'overcommit', require: false
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
+  gem 'web-console'
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
@@ -96,3 +95,5 @@ gem 'authentication-zero', '~> 3.0'
 gem 'liquid', '~> 5.4'
 
 gem 'font-awesome-sass', '~> 6.5'
+
+gem 'solid_queue', '~> 0.3.0'
