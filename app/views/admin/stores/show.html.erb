@@ -1,8 +1,8 @@
 <p style="color: green"><%= notice %></p>
 
 <%= page_title(@store.name) do %>
-  <%= link_to '', edit_admin_store_path(@store), class: 'btn btn-warning fas fa-pencil', data: { turbo: true, turbo_frame: 'modal' } %>
-  <%= link_to '', admin_store_path(@store), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}, class: 'btn btn-danger fas fa-trash' %>
+  <%= link_to '', edit_admin_store_path(@store), class: 'btn btn-sm btn-warning fas fa-pencil', data: { turbo: true, turbo_frame: 'modal' } %>
+  <%= link_to '', admin_store_path(@store), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}, class: 'btn btn-sm btn-danger fas fa-trash' %>
 <% end %>
 
 <div class="row">
@@ -45,9 +45,19 @@
               </td>
             </tr>
             <tr>
+              <td>
+              <%= link_to admin_store_purchase_orders_path(@store), class: 'btn btn-sm btn-primary' do %>
+                <i class='fas fa-cart-shopping'></i> Orders
+              <% end %>
+              </td>
               <%# <td><%= link_to "Orders", admin_store_orders_path(@store) %></td>
             </tr>
             <tr>
+              <td>
+                <%= link_to admin_store_pages_path(@store), class: 'btn btn-sm btn-primary' do %>
+                  <i class='fas fa-file'></i> Pages
+                <% end %>
+              </td>
               <%# <td><%= link_to "Notices", admin_store_notices_path(@store) %></td>
             </tr>
             <tr>

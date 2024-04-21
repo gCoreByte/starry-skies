@@ -21,9 +21,9 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   get 'up' => 'rails/health#show', as: :rails_health_check
 
   # Authenticated routes
-  namespace :admin do
+  namespace :admin do # rubocop:disable Metrics/BlockLength
     resources :dashboard, only: :index
-    resources :stores, except: :index do
+    resources :stores, except: :index do # rubocop:disable Metrics/BlockLength
       resources :products, shallow: true do
         resources :product_versions, shallow: true do
           member do
@@ -38,12 +38,18 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
       resources :product_categories, shallow: true
       resources :admin_store_permissions, only: %i[index create destroy]
       resources :admin_store_relationships, only: %i[index create destroy]
-      resources :purchase_orders, shallow: true do
+      resources :purchase_orders, shallow: true, except: %i[edit update] do
         member do
           patch :processing
           patch :in_transit
           patch :completed
           patch :failed
+        end
+      end
+
+      resources :pages, shallow: true do
+        member do
+          get :preview
         end
       end
     end

@@ -293,14 +293,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_10_112847) do
   create_table "purchase_orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "store_id", null: false
     t.uuid "purchase_cart_id", null: false
+    t.uuid "created_by_id", null: false
+    t.uuid "updated_by_id", null: false
     t.string "status", null: false
     t.string "first_name", null: false
     t.string "surname", null: false
     t.string "phone_number", null: false
+    t.integer "reference_number", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["created_by_id"], name: "index_purchase_orders_on_created_by_id"
     t.index ["purchase_cart_id"], name: "index_purchase_orders_on_purchase_cart_id"
     t.index ["store_id"], name: "index_purchase_orders_on_store_id"
+    t.index ["updated_by_id"], name: "index_purchase_orders_on_updated_by_id"
   end
 
   create_table "sessions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -507,6 +512,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_10_112847) do
   add_foreign_key "purchase_carts", "fingerprints", column: "created_by_id"
   add_foreign_key "purchase_carts", "fingerprints", column: "updated_by_id"
   add_foreign_key "purchase_carts", "stores"
+  add_foreign_key "purchase_orders", "fingerprints", column: "created_by_id"
+  add_foreign_key "purchase_orders", "fingerprints", column: "updated_by_id"
   add_foreign_key "purchase_orders", "purchase_carts"
   add_foreign_key "purchase_orders", "stores"
   add_foreign_key "sessions", "admin_accounts"

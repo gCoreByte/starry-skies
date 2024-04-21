@@ -46,4 +46,12 @@ module ButtonHelper
                                                                turbo_method: :patch, turbo_confirm: t('are_you_sure')
                                                              }
   end
+
+  def action_button(*path, action: nil, icon: '', confirm: false, label: '', type: 'primary') # rubocop:disable Metrics/ParameterLists
+    path = path.flatten
+    data_options = { turbo_method: :patch }
+    data_options[:turbo_confirm] = t('are_you_sure') if confirm
+    link_to label, polymorphic_path(path, action: action), class: "btn btn-sm btn-#{type} fas #{icon}",
+                                                           data: data_options
+  end
 end

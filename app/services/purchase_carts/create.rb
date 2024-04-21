@@ -2,9 +2,9 @@
 
 module PurchaseCarts
   class Create < ApplicationService
-    attr_accessor :fingerprint
+    attr_accessor :store, :fingerprint
 
-    validates :fingerprint, presence: true
+    validates :store, :fingerprint, presence: true
 
     validate if: :purchase_cart do
       validate_model(purchase_cart, :base, :status, :expires_at)
@@ -12,6 +12,7 @@ module PurchaseCarts
 
     def purchase_cart
       @_purchase_cart ||= PurchaseCart.new(
+        store: store,
         created_by: fingerprint,
         updated_by: fingerprint,
         status: PurchaseCart::Statuses::CREATED,

@@ -2,10 +2,9 @@
 
 FactoryBot.define do
   factory :product_price do
-    locale { 'MyString' }
+    locale { 'et' }
     price { '9.99' }
-    currency { 'MyString' }
-    deactivated_at { '2023-12-29 12:56:45' }
+    currency { 'eur' }
     store { @overrides[:product_version]&.store || association(:store) }
     created_by { association(:fingerprint) }
     updated_by { created_by }

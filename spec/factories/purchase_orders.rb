@@ -7,6 +7,9 @@ FactoryBot.define do
     first_name { Faker::Name.first_name }
     surname { Faker::Name.last_name }
     phone_number { Faker::PhoneNumber.cell_phone }
+    sequence(:reference_number) { |n| n }
+    created_by { association(:fingerprint) }
+    updated_by { created_by }
 
     created
 
@@ -14,6 +17,10 @@ FactoryBot.define do
       trait status.to_sym do
         status { status }
       end
+    end
+
+    after(:build) do |purchase_order|
+      create(:address, record: purchase_order)
     end
   end
 end
