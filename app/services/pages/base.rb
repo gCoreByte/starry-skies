@@ -2,7 +2,7 @@
 
 module Pages
   class Base < ApplicationService
-    ATTRIBUTES = %i[key url dynamic].freeze
+    ATTRIBUTES = %i[key url].freeze
 
     attr_accessor :fingerprint
     attr_writer :payload
@@ -12,6 +12,8 @@ module Pages
     validate if: :page do
       validate_model(page, :base, *ATTRIBUTES)
     end
+
+    delegate(*ATTRIBUTES, to: :page)
 
     def page
       raise 'Implement in subclass'

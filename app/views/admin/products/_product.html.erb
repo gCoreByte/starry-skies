@@ -1,6 +1,5 @@
 <tr>
-  <td><%= link_to product.name, admin_product_path(product) %></td>
-  <td><%= product.key %></td>
+  <td><%= link_to product.key, admin_product_path(product) %></td>
   <td><%= time_tag(product.created_at) %></td>
   <td>
     <%= card_controls do %>

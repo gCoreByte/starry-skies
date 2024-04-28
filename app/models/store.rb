@@ -11,6 +11,9 @@ class Store < ApplicationRecord
   has_many :product_version_categories, dependent: nil
   has_many :product_prices, dependent: nil
   has_many :purchase_orders, dependent: nil
+  has_many :pages, dependent: nil
+  has_many :page_templates, dependent: nil
+  has_many :page_translations, dependent: :destroy
 
   belongs_to :package, optional: true
   belongs_to :created_by, class_name: 'Fingerprint'

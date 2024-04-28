@@ -1,6 +1,6 @@
 <p style="color: green"><%= notice %></p>
 
-<%= page_title(@product.name) do %>
+<%= page_title(@product.key) do %>
   <%= edit_button(:admin, @product) %>
   <%= destroy_button(:admin, @product) %>
 <% end %>

@@ -16,6 +16,7 @@
           <% if @product_version.active? %>
             <%= deactivate_button([:admin, @product_version]) %>
           <% end %>
+          <%= action_button([:admin, @product_version], action: :translations_form, method: :get, turbo: true, icon: 'fa-file' )%>
         <% end %>
       </div>
       <div class="table-responsive">

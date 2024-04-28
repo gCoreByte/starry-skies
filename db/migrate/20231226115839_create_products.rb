@@ -7,7 +7,6 @@ class CreateProducts < ActiveRecord::Migration[7.1]
       t.references :created_by, foreign_key: { to_table: :fingerprints }, type: :uuid, null: false
       t.references :updated_by, foreign_key: { to_table: :fingerprints }, type: :uuid, null: false
 
-      t.string :name, null: false
       t.string :key, null: false
 
       t.timestamps

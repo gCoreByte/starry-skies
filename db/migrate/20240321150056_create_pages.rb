@@ -8,9 +8,7 @@ class CreatePages < ActiveRecord::Migration[7.1]
       t.belongs_to :updated_by, null: true, foreign_key: { to_table: :fingerprints }, type: :uuid, index: true
       t.belongs_to :page_template, null: false, foreign_key: true, type: :uuid, index: true
 
-      t.belongs_to :record, null: true, polymorphic: true, type: :uuid, index: true
       t.string :status, null: false
-      t.boolean :dynamic, null: false, default: false
       t.string :key, null: false
       t.string :url, null: false
 

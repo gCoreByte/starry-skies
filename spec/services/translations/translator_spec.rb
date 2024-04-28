@@ -2,13 +2,13 @@
 
 RSpec.describe Translations::Translator do
   let!(:locale) { :en }
-  let!(:record) { create(:product) }
+  let!(:record) { create(:product_version) }
 
   subject { described_class.new(record: record, locale: locale) }
 
   describe '#translate' do
     context 'when record is not translatable' do
-      let!(:record) { create(:page) }
+      let!(:record) { create(:product) }
 
       it do
         expect(subject).to validate_errors_on(:base).with_details(error: :untranslatable)
@@ -47,7 +47,7 @@ RSpec.describe Translations::Translator do
       end
 
       context 'when translation is not found' do
-        let!(:record) { create(:product, translations: {}) }
+        let!(:record) { create(:product_version, translations: {}) }
 
         it do
           expect(subject.translate(:name)).to be_nil

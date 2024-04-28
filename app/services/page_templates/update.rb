@@ -4,6 +4,8 @@ module PageTemplates
   class Update < PageTemplates::Base
     attr_writer :page_template
 
+    delegate :store, to: :page_template
+
     def page_template
       @_page_template ||= @page_template.tap do |o|
         o.assign_attributes(payload.slice(*ATTRIBUTES))

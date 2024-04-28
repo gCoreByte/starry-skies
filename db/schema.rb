@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_10_112847) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_27_022857) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -112,6 +112,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_10_112847) do
     t.uuid "page_template_id", null: false
     t.text "content", null: false
     t.string "status", null: false
+    t.string "key", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["created_by_id"], name: "index_page_template_changes_on_created_by_id"
@@ -135,22 +136,32 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_10_112847) do
     t.index ["updated_by_id"], name: "index_page_templates_on_updated_by_id"
   end
 
+  create_table "page_translations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "store_id", null: false
+    t.uuid "page_template_id", null: false
+    t.uuid "created_by_id", null: false
+    t.string "locale", null: false
+    t.text "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_by_id"], name: "index_page_translations_on_created_by_id"
+    t.index ["page_template_id", "locale"], name: "index_page_translations_on_page_template_id_and_locale", unique: true
+    t.index ["page_template_id"], name: "index_page_translations_on_page_template_id"
+    t.index ["store_id"], name: "index_page_translations_on_store_id"
+  end
+
   create_table "pages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "store_id", null: false
     t.uuid "created_by_id", null: false
     t.uuid "updated_by_id"
     t.uuid "page_template_id", null: false
-    t.string "record_type"
-    t.uuid "record_id"
     t.string "status", null: false
-    t.boolean "dynamic", default: false, null: false
     t.string "key", null: false
     t.string "url", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["created_by_id"], name: "index_pages_on_created_by_id"
     t.index ["page_template_id"], name: "index_pages_on_page_template_id"
-    t.index ["record_type", "record_id"], name: "index_pages_on_record"
     t.index ["store_id", "key"], name: "index_pages_on_store_id_and_key", unique: true
     t.index ["store_id", "url"], name: "index_pages_on_store_id_and_url", unique: true
     t.index ["store_id"], name: "index_pages_on_store_id"
@@ -208,7 +219,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_10_112847) do
     t.uuid "product_id", null: false
     t.uuid "created_by_id", null: false
     t.uuid "updated_by_id", null: false
-    t.text "description"
     t.integer "version", null: false
     t.string "locales", default: [], null: false, array: true
     t.datetime "activated_at"
@@ -237,11 +247,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_10_112847) do
     t.uuid "store_id", null: false
     t.uuid "created_by_id", null: false
     t.uuid "updated_by_id", null: false
-    t.string "name", null: false
     t.string "key", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.jsonb "translations", default: {}, null: false
     t.index ["created_by_id"], name: "index_products_on_created_by_id"
     t.index ["store_id", "key"], name: "index_products_on_store_id_and_key", unique: true
     t.index ["store_id"], name: "index_products_on_store_id"
@@ -478,6 +486,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_10_112847) do
   add_foreign_key "page_templates", "fingerprints", column: "created_by_id"
   add_foreign_key "page_templates", "fingerprints", column: "updated_by_id"
   add_foreign_key "page_templates", "stores"
+  add_foreign_key "page_translations", "fingerprints", column: "created_by_id"
+  add_foreign_key "page_translations", "page_templates"
+  add_foreign_key "page_translations", "stores"
   add_foreign_key "pages", "fingerprints", column: "created_by_id"
   add_foreign_key "pages", "fingerprints", column: "updated_by_id"
   add_foreign_key "pages", "page_templates"

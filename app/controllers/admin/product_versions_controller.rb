@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Admin
-  class ProductVersionsController < Admin::ApplicationController
+  class ProductVersionsController < Admin::ApplicationController # rubocop:disable Metrics/ClassLength
     before_action :set_product, only: %i[new create index]
     before_action :set_product_version, except: %i[new create index]
 
@@ -81,6 +81,25 @@ module Admin
       redirect_to admin_product_version_url(@product_version)
     end
 
+    def translations_form
+      @translation_service = Translations::Translator.new(record: @product_version)
+      @service = ProductVersions::Translations.new(product_version: @product_version, fingerprint: fingerprint)
+    end
+
+    def translations # rubocop:disable Metrics/MethodLength
+      @translation_service = Translations::Translator.new(record: @product_version)
+      @service = ProductVersions::Translations.new(product_version: @product_version, fingerprint: fingerprint,
+                                                   payload: translations_params)
+      if @service.save
+        respond_to do |format|
+          format.html { redirect_to admin_product_version_url(@product_version) }
+          format.turbo_stream
+        end
+      else
+        render :translations_form, status: :unprocessable_entity
+      end
+    end
+
     private
 
     def set_product
@@ -103,6 +122,14 @@ module Admin
 
     def update_params
       params.require(:product_version).permit(*ProductVersions::Update::ATTRIBUTES).merge!(updated_by: fingerprint)
+    end
+
+    def translations_params
+      params.require(:product_version).permit(
+        en: ProductVersion::TRANSLATABLE_KEYS,
+        et: ProductVersion::TRANSLATABLE_KEYS,
+        ru: ProductVersion::TRANSLATABLE_KEYS
+      )
     end
   end
 end

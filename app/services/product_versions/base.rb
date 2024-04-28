@@ -2,7 +2,7 @@
 
 module ProductVersions
   class Base < ApplicationService
-    ATTRIBUTES = %i[description width length height weight size_unit weight_unit].freeze
+    ATTRIBUTES = %i[width length height weight size_unit weight_unit].freeze
 
     attr_accessor :fingerprint
     attr_writer :payload

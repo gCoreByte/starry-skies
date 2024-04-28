@@ -2,6 +2,9 @@
 
 class ProductVersion < ApplicationRecord
   include Mixins::Activatable
+  include Mixins::Translatable
+
+  TRANSLATABLE_KEYS = %w[name description].freeze
 
   module SizeUnits
     MM = 'mm'
@@ -16,7 +19,7 @@ class ProductVersion < ApplicationRecord
     ALL = [G, KG].freeze
   end
 
-  nullify_attributes :description, :width, :length, :height, :weight, :size_unit, :weight_unit
+  nullify_attributes :width, :length, :height, :weight, :size_unit, :weight_unit
 
   has_many :product_version_categories, dependent: nil
   has_many :product_categories, through: :product_version_categories
@@ -30,7 +33,6 @@ class ProductVersion < ApplicationRecord
   validates :version, presence: true
   validates :version, numericality: { minimum: 0, maximum: 999 }, allow_nil: true
   validates :version, uniqueness: { scope: :product_id }
-  validates :description, length: { maximum: 1000 }, allow_nil: true
 
   validates :width, :length, :height, :weight,
             numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 50_000 }, allow_nil: true
@@ -41,12 +43,10 @@ class ProductVersion < ApplicationRecord
     validate_record_store(product)
   end
 
-  delegate :name, to: :product, prefix: true
-
   # FIXME: Add validation to disallow unit without values
 
   def title
-    "#{product.name} V#{version}"
+    "V#{version}"
   end
 
   def available_categories

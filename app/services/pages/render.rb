@@ -4,7 +4,7 @@ module Pages
   class Render
     def initialize(page:, record:)
       @page = page
-      @record = page.dynamic? ? record : page.record
+      @record = record
     end
 
     def render

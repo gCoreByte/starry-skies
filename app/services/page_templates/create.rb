@@ -8,7 +8,8 @@ module PageTemplates
       @_page_template ||= PageTemplate.new(
         store: store,
         created_by: fingerprint,
-        updated_by: fingerprint
+        updated_by: fingerprint,
+        status: PageTemplate::Statuses::DRAFT
       ).tap do |o|
         o.assign_attributes(payload.slice(*ATTRIBUTES))
       end

@@ -20,6 +20,10 @@ module Translations
       locale_translations[key.to_s]
     end
 
+    def translate_with_locale(key, locale)
+      record.translations.dig(locale.to_s, key.to_s)
+    end
+
     private
 
     def locale_translations

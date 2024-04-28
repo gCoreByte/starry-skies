@@ -11,6 +11,14 @@ class ApplicationRecord < ActiveRecord::Base
         end
       end
     end
+
+    def nullify_and_strip_attributes(*attrs)
+      attrs.each do |attribute|
+        define_method("#{attribute}=") do |value|
+          super(value.presence&.strip)
+        end
+      end
+    end
   end
 
   def validate_record_store(record)

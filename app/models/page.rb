@@ -10,21 +10,23 @@ class Page < ApplicationRecord
   belongs_to :store
   belongs_to :created_by, class_name: 'Fingerprint'
   belongs_to :updated_by, class_name: 'Fingerprint'
-  belongs_to :record, polymorphic: true, optional: true
   belongs_to :page_template
 
   validates :status, :key, :url, presence: true
   validates :status, inclusion: { in: Statuses::ALL }, allow_nil: true
   validates :key, length: { minimum: 3, maximum: 100 }, allow_nil: true
   validates :url, length: { minimum: 3, maximum: 100 }, allow_nil: true
-  validates :dynamic, inclusion: { in: [true, false] }
 
   validates :key, uniqueness: { scope: :store_id }
   validates :url, uniqueness: { scope: :store_id }
 
-  delegate :content, to: :page_template
+  delegate :content, :based_on, to: :page_template
 
   def draft?
     status == Statuses::DRAFT
+  end
+
+  def live?
+    status == Statuses::LIVE
   end
 end

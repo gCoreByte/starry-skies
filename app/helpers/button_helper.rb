@@ -19,6 +19,12 @@ module ButtonHelper
     link_to '', polymorphic_path(path), class: 'btn btn-sm btn-primary fas fa-eye'
   end
 
+  def show_modal_button(*path)
+    path = path.flatten
+    link_to '', polymorphic_path(path), class: 'btn btn-sm btn-primary fas fa-eye',
+                                        data: { turbo: true, turbo_frame: 'modal' }
+  end
+
   def edit_button(*path)
     path = path.flatten
     link_to '', edit_polymorphic_path(path), class: 'btn btn-sm btn-warning fas fa-edit',
@@ -47,9 +53,11 @@ module ButtonHelper
                                                              }
   end
 
-  def action_button(*path, action: nil, icon: '', confirm: false, label: '', type: 'primary') # rubocop:disable Metrics/ParameterLists
+  def action_button(*path, action: nil, icon: '', confirm: false, label: '', type: 'primary', method: :patch, # rubocop:disable Metrics/ParameterLists
+                    turbo: false)
     path = path.flatten
-    data_options = { turbo_method: :patch }
+    data_options = { turbo_method: method }
+    data_options[:turbo_frame] = 'modal' if turbo
     data_options[:turbo_confirm] = t('are_you_sure') if confirm
     link_to label, polymorphic_path(path, action: action), class: "btn btn-sm btn-#{type} fas #{icon}",
                                                            data: data_options

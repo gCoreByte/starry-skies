@@ -1,0 +1,73 @@
+<p style="color: green"><%= notice %></p>
+<p style="color: red"><%= alert %></p>
+<%= page_title 'Page' do %>
+  <% if @page.draft? %>
+    <%= destroy_button([:admin, @page]) %>
+    <%= action_button([:admin, @page], action: :live, icon: 'fa-play', type: 'success', method: :patch) %>
+  <% end %>
+  <% if @page.live? && @page.url != 'index' %>
+    <%= action_button([:admin, @page], action: :draft, icon: 'fa-stop', type: 'danger', method: :patch )%>
+  <% end %>
+<% end %>
+<div class="row">
+  <div class="col-xl-6">
+    <div class="card mb-3 border">
+      <div class="card-header">
+        <%= card_title('Page details') %>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <tbody>
+            <tr>
+              <th>Key</th>
+              <td><%= @page.key %></td>
+            </tr>
+            <tr>
+              <th>Status</th>
+              <td><%= @page.status %></td>
+            </tr>
+            <tr>
+              <th>Url</th>
+              <td><%= @page.url %></td>
+            </tr>
+            <tr>
+              <th>Created by</th>
+              <td><%= @page.created_by.name %></td>
+            </tr>
+            <tr>
+              <th>Created at</th>
+              <td><%= time_tag(@page.created_at) %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-6">
+    <div class="card mb-3 border">
+      <div class="card-header">
+        <%= card_title('Page template details') do %>
+          <%= show_button([:admin, @page.page_template]) %>
+        <% end %>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <tbody>
+            <tr>
+              <th>Key</th>
+              <td><%= @page.page_template.key %></td>
+            </tr>
+            <tr>
+              <th>Status</th>
+              <td><%= @page.page_template.status %></td>
+            </tr>
+            <tr>
+              <th>Based on</th>
+              <td><%= @page.page_template.based_on %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

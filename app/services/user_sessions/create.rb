@@ -3,7 +3,7 @@
 module UserSessions
   class Create < ApplicationService
     attribute :expires_at, :datetime, default: -> { UserSession::EXPIRY_PERIOD.from_now }
-    attr_accessor :cookie, :store, :user_account, :fingerprint
+    attr_accessor :cookie, :store, :user_account
 
     validate if: :user_session do
       validate_model(user_session, :base, :cookie, :expires_at)

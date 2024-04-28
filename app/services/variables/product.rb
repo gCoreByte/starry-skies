@@ -6,10 +6,14 @@ module Variables
       %w[name key active? description width length height weight size_unit weight_unit]
     end
 
-    delegate :name, :key, :active?, to: :record
+    delegate :key, :active?, to: :record
+
+    def name
+      product_version_translator&.translate(:name)
+    end
 
     def description
-      record.product_version&.description
+      product_version_translator&.translate(:description)
     end
 
     def width
@@ -42,6 +46,14 @@ module Variables
 
     def product_version
       Variables::VariableProvider.new(record: based_on_service.product_version)
+    end
+
+    private
+
+    def product_version_translator
+      return unless record.product_version
+
+      @_product_version_translator ||= Translations::Translator.new(record: record.product_version, locale: I18n.locale)
     end
   end
 end
