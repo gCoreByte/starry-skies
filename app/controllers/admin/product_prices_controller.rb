@@ -4,6 +4,7 @@ module Admin
   class ProductPricesController < Admin::ApplicationController
     before_action :set_product_price, only: %i[show edit update destroy]
     before_action :set_product_version, only: %i[new create]
+    before_action :set_user_group, only: %i[new create edit update]
 
     def show
     end
@@ -23,7 +24,7 @@ module Admin
 
     def create # rubocop:disable Metrics/MethodLength
       @service = ProductPrices::Create.new(
-        product_version: @product_version, fingerprint: fingerprint, payload: create_params
+        product_version: @product_version, user_group: @user_group, fingerprint: fingerprint, payload: create_params
       )
       @product_price = @service.product_price
       if @service.save
@@ -38,7 +39,7 @@ module Admin
 
     def update # rubocop:disable Metrics/MethodLength
       @service = ProductPrices::Update.new(
-        product_price: @product_price, fingerprint: fingerprint, payload: update_params
+        product_price: @product_price, user_group: @user_group, fingerprint: fingerprint, payload: update_params
       )
       if service.save
         respond_to do |format|
@@ -65,6 +66,14 @@ module Admin
 
     def set_product_price
       @product_price = @store.product_prices.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      render_404
+    end
+
+    def set_user_group
+      return unless params.dig(:product_price, :user_group_id)
+
+      @user_group = @store.user_groups.find(params.dig(:product_price, :user_group_id))
     rescue ActiveRecord::RecordNotFound
       render_404
     end

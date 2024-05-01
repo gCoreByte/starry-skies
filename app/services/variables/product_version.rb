@@ -48,6 +48,10 @@ module Variables
       Variables::VariableProvider.new(record: based_on_service.product)
     end
 
+    def product_price
+      Variables::VariableProvider.new(record: based_on_service.product_price)
+    end
+
     private
 
     def product_version_translator

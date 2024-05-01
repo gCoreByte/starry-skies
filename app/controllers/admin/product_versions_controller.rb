@@ -11,7 +11,7 @@ module Admin
 
     def show
       @product_version_categories = @product_version.product_version_categories
-      @product_prices = @product_version.product_prices.order(locale: :desc, currency: :desc)
+      @product_prices = @product_version.product_prices
     end
 
     def new

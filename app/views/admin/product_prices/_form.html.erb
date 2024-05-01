@@ -11,16 +11,12 @@
       </div>
     <% end %>
     <div class='mb-3'>
-      <%= form.label :locale, { class: 'form-label' } %>
-      <%= form.select :locale, ProductPrice::Locales::ALL, {}, { class: 'form-select' } %>
-    </div>
-    <div class='mb-3'>
-      <%= form.label :currency, { class: 'form-label' } %>
-      <%= form.text_field :currency %>
-    </div>
-    <div class='mb-3'>
       <%= form.label :price, { class: 'form-label' } %>
       <%= form.number_field :price, { class: 'form-control' } %>
+    </div>
+    <div class='mb-3'>
+      <%= form.label :user_group, { class: 'form-label' } %>
+      <%= form.collection_select :user_group_id, @store.user_groups, :id, :key, {}, { class: 'form-select'} %>
     </div>
   </div>
 

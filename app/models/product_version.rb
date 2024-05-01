@@ -52,4 +52,15 @@ class ProductVersion < ApplicationRecord
   def available_categories
     store.product_categories.where.not(id: product_categories.pluck(:id))
   end
+
+  def product_price
+    user_group_price || product_prices.first
+  end
+
+  private
+
+  def user_group_price
+    user_groups = Current.user_account&.user_groups
+    product_prices.joins(:user_group).where(user_groups: { id: user_groups }).order(ranking: :asc).first
+  end
 end

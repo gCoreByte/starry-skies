@@ -7,7 +7,7 @@ class PageTemplate < ApplicationRecord
     ALL = [DRAFT, ACTIVE].freeze
   end
 
-  nullify_and_strip_attributes :key, :content
+  nullify_and_strip_attributes :key
 
   belongs_to :store
   belongs_to :created_by, class_name: 'Fingerprint'

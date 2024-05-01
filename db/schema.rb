@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_27_022857) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_28_234101) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -125,7 +125,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_27_022857) do
     t.uuid "created_by_id", null: false
     t.uuid "updated_by_id"
     t.string "key", null: false
-    t.text "content", null: false
     t.string "status", null: false
     t.string "based_on", null: false
     t.datetime "created_at", null: false
@@ -184,21 +183,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_27_022857) do
   end
 
   create_table "product_prices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "locale", null: false
     t.decimal "price", null: false
-    t.string "currency", null: false
     t.datetime "deactivated_at"
     t.uuid "store_id", null: false
     t.uuid "created_by_id", null: false
     t.uuid "updated_by_id", null: false
     t.uuid "product_version_id", null: false
+    t.uuid "user_group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["created_by_id"], name: "index_product_prices_on_created_by_id"
-    t.index ["product_version_id", "locale", "currency"], name: "idx_on_product_version_id_locale_currency_42358d636c", unique: true, where: "(deactivated_at IS NOT NULL)"
+    t.index ["product_version_id", "user_group_id"], name: "index_product_prices_on_product_version_id_and_user_group_id", unique: true, where: "((deactivated_at IS NULL) AND (user_group_id IS NOT NULL))"
     t.index ["product_version_id"], name: "index_product_prices_on_product_version_id"
     t.index ["store_id"], name: "index_product_prices_on_store_id"
     t.index ["updated_by_id"], name: "index_product_prices_on_updated_by_id"
+    t.index ["user_group_id"], name: "index_product_prices_on_user_group_id"
   end
 
   create_table "product_version_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -454,6 +453,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_27_022857) do
     t.index ["store_id"], name: "index_user_accounts_on_store_id"
   end
 
+  create_table "user_groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "store_id", null: false
+    t.string "name", null: false
+    t.string "key", null: false
+    t.integer "ranking", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["store_id", "key"], name: "index_user_groups_on_store_id_and_key", unique: true
+    t.index ["store_id"], name: "index_user_groups_on_store_id"
+  end
+
   create_table "user_sessions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "cookie", null: false
     t.datetime "expires_at", null: false
@@ -464,6 +474,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_27_022857) do
     t.index ["store_id", "cookie"], name: "index_user_sessions_on_store_id_and_cookie", unique: true
     t.index ["store_id"], name: "index_user_sessions_on_store_id"
     t.index ["user_account_id"], name: "index_user_sessions_on_user_account_id"
+  end
+
+  create_table "user_user_groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "store_id", null: false
+    t.uuid "user_account_id", null: false
+    t.uuid "user_group_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["store_id"], name: "index_user_user_groups_on_store_id"
+    t.index ["user_account_id"], name: "index_user_user_groups_on_user_account_id"
+    t.index ["user_group_id"], name: "index_user_user_groups_on_user_group_id"
   end
 
   add_foreign_key "addresses", "fingerprints", column: "created_by_id"
@@ -500,6 +521,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_27_022857) do
   add_foreign_key "product_prices", "fingerprints", column: "updated_by_id"
   add_foreign_key "product_prices", "product_versions"
   add_foreign_key "product_prices", "stores"
+  add_foreign_key "product_prices", "user_groups"
   add_foreign_key "product_version_categories", "fingerprints", column: "created_by_id"
   add_foreign_key "product_version_categories", "product_categories"
   add_foreign_key "product_version_categories", "product_versions"
@@ -538,6 +560,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_27_022857) do
   add_foreign_key "stores", "fingerprints", column: "updated_by_id"
   add_foreign_key "stores", "packages"
   add_foreign_key "user_accounts", "stores"
+  add_foreign_key "user_groups", "stores"
   add_foreign_key "user_sessions", "stores"
   add_foreign_key "user_sessions", "user_accounts"
+  add_foreign_key "user_user_groups", "stores"
+  add_foreign_key "user_user_groups", "user_accounts"
+  add_foreign_key "user_user_groups", "user_groups"
 end

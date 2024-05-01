@@ -6,10 +6,6 @@ module ProductPrices
 
     validates :product_version, presence: true
 
-    validate if: :product_version do
-      validate_model(product_price, :base, *ATTRIBUTES)
-    end
-
     delegate :store, to: :product_version
 
     def product_price
@@ -18,7 +14,8 @@ module ProductPrices
           product_version: product_version,
           store: store,
           created_by: fingerprint,
-          updated_by: fingerprint
+          updated_by: fingerprint,
+          user_group: user_group
         ).tap do |product_price|
           product_price.assign_attributes(payload.slice(*ATTRIBUTES))
         end

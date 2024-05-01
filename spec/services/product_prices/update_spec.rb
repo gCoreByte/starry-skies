@@ -5,8 +5,6 @@ RSpec.describe ProductPrices::Update do
   let!(:product_price) { create(:product_price) }
   let!(:payload) do
     {
-      locale: 'et',
-      currency: 'EUR',
       price: 50.0
     }
   end
@@ -18,8 +16,6 @@ RSpec.describe ProductPrices::Update do
       it do
         expect { subject.save! }.not_to change(ProductPrice, :count)
         expect(subject.product_price).to have_attributes(
-          locale: 'et',
-          currency: 'EUR',
           price: 50.0,
           updated_by: fingerprint
         )

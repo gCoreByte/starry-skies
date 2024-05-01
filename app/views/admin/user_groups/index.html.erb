@@ -1,0 +1,25 @@
+<p style="color: green"><%= notice %></p>
+
+<%= page_title('User Groups') do %>
+  <%= create_button(:admin, :store, :user_group) %>
+<% end %>
+
+<div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card mb-3 border">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <th>Name</th>
+              <th>Key</th>
+              <th>Ranking</th>
+            <tbody id=user_groups>
+              <%= render @user_groups %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

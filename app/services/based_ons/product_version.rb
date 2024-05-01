@@ -2,10 +2,10 @@
 
 module BasedOns
   class ProductVersion < BasedOns::Base
-    delegate :store, :product, to: :record
+    delegate :store, :product, :product_price, to: :record
 
     def provides
-      %w[store product product_version]
+      %w[store product product_version product_price]
     end
 
     def product_version

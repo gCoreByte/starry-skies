@@ -5,6 +5,7 @@ class UserAccount < ApplicationRecord
 
   has_many :user_sessions, dependent: :destroy
   has_many :fingerprints, dependent: nil
+  has_many :user_user_groups, dependent: :destroy
   belongs_to :store
 
   validates :email, presence: true
