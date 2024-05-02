@@ -15,6 +15,8 @@ module PurchaseCarts
         store: store,
         created_by: fingerprint,
         updated_by: fingerprint,
+        user_account: fingerprint.user_account,
+        user_session: fingerprint.user_session,
         status: PurchaseCart::Statuses::CREATED,
         expires_at: PurchaseCart::EXPIRY_PERIOD.from_now
       )

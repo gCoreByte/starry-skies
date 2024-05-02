@@ -80,6 +80,12 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     resources :user_sessions, only: %i[new create destroy]
     # resources :pages, only: %i[index show]
     get '/p(/:slug(/:record_type/:record_id))', to: 'pages#show'
+    resources :purchase_carts, only: %i[show destroy] do
+      member do
+        patch :add_item
+        patch :remove_item
+      end
+    end
 
     root 'pages#show', as: :user_root
   end

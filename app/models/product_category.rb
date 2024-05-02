@@ -6,6 +6,7 @@ class ProductCategory < ApplicationRecord
   belongs_to :updated_by, class_name: 'Fingerprint'
   has_many :product_version_categories, dependent: nil
   has_many :product_versions, through: :product_version_categories
+  has_many :products, through: :product_versions
 
   nullify_attributes :name, :key
 

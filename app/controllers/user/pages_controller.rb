@@ -8,7 +8,7 @@ module User
     def show
       return render_404 unless @record
 
-      @service = Pages::Render.new(page: @page, record: @record)
+      @service = Pages::Render.new(page: @page, record: @record, variables: { 'purchase_cart' => @purchase_cart })
       @content = @service.render
     end
 

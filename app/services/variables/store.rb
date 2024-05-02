@@ -3,10 +3,10 @@
 module Variables
   class Store < Variables::Base
     def variables
-      %w[name products]
+      %w[id name products]
     end
 
-    delegate :name, to: :record
+    delegate :id, :name, to: :record
 
     def products
       @_products ||= record.products.active.map do |product|

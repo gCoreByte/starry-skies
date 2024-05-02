@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_28_234101) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_01_213710) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -292,9 +292,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_28_234101) do
     t.datetime "expires_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "user_account_id"
+    t.uuid "user_session_id"
     t.index ["created_by_id"], name: "index_purchase_carts_on_created_by_id"
     t.index ["store_id"], name: "index_purchase_carts_on_store_id"
     t.index ["updated_by_id"], name: "index_purchase_carts_on_updated_by_id"
+    t.index ["user_account_id"], name: "index_purchase_carts_on_user_account_id"
+    t.index ["user_session_id"], name: "index_purchase_carts_on_user_session_id"
   end
 
   create_table "purchase_orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -545,6 +549,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_28_234101) do
   add_foreign_key "purchase_carts", "fingerprints", column: "created_by_id"
   add_foreign_key "purchase_carts", "fingerprints", column: "updated_by_id"
   add_foreign_key "purchase_carts", "stores"
+  add_foreign_key "purchase_carts", "user_accounts"
+  add_foreign_key "purchase_carts", "user_sessions"
   add_foreign_key "purchase_orders", "fingerprints", column: "created_by_id"
   add_foreign_key "purchase_orders", "fingerprints", column: "updated_by_id"
   add_foreign_key "purchase_orders", "purchase_carts"

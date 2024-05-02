@@ -59,7 +59,7 @@ module Admin
       end
     end
 
-    def preview
+    def preview # rubocop:disable Metrics/MethodLength
       # FIXME: hack
       @record =
         if @page_template.based_on == 'store'
@@ -68,7 +68,8 @@ module Admin
           FactoryBot.build(@page_template.based_on.to_sym, store: @store)
         end
       I18n.with_locale(params[:locale]) do
-        @service = Pages::Render.new(page: @page_template, record: @record)
+        @service = Pages::Render.new(page: @page_template, record: @record,
+                                     variables: { 'purchase_cart' => FactoryBot.build(:purchase_cart, store: @store) })
         @content = @service.render
       end
     end

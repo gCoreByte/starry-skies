@@ -2,10 +2,10 @@
 
 module Variables
   class ProductVersion < Variables::Base
-    delegate :price, to: :record
+    delegate :id, :price, to: :record
 
     def variables
-      %w[price]
+      %w[id price]
     end
   end
 end

@@ -21,5 +21,5 @@ class PurchaseCartItem < ApplicationRecord
   end
 
   delegate :price, to: :product_price
-  delegate :product_name, to: :product_version
+  delegate :name, :description, to: :product_version
 end

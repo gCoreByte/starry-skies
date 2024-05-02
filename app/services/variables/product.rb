@@ -3,10 +3,10 @@
 module Variables
   class Product < Variables::Base
     def variables
-      %w[name key active? description width length height weight size_unit weight_unit]
+      %w[id name key active? description width length height weight size_unit weight_unit]
     end
 
-    delegate :key, :active?, to: :record
+    delegate :id, :key, :active?, to: :record
 
     def name
       product_version_translator&.translate(:name)

@@ -57,10 +57,22 @@ class ProductVersion < ApplicationRecord
     user_group_price || product_prices.first
   end
 
+  def name
+    translation_service.translate_with_locale(:name, I18n.locale)
+  end
+
+  def description
+    translation_service.translate_with_locale(:description, I18n.locale)
+  end
+
   private
 
   def user_group_price
     user_groups = Current.user_account&.user_groups
     product_prices.joins(:user_group).where(user_groups: { id: user_groups }).order(ranking: :asc).first
+  end
+
+  def translation_service
+    @_translation_service ||= Translations::Translator.new(record: self, locale: I18n.locale)
   end
 end

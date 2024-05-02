@@ -6,6 +6,7 @@ module User
     before_action :set_current_request_details
     before_action :set_store
     before_action :set_current_user
+    before_action :set_purchase_cart
 
     layout nil
 
@@ -55,6 +56,12 @@ module User
       Current.user_session = session
 
       @current_user = session.user_account
+    end
+
+    def set_purchase_cart
+      @purchase_cart =
+        @store.purchase_carts.active.find_by(user_account: @current_user) ||
+        @store.purchase_carts.active.find_by(user_session: Current.user_session)
     end
 
     def fingerprint
