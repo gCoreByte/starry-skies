@@ -7,6 +7,8 @@ class CreateUserUserGroup < ActiveRecord::Migration[7.1]
       t.belongs_to :user_account, null: false, foreign_key: true, type: :uuid, index: true
       t.belongs_to :user_group, null: false, foreign_key: true, type: :uuid, index: true
       t.timestamps
+
+      t.index %i[user_account_id user_group_id], unique: true
     end
   end
 end

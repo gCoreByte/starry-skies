@@ -26,8 +26,8 @@ module Admin
 
       model_name = name.to_s.delete_suffix('_id')
       klass = model_name.classify.constantize
-      id = params.delete('name_id')
-      params.merge!(name => klass.find_by(id: id, store: @store))
+      id = params.delete(name)
+      params.merge!(name.to_sym => klass.find_by(id: id, store: @store))
     end
 
     def authenticate

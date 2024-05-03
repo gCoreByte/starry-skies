@@ -487,6 +487,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_01_213710) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["store_id"], name: "index_user_user_groups_on_store_id"
+    t.index ["user_account_id", "user_group_id"], name: "index_user_user_groups_on_user_account_id_and_user_group_id", unique: true
     t.index ["user_account_id"], name: "index_user_user_groups_on_user_account_id"
     t.index ["user_group_id"], name: "index_user_user_groups_on_user_group_id"
   end

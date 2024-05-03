@@ -66,6 +66,9 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
           end
         end
         resources :user_groups, shallow: true
+        resources :user_accounts, shallow: true, only: %i[index show] do
+          resources :user_user_groups, only: %i[new create destroy], shallow: true
+        end
       end
     end
 
