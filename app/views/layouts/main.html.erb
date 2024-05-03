@@ -7,12 +7,26 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <!-- Hotjar Tracking Code for Site 4968135 (name missing) -->
+    <% if Rails.env.production? %>
+      <script>
+          (function(h,o,t,j,a,r){
+              h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+              h._hjSettings={hjid:4968135,hjsv:6};
+              a=o.getElementsByTagName('head')[0];
+              r=o.createElement('script');r.async=1;
+              r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+              a.appendChild(r);
+          })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+      </script>
+    <% end%>
   </head>
   <body>
     <%= render 'shared/navbar' %>
     <div class="d-flex w-100 align-items-stretch">
       <div class="container-fluid py-3">
         <%= yield %>
+      </div>
     </div>
     <div
       class="modal fade"
@@ -26,6 +40,5 @@
         </div>
       </div>
     </div>
-  </div>
   </body>
 </html>
