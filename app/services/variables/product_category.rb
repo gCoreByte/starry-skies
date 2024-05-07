@@ -13,5 +13,9 @@ module Variables
         Variables::VariableProvider.new(record: product)
       end
     end
+
+    def store
+      Variables::VariableProvider.new(record: based_on_service.store)
+    end
   end
 end

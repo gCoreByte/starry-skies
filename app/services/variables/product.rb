@@ -3,7 +3,7 @@
 module Variables
   class Product < Variables::Base
     def variables
-      %w[id name key active? description width length height weight size_unit weight_unit]
+      %w[id name key active? description width length height weight size_unit weight_unit price]
     end
 
     delegate :id, :key, :active?, to: :record
@@ -40,12 +40,22 @@ module Variables
       record.product_version&.weight_unit
     end
 
+    def price
+      record.product_version&.product_price&.price
+    end
+
     def store
       Variables::VariableProvider.new(record: based_on_service.store)
     end
 
     def product_version
       Variables::VariableProvider.new(record: based_on_service.product_version)
+    end
+
+    def product_categories
+      @_product_categories ||= record.product_categories.map do |product_category|
+        Variables::VariableProvider.new(record: product_category)
+      end
     end
 
     private

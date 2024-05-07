@@ -14,6 +14,12 @@ module Variables
       end
     end
 
+    def product_categories
+      @_product_categories ||= record.product_categories.map do |product_category|
+        Variables::VariableProvider.new(record: product_category)
+      end
+    end
+
     # TODO: implement me
     # def blog_posts
     #   record.blog_posts.published

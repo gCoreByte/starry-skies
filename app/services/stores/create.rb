@@ -31,7 +31,7 @@ module Stores
     def perform
       store.save!
       relationship_service.save!
-      create_index_page
+      Stores::ExampleStore.new(store: store, fingerprint: fingerprint).save!
     end
 
     private
@@ -43,42 +43,6 @@ module Stores
         type_key: AdminStoreRelationship::TypeKeys::ADMIN,
         fingerprint: fingerprint
       )
-    end
-
-    def create_index_page
-      index_page_template_service.page_template.status = PageTemplate::Statuses::ACTIVE
-      index_page_template_service.save!
-      index_page_service.save!
-    end
-
-    def index_page_service
-      @_index_page_service ||=
-        Pages::Create.new(
-          store: store,
-          page_template: index_page_template_service.page_template,
-          fingerprint: fingerprint,
-          payload: page_params
-        )
-    end
-
-    def page_params
-      {
-        key: 'index',
-        url: 'index'
-      }
-    end
-
-    def index_page_template_service
-      @_index_page_template_service ||= PageTemplates::Create.new(store: store, fingerprint: fingerprint,
-                                                                  payload: page_template_params)
-    end
-
-    def page_template_params
-      {
-        content: '<h1>This store is currently under construction.</h1>',
-        key: 'index',
-        based_on: 'store'
-      }
     end
 
     def package

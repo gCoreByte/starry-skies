@@ -12,8 +12,8 @@ class PageTemplate < ApplicationRecord
   belongs_to :store
   belongs_to :created_by, class_name: 'Fingerprint'
   belongs_to :updated_by, class_name: 'Fingerprint'
-  has_many :pages, dependent: nil
-  has_many :page_template_changes, dependent: nil
+  has_many :pages, dependent: :destroy
+  has_many :page_template_changes, dependent: :destroy
   has_many :page_translations, dependent: :destroy
 
   validates :key, :status, :based_on, presence: true

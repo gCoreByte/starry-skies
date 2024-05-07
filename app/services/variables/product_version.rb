@@ -6,7 +6,7 @@ module Variables
       %w[id name description width length height weight size_unit weight_unit]
     end
 
-    delegate :id, :key, :active?, to: :record
+    delegate :id, :key, :active?, :width, :length, :height, :weight, :size_unit, :weight_unit, to: :record
 
     def name
       product_version_translator&.translate(:name)
@@ -14,30 +14,6 @@ module Variables
 
     def description
       product_version_translator&.translate(:description)
-    end
-
-    def width
-      record.product_version&.width
-    end
-
-    def length
-      record.product_version&.length
-    end
-
-    def height
-      record.product_version&.height
-    end
-
-    def weight
-      record.product_version&.weight
-    end
-
-    def size_unit
-      record.product_version&.size_unit
-    end
-
-    def weight_unit
-      record.product_version&.weight_unit
     end
 
     def store
@@ -55,9 +31,9 @@ module Variables
     private
 
     def product_version_translator
-      return unless record.product_version
+      return unless record
 
-      @_product_version_translator ||= Translations::Translator.new(record: record.product_version, locale: I18n.locale)
+      @_product_version_translator ||= Translations::Translator.new(record: record, locale: I18n.locale)
     end
   end
 end

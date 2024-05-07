@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module BasedOns
-  class ProductVersion < BasedOns::Base
+  class PurchaseCartItem < BasedOns::Base
     delegate :store, :purchase_cart, to: :record
 
     def provides

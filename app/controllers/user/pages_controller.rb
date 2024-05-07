@@ -20,14 +20,9 @@ module User
 
     def set_record
       @record = @store if @page.based_on == 'store'
-      return unless params[:record_type] && params[:record_id] && @page.based_on != 'store'
+      return unless @page.based_on != 'store'
 
-      @record =
-        if @page.based_on == 'store'
-          @store
-        else
-          params[:record_type].classify.safe_constantize.find_by(store: @store, id: params[:record_id])
-        end
+      @record = @page.based_on.classify.safe_constantize.find_by(store: @store, id: params[:record_id])
     end
 
     def page_slug

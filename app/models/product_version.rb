@@ -21,9 +21,9 @@ class ProductVersion < ApplicationRecord
 
   nullify_attributes :width, :length, :height, :weight, :size_unit, :weight_unit
 
-  has_many :product_version_categories, dependent: nil
+  has_many :product_version_categories, dependent: :destroy
   has_many :product_categories, through: :product_version_categories
-  has_many :product_prices, dependent: nil
+  has_many :product_prices, dependent: :destroy
   belongs_to :created_by, class_name: 'Fingerprint'
   belongs_to :updated_by, class_name: 'Fingerprint'
 
