@@ -78,6 +78,9 @@ module Stores
                         {% endfor %}
                       </ul>
                     </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/p/cart">Cart - {{ purchase_cart.item_count }}</a>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -162,6 +165,9 @@ module Stores
                       {% endfor %}
                     </ul>
                   </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="/p/cart">Ostukorv - {{ purchase_cart.item_count }}</a>
+                    </li>
                 </ul>
               </div>
             </div>
@@ -247,6 +253,9 @@ module Stores
                           <li><a class="dropdown-item" href="/p/category/{{ category.id }}">{{ category.name }}</a></li>
                         {% endfor %}
                       </ul>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/p/cart">Cart - {{ purchase_cart.item_count }}</a>
                     </li>
                   </ul>
                 </div>

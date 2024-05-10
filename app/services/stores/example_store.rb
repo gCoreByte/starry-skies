@@ -25,7 +25,7 @@ module Stores
     def records
       [
         categories, user_groups, products, product_versions, product_version_categories, product_prices,
-        index_page_records, products_page_records, product_page_records, category_page_records
+        index_page_records, products_page_records, product_page_records, category_page_records, cart_show_records
       ]
     end
 
@@ -71,6 +71,10 @@ module Stores
 
     def category_page_records
       @_category_page_records ||= Stores::ExamplePages::CategoryShow.new(store: store, fingerprint: fingerprint).records
+    end
+
+    def cart_show_records
+      @_cart_show_records ||= Stores::ExamplePages::PurchaseCartShow.new(store: store, fingerprint: fingerprint).records
     end
 
     def build_category(name)

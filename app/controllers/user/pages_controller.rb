@@ -16,11 +16,13 @@ module User
 
     def set_page
       @page = @store.pages.find_by(url: page_slug)
+      redirect_to user_root_path unless @page
     end
 
     def set_record
       @record = @store if @page.based_on == 'store'
-      return unless @page.based_on != 'store'
+      @record = @purchase_cart if @page.based_on == 'purchase_cart'
+      return if @record
 
       @record = @page.based_on.classify.safe_constantize.find_by(store: @store, id: params[:record_id])
     end

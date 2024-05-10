@@ -43,6 +43,8 @@ class ProductVersion < ApplicationRecord
     validate_record_store(product)
   end
 
+  delegate :key, to: :product
+
   # FIXME: Add validation to disallow unit without values
 
   def title

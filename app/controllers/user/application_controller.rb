@@ -7,6 +7,7 @@ module User
     before_action :set_store
     before_action :set_current_user
     before_action :set_purchase_cart
+    protect_from_forgery with: :null_session
 
     layout nil
 
@@ -37,7 +38,7 @@ module User
       render_404 unless @store
     end
 
-    def session
+    def session # rubocop:disable Naming/MethodLength
       return @_session if defined?(@_session)
 
       session_cookie = cookies.signed[:user_session_token]
@@ -46,10 +47,12 @@ module User
 
       cookie = SecureRandom.hex(128)
       cookies.signed[:user_session_token] = cookie
-      @_session = UserSessions::Create.new(
+      service = UserSessions::Create.new(
         cookie: cookie,
         store: @store
       )
+      service.save!
+      @_session = service.user_session
     end
 
     def set_current_user
@@ -61,7 +64,16 @@ module User
     def set_purchase_cart
       @purchase_cart =
         @store.purchase_carts.active.find_by(user_account: @current_user) ||
-        @store.purchase_carts.active.find_by(user_session: Current.user_session)
+        @store.purchase_carts.active.find_by(user_session: Current.user_session) ||
+        purchase_cart_service.purchase_cart
+    end
+
+    def purchase_cart_service
+      return @_purchase_cart_service if defined?(@_purchase_cart_service)
+
+      @_purchase_cart_service = PurchaseCarts::Create.new(store: @store, fingerprint: fingerprint)
+      @_purchase_cart_service.save!
+      @_purchase_cart_service
     end
 
     def fingerprint

@@ -11,6 +11,8 @@ module PurchaseOrders
       validate_model(purchase_order, :base, *ATTRIBUTES)
     end
 
+    delegate(*ATTRIBUTES, to: :purchase_order)
+
     def payload
       @_payload ||= @payload || {}
     end

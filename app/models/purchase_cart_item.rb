@@ -7,7 +7,7 @@ class PurchaseCartItem < ApplicationRecord
   belongs_to :product_price
 
   validates :quantity, :total_price, presence: true
-  validates :quantity, numericality: { only_integer: true, greater_than: 0 }
+  validates :quantity, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :total_price, numericality: { greater_than_or_equal_to: 0 }
 
   validate do
@@ -21,5 +21,5 @@ class PurchaseCartItem < ApplicationRecord
   end
 
   delegate :price, to: :product_price
-  delegate :name, :description, to: :product_version
+  delegate :name, :description, :key, to: :product_version
 end

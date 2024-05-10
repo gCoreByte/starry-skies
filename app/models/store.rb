@@ -2,7 +2,6 @@
 
 class Store < ApplicationRecord
   has_many :admin_store_permissions, dependent: :destroy
-  has_many :admin_store_relationships, dependent: :destroy
   has_many :admin_accounts, through: :admin_store_relationships
 
   has_many :products, dependent: :destroy
@@ -17,7 +16,10 @@ class Store < ApplicationRecord
   has_many :user_groups, dependent: :destroy
   has_many :purchase_carts, dependent: :destroy
   has_many :user_accounts, dependent: :destroy
+  has_many :user_sessions, dependent: :destroy
   has_many :user_user_groups, dependent: :destroy
+  has_many :addresses, dependent: :destroy
+  has_many :admin_store_relationships, dependent: :destroy
 
   belongs_to :package, optional: true
   belongs_to :created_by, class_name: 'Fingerprint'

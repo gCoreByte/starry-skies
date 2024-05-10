@@ -31,7 +31,7 @@ module Stores
                   <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                  <ul class="navbar-nav">
+                  <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                       <a class="nav-link" href="/">Home</a>
                     </li>
@@ -47,6 +47,9 @@ module Stores
                           <li><a class="dropdown-item" href="/p/category/{{ category.id }}">{{ category.name }}</a></li>
                         {% endfor %}
                       </ul>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/p/cart">Cart - {{ purchase_cart.item_count }}</a>
                     </li>
                   </ul>
                 </div>
@@ -112,6 +115,9 @@ module Stores
                         {% endfor %}
                       </ul>
                     </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/p/cart">Cart - {{ purchase_cart.item_count }}</a>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -176,6 +182,9 @@ module Stores
                           <li><a class="dropdown-item" href="/p/category/{{ category.id }}">{{ category.name }}</a></li>
                         {% endfor %}
                       </ul>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/p/cart">Ostukorv - {{ purchase_cart.item_count }}</a>
                     </li>
                   </ul>
                 </div>

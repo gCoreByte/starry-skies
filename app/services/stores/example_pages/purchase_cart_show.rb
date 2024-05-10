@@ -2,13 +2,13 @@
 
 module Stores
   module ExamplePages
-    class ProductShow < Stores::ExamplePages::Base # rubocop:disable Metrics/ClassLength
+    class PurchaseCartShow < Stores::ExamplePages::Base # rubocop:disable Metrics/ClassLength
       def key
-        'product'
+        'cart'
       end
 
       def based_on
-        'product'
+        'purchase_cart'
       end
 
       def english_content
@@ -24,63 +24,80 @@ module Stores
 
             <body>
               <div>
-              <nav class="navbar navbar-expand-lg bg-body-tertiary ps-3">
-              <div class="container-fluid">
-                <a class="navbar-brand" href="#">{{ store.name }}</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                  <ul class="navbar-nav">
-                    <li class="nav-item">
-                      <a class="nav-link" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="/p/products">Products</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Categories
-                      </a>
-                      <ul class="dropdown-menu">
-                        {% for category in store.product_categories %}
-                          <li><a class="dropdown-item" href="/p/category/{{ category.id }}">{{ category.name }}</a></li>
-                        {% endfor %}
+                <nav class="navbar navbar-expand-lg bg-body-tertiary ps-3">
+                  <div class="container-fluid">
+                    <a class="navbar-brand" href="#">{{ store.name }}</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                      <ul class="navbar-nav">
+                        <li class="nav-item">
+                          <a class="nav-link" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="/p/products">Products</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Categories
+                          </a>
+                          <ul class="dropdown-menu">
+                            {% for category in store.product_categories %}
+                              <li><a class="dropdown-item" href="/p/category/{{ category.id }}">{{ category.name }}</a></li>
+                            {% endfor %}
+                          </ul>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="/p/cart">Cart - {{ purchase_cart.item_count }}</a>
+                        </li>
                       </ul>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="/p/cart">Cart - {{ purchase_cart.item_count }}</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </nav>
+                    </div>
+                  </div>
+                </nav>
               </div>
               <div class="row m-3">
                 <div class="col-xl-6">
                   <div class="card mb-3 border">
                     <div class="card-header">
-                      <h1>{{ product.name }}</h1>
+                      <h2 class="card-title">
+                        Purchase Cart
+                      </h2>
                     </div>
-                    <div class="card-body">
-                      <p>{{ product.description }}</p>
-                      <br>
-                      <p>Price: {{ product.price }}</p>
-                      <br>
-                      <button id="addItem" class="btn btn-primary">Add to Cart</button>
+                    <div class="table-responsive">
+                      <table class="table table-bordered table-striped">
+                        <thead>
+                          <th>Product</th>
+                          <th>Quantity</th>
+                          <th>Price</th>
+                          <th>Actions</th>
+                        </thead>
+                        <tbody>
+                          {% for item in purchase_cart.purchase_cart_items %}
+                            <tr>
+                              <td>{{ item.name }}</td>
+                              <td>{{ item.quantity }}</td>
+                              <td>{{ item.total_price }}</td>
+                              <td><button class="btn btn-danger remove-button" data-key='{{ item.key }}'>Remove</button></td>
+                            </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                 </div>
               </div>
+              <a class="btn btn-primary" href='/purchase_orders/new'>Purchase</a>
               <script>
-              document.getElementById('addItem').addEventListener('click', function() {
+              document.querySelectorAll('.remove-button').forEach(button => {
+                button.addEventListener('click', () => {
                 // URL to which PATCH request will be sent
-                var url = '/purchase_carts/add_item';
+                var url = '/purchase_carts/remove_item';
 
                 // Data to be sent in the PATCH request (if any)
                 var data = {
                   item: {
-                    key: '{{ product.key }}',
+                    key: button.getAttribute('data-key'),
                     quantity: 1
                   }
                 };
@@ -109,8 +126,9 @@ module Stores
                   .catch(error => {
                     console.error('Error during PATCH request:', error);
                     // You can handle errors here
-                  })
+                  });
               });
+                });
               </script>
               <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
             </body>
@@ -162,32 +180,49 @@ module Stores
                 </div>
               </div>
             </nav>
-              </div>
-              <div class="row m-3">
+          </div>
+          <div class="row m-3">
                 <div class="col-xl-6">
                   <div class="card mb-3 border">
                     <div class="card-header">
-                      <h1>{{ product.name }}</h1>
+                      <h2 class="card-title">
+                        Purchase Cart
+                      </h2>
                     </div>
-                    <div class="card-body">
-                      <p>{{ product.description }}</p>
-                      <br>
-                      <p>Price: {{ product.price }}</p>
-                      <br>
-                      <button id="addItem" class="btn btn-primary">Add to Cart</button>
+                    <div class="table-responsive">
+                      <table class="table table-bordered table-striped">
+                        <thead>
+                          <th>Product</th>
+                          <th>Quantity</th>
+                          <th>Price</th>
+                          <th>Actions</th>
+                        </thead>
+                        <tbody>
+                          {% for item in purchase_cart.purchase_cart_items %}
+                            <tr>
+                              <td>{{ item.name }}</td>
+                              <td>{{ item.quantity }}</td>
+                              <td>{{ item.total_price }}</td>
+                              <td><button class="btn btn-danger remove-button" data-key='{{ item.key }}'>Remove</button></td>
+                            </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                 </div>
+                <a class="btn btn-primary" href='/purchase_orders/new'>Purchase</a>
               </div>
               <script>
-              document.getElementById('addItem').addEventListener('click', function() {
+              document.querySelectorAll('.remove-button').forEach(button => {
+                button.addEventListener('click', () => {
                 // URL to which PATCH request will be sent
-                var url = '/purchase_carts/add_item';
+                var url = '/purchase_carts/remove_item';
 
                 // Data to be sent in the PATCH request (if any)
                 var data = {
                   item: {
-                    key: '{{ product.key }}',
+                    key: button.getAttribute('data-key'),
                     quantity: 1
                   }
                 };
@@ -218,6 +253,7 @@ module Stores
                     // You can handle errors here
                   });
               });
+                });
               </script>
               <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
             </body>
@@ -275,27 +311,44 @@ module Stores
                 <div class="col-xl-6">
                   <div class="card mb-3 border">
                     <div class="card-header">
-                      <h1>{{ product.name }}</h1>
+                      <h2 class="card-title">
+                        Purchase Cart
+                      </h2>
                     </div>
-                    <div class="card-body">
-                      <p>{{ product.description }}</p>
-                      <br>
-                      <p>Hind: {{ product.price }}</p>
-                      <br>
-                      <button id="addItem" class="btn btn-primary">Add to Cart</button>
+                    <div class="table-responsive">
+                      <table class="table table-bordered table-striped">
+                        <thead>
+                          <th>Product</th>
+                          <th>Quantity</th>
+                          <th>Price</th>
+                          <th>Actions</th>
+                        </thead>
+                        <tbody>
+                          {% for item in purchase_cart.purchase_cart_items %}
+                            <tr>
+                              <td>{{ item.name }}</td>
+                              <td>{{ item.quantity }}</td>
+                              <td>{{ item.total_price }}</td>
+                              <td><button class="btn btn-danger remove-button" data-key='{{ item.key }}'>Remove</button></td>
+                            </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                 </div>
               </div>
+              <a class="btn btn-primary" href='/purchase_orders/new'>Osta</a>
               <script>
-              document.getElementById('addItem').addEventListener('click', function() {
+              document.querySelectorAll('.remove-button').forEach(button => {
+                button.addEventListener('click', () => {
                 // URL to which PATCH request will be sent
-                var url = '/purchase_carts/add_item';
+                var url = '/purchase_carts/remove_item';
 
                 // Data to be sent in the PATCH request (if any)
                 var data = {
                   item: {
-                    key: '{{ product.key }}',
+                    key: button.getAttribute('data-key'),
                     quantity: 1
                   }
                 };
@@ -326,6 +379,7 @@ module Stores
                     // You can handle errors here
                   });
               });
+                });
               </script>
               <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
             </body>

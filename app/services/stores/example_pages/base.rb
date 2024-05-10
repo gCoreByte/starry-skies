@@ -30,7 +30,7 @@ module Stores
           build_page_translation('en', english_content),
           build_page_translation('et', estonian_content),
           build_page_translation('ru', russian_content)
-        ]
+        ].compact
       end
 
       def page
@@ -48,6 +48,8 @@ module Stores
       private
 
       def build_page_translation(locale, content)
+        return unless content
+
         PageTranslation.new(
           page_template: page_template,
           store: store,

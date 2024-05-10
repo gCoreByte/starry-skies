@@ -70,6 +70,11 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
           resources :user_user_groups, only: %i[new create destroy], shallow: true
         end
       end
+      resources :documentations, only: %i[] do
+        collection do
+          get :variables
+        end
+      end
     end
 
     get '/about', to: 'home#about'
@@ -79,14 +84,23 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   end
 
   scope module: 'user' do
-    resources :user_accounts, only: %i[new create]
+    resources :user_accounts, only: %i[new create] do
+      collection do
+        get :success
+      end
+    end
     resources :user_sessions, only: %i[new create destroy]
     # resources :pages, only: %i[index show]
     get '/p(/:slug(/:record_id))', to: 'pages#show'
     resources :purchase_carts, only: %i[show destroy] do
-      member do
+      collection do
         patch :add_item
         patch :remove_item
+      end
+    end
+    resources :purchase_orders, only: %i[new create], shallow: true do
+      collection do
+        get :success
       end
     end
 

@@ -9,8 +9,8 @@ module PurchaseCarts
 
     validates :purchase_cart, :fingerprint, :key, :product, presence: true
     validates :quantity, numericality: { only_integer: true, greater_than: 0 }
-    validate if: :product_cart_item do
-      validate_model(product_cart_item, :base, :quantity, :total_price)
+    validate if: :purchase_cart_item do
+      validate_model(purchase_cart_item, :base, :quantity, :total_price)
     end
 
     delegate :store, to: :purchase_cart
@@ -36,8 +36,11 @@ module PurchaseCarts
 
     def purchase_cart_item
       @_purchase_cart_item ||=
-        purchase_cart.purchase_cart_items.find_by(product_version: product_version) ||
-        new_purchase_cart_item
+        (purchase_cart.purchase_cart_items.find_by(product_version: product_version) ||
+        new_purchase_cart_item).tap do |item|
+          item.quantity += quantity
+          item.total_price = price * item.quantity
+        end
     end
 
     def new_purchase_cart_item
@@ -54,16 +57,7 @@ module PurchaseCarts
     protected
 
     def perform
-      purchase_cart_item.update!(quantity: new_quantity, total_price: new_total_price)
       purchase_cart_item.save!
-    end
-
-    def new_quantity
-      purchase_cart_item.quantity + quantity
-    end
-
-    def new_total_price
-      price * new_quantity
     end
   end
 end
