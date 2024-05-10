@@ -35,7 +35,7 @@
     <div class="card mb-3 border">
       <div class="card-header">
         <%= card_title('Product versions') do %>
-          <%= link_to '', new_admin_product_product_version_path(@product), class: 'btn btn-success fas fa-plus', data: { turbo: true, turbo_frame: 'modal' } %>
+          <%= create_button(:admin, @product, :product_version) %>
         <% end %>
       </div>
       <div class="table-responsive">

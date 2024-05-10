@@ -6,7 +6,7 @@
   <td><%= store.sales %></td>
   <td>
     <%= card_controls do %>
-      <%= link_to '', admin_store_path(store), class: 'btn btn-primary fas fa-eye' %>
+      <%= show_button(:admin, store) %>
     <% end %>
   </td>
 </tr>

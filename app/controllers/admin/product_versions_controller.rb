@@ -2,12 +2,8 @@
 
 module Admin
   class ProductVersionsController < Admin::ApplicationController # rubocop:disable Metrics/ClassLength
-    before_action :set_product, only: %i[new create index]
-    before_action :set_product_version, except: %i[new create index]
-
-    def index
-      @product_versions = @product.product_versions
-    end
+    before_action :set_product, only: %i[new create]
+    before_action :set_product_version, except: %i[new create]
 
     def show
       @product_version_categories = @product_version.product_version_categories
