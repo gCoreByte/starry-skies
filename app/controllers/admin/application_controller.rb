@@ -5,6 +5,7 @@ module Admin
     before_action :set_current_request_details
     before_action :set_current_user
     before_action :set_store
+    before_action :set_current_store
     before_action :authenticate
 
     layout 'main'
@@ -55,9 +56,14 @@ module Admin
       @store = Current.store
     end
 
+    def set_current_store
+      @current_store = @store || current_user.stores.find_by(id: cookies[:store_id])
+    end
+
     def set_current_request_details
       Current.user_agent = request.user_agent
       Current.ip_address = request.ip
+      @request = request
     end
 
     def fingerprint

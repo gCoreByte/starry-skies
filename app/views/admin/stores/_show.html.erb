@@ -5,7 +5,13 @@
   </tr>
   <tr>
     <th>URL</th>
-    <td><%= @store.url %></td>
+    <td>
+      <% if @request.port != 80 %>
+        <a href="<%= "http://#{@store.url}.#{@request.domain}:#{@request.port}" %>"><%= @store.url %></a>
+      <% else %>
+        <a href="<%= "http://#{@store.url}.#{@request.domain}" %>"><%= @store.url %></a>
+      <% end %>
+    </td>
   </tr>
   <tr>
     <th>Revenue</th>

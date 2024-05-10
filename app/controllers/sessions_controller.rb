@@ -5,10 +5,6 @@ class SessionsController < ApplicationController
 
   before_action :set_session, only: :destroy
 
-  def index
-    @sessions = Current.admin_account.sessions.order(created_at: :desc)
-  end
-
   def new
   end
 

@@ -71,7 +71,7 @@ module Admin
     end
 
     def set_user_group
-      return unless params.dig(:product_price, :user_group_id)
+      return if params.dig(:product_price, :user_group_id).blank?
 
       @user_group = @store.user_groups.find(params.dig(:product_price, :user_group_id))
     rescue ActiveRecord::RecordNotFound

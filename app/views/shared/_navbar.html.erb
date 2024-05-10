@@ -31,6 +31,11 @@
               </li>
             </ul>
           </li>
+          <% if @current_store.present? %>
+            <li class="nav-item">
+              <%= link_to 'Store', admin_store_path(@current_store), class: 'nav-link' %>
+            </li>
+          <% end %>
         <% end %>
       </ul>
       <% unless @current_user.present? %>

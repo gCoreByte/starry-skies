@@ -22,10 +22,6 @@
         <%= form.select :based_on, BasedOns::BasedOn.possible_based_ons, {}, { class: 'form-select' } %>
       <% end %>
     </div>
-    <div class='mb-3'>
-      <%= form.label :content, { class: 'form-label' } %>
-      <%= form.text_area :content,  size: '50x15' , class: 'form-control'  %>
-    </div>
     <div class='modal-footer'>
       <%= form.submit 'Save', class: 'btn btn-primary' %>
     </div>

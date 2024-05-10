@@ -8,7 +8,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     get  'sign_up', to: 'registrations#new'
     post 'sign_up', to: 'registrations#create'
 
-    resources :sessions, only: %i[index destroy]
+    resources :sessions, only: %i[destroy]
     resource  :password, only: %i[edit update]
     namespace :identity do
       resource :email,              only: %i[edit update]

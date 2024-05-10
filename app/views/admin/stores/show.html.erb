@@ -1,5 +1,3 @@
-<p style="color: green"><%= notice %></p>
-
 <%= page_title(@store.name) do %>
   <%= link_to '', edit_admin_store_path(@store), class: 'btn btn-sm btn-warning fas fa-pencil', data: { turbo: true, turbo_frame: 'modal' } %>
   <%= link_to '', admin_store_path(@store), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}, class: 'btn btn-sm btn-danger fas fa-trash' %>

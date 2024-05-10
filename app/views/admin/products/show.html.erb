@@ -1,5 +1,3 @@
-<p style="color: green"><%= notice %></p>
-
 <%= page_title(@product.key) do %>
   <%= edit_button(:admin, @product) %>
   <%= destroy_button(:admin, @product) %>
@@ -23,9 +21,7 @@
   <div class="col-xl-6">
     <div class="card mb-3 border">
       <div class="card-header">
-        <%= card_title('Active version') do %>
-          <%= link_to '', new_admin_product_product_version_path(@product), class: 'btn btn-warning fas fa-pencil', data: { turbo: true, turbo_frame: 'modal' } %>
-        <% end %>
+        <%= card_title('Active version') %>
       </div>
       <div class="table-responsive">
         <table class="table table-bordered table-striped">

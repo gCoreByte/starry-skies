@@ -18,6 +18,10 @@
       <%= form.label :url, { class: 'form-label' } %>
       <%= form.text_field :url, { class: 'form-control' } %>
     </div>
+    <div class="mb-3 form-check">
+      <%= form.check_box :example_store, { class: 'form-check-input' } %>
+      <%= form.label :example_store, { class: 'form-check-label' } %>
+    </div>
   </div>
   <div class="modal-footer">
     <%= form.submit 'Submit', class: 'btn btn-primary' %>
