@@ -6,8 +6,6 @@ RSpec.describe ProductPrices::Create do
   let!(:product_version) { create(:product_version, store: store) }
   let!(:payload) do
     {
-      locale: 'ET',
-      currency: 'EUR',
       price: 105.13
     }
   end
@@ -19,8 +17,6 @@ RSpec.describe ProductPrices::Create do
       it do
         expect { subject.save! }.to change(ProductPrice, :count).from(0).to(1)
         expect(subject.product_price).to have_attributes(
-          locale: 'ET',
-          currency: 'EUR',
           price: 105.13
         )
       end

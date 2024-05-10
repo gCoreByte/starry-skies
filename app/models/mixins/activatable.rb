@@ -20,6 +20,14 @@ module Mixins
       activated_at.present? && deactivated_at.blank?
     end
 
+    def draft?
+      activated_at.blank?
+    end
+
+    def deactivated?
+      deactivated_at.present?
+    end
+
     def activate!(fingerprint, time = Time.zone.now)
       update(activated_at: time, activated_by: fingerprint)
     end

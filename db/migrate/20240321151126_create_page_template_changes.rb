@@ -9,6 +9,7 @@ class CreatePageTemplateChanges < ActiveRecord::Migration[7.1]
 
       t.text :content, null: false
       t.string :status, null: false
+      t.string :key, null: false
 
       t.timestamps
     end

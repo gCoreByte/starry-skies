@@ -16,6 +16,7 @@ module PageTemplateStatuses
         store: page_template.store,
         status: status,
         content: page_template.content,
+        key: page_template.key,
         created_by: fingerprint
       )
     end

@@ -1,25 +1,21 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Products</h1>
+<%= page_title('Products') do %>
+  <%= link_to '', new_admin_store_product_path, class: 'btn btn-success fas fa-plus', data: { turbo: true, turbo_frame: 'modal' } %>
+<% end %>
 
-<div id="products">
+<div>
   <div class="row">
     <div class="col-lg-12">
       <div class="card mb-3 border">
         <div class="table-responsive">
           <table class="table table-bordered table-striped">
             <thead>
-              <th>Name</th>
               <th>Key</th>
-              <th>Activated at</th>
-            <tbody>
-              <% @products.each do |product| %>
-                <tr>
-                  <td><%= link_to product.name, admin_product_path(product) %></td>
-                  <td><%= product.key %></td>
-                  <td><%= time_tag(product.activated_at) %></td>
-                </tr>
-              <% end %>
+              <th>Created at</th>
+              <th>Actions</th>
+            <tbody id='products'>
+              <%= render @products %>
             </tbody>
           </table>
         </div>
@@ -27,5 +23,3 @@
     </div>
   </div>
 </div>
-
-<%= link_to "New product", new_admin_store_product_path %>

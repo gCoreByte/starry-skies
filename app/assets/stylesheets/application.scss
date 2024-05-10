@@ -14,4 +14,36 @@
  *= require_self
  */
 
+$body-bg: #F3DBD5;
+$border-color: #65433b;
+
 @import "bootstrap";
+@import "font-awesome";
+
+
+.btn {
+  line-height: 24px;
+  border-color: $border-color;
+  box-shadow: inset 0 1px 0 hsla(0, 0%, 100%, .15), 0 1px 1px rgba(0, 0, 0, .075);
+}
+
+
+.page_controls {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+
+  >* {
+    margin-left: 0.3rem;
+  }
+}
+
+.navbar-background {
+  background-color: #4F281E;
+}
+
+.card-header {
+  background-color: #AA8177;
+}

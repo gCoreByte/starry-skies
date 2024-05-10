@@ -1,0 +1,11 @@
+<tr>
+  <td><%= page_template.key %></td>
+  <td><%= page_template.status %></td>
+  <td><%= page_template.based_on %></td>
+  <td>
+    <%= card_controls do %>
+      <%= show_button(:admin, page_template) %>
+      <%= destroy_button(:admin, page_template) %>
+    <% end %>
+  </td>
+</tr>

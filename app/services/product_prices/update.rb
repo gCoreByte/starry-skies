@@ -7,6 +7,7 @@ module ProductPrices
     def product_price
       @_product_price ||= @product_price.tap do |product_price|
         product_price.assign_attributes(payload.slice(*ATTRIBUTES))
+        product_price.user_group = user_group if user_group
       end
     end
 

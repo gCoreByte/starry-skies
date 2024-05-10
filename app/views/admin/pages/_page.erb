@@ -1,0 +1,13 @@
+<tr>
+  <td><%= page.key %></td>
+  <td><%= page.status %></td>
+  <td><%= page.url %></td>
+  <td>
+    <%= card_controls do %>
+      <%= show_button(:admin, page) %>
+      <% if page.draft? %>
+        <%= destroy_button(:admin, page) %>
+      <% end %>
+    <% end %>
+  </td>
+</tr>

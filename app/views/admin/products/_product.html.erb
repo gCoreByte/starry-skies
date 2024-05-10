@@ -1,0 +1,9 @@
+<tr>
+  <td><%= link_to product.key, admin_product_path(product) %></td>
+  <td><%= time_tag(product.created_at) %></td>
+  <td>
+    <%= card_controls do %>
+      <%= link_to '', admin_product_path(product), class: 'btn btn-primary fas fa-eye' %>
+    <% end%>
+  </td>
+</tr>

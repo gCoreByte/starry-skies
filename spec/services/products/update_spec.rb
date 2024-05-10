@@ -5,12 +5,10 @@ RSpec.describe Products::Update do
   let!(:product) { create(:product) }
   let!(:payload) do
     {
-      name: name,
       key: key
     }
   end
 
-  let(:name) { 'Product Name' }
   let(:key) { 'product_key' }
 
   subject { described_class.new(product: product, fingerprint: fingerprint, payload: payload) }
@@ -20,7 +18,6 @@ RSpec.describe Products::Update do
       it do
         expect { subject.save! }.not_to change(Product, :count)
         expect(subject.product).to have_attributes(
-          name: name,
           key: key,
           updated_by: fingerprint
         )

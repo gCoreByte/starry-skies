@@ -1,0 +1,73 @@
+<p style="color: green"><%= notice %></p>
+<%= page_title('Purchase Order') do %>
+<% end %>
+<div class="row">
+  <div class="col-xl-6">
+    <div class="card mb-3 border">
+      <div class="card-header">
+        <%= card_title('Purchase Order Details') do %>
+          <% if PurchaseOrderStatuses::Processing.new(purchase_order: @purchase_order).valid_state? %>
+            <%= action_button([:admin, @purchase_order], action: :processing, icon: 'fa-box', confirm: true)  %>
+          <% end %>
+          <% if PurchaseOrderStatuses::InTransit.new(purchase_order: @purchase_order).valid_state? %>
+            <%= action_button([:admin, @purchase_order], action: :in_transit, icon: 'fa-truck', confirm: true)  %>
+          <% end %>
+          <% if PurchaseOrderStatuses::Complete.new(purchase_order: @purchase_order).valid_state? %>
+            <%= action_button([:admin, @purchase_order], action: :completed, icon: 'fa-check', confirm: true)  %>
+          <% end %>
+          <% if PurchaseOrderStatuses::Fail.new(purchase_order: @purchase_order).valid_state? %>
+            <%= action_button([:admin, @purchase_order], action: :failed, icon: 'fa-xmark', type: 'danger', confirm: true)  %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <%= render 'show', locals: { purchase_order: @purchase_order } %>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-6">
+    <div class="card mb-3 border">
+      <div class="card-header">
+        <%= card_title('Address') %>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <tbody>
+            <tr>
+              <th>Address</th>
+              <td>
+                <%= @purchase_order.address.address %>
+              </td>
+            </tr>
+            <tr>
+              <th>Country</th>
+              <td>
+                <%= @purchase_order.address.country %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card mb-3 border">
+      <div class="card-header">
+        <%= card_title('Order items') %>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <th>Product Version</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+          </thead>
+          <tbody id='order_items'>
+            <%= render @purchase_order.purchase_cart_items %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<tr>
+  <td>
+    <%= link_to purchase_order.reference_number, admin_purchase_order_path(purchase_order) %>
+  </td>
+  <td>
+    <%= purchase_order.status %>
+  </td>
+  <td>
+    <%= card_controls do %>
+      <%= show_button(:admin, purchase_order) %>
+    <% end %>
+  </td>
+</tr>

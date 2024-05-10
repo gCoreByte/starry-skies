@@ -1,0 +1,11 @@
+<tr>
+  <td><%= product_category.name %></td>
+  <td><%= product_category.key %></td>
+  <td><%= time_tag(product_category.created_at) %></td>
+  <td>
+    <%= card_controls do %>
+      <%= show_button(:admin, product_category) %>
+      <%= destroy_button(:admin, product_category) %>
+    <% end %>
+  </td>
+</tr>

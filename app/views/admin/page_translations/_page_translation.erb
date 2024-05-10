@@ -1,0 +1,10 @@
+<tr>
+  <td><%= page_translation.locale %></td>
+  <td>
+    <%= card_controls do %>
+      <%= show_modal_button(:admin, page_translation) %>
+      <%= edit_button(:admin, page_translation) %>
+      <%= destroy_button(:admin, page_translation) %>
+    <% end %>
+  </td>
+</tr>

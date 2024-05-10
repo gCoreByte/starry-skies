@@ -1,0 +1,66 @@
+<%= turbo_frame_tag "modal" do %>
+  <div class="modal-header">
+    <h1 class="modal-title">Translations</h1>
+  </div>
+  <%= form_with(model: [:admin, @product_version], scope: :product_version, url: { action: 'translations' }) do |form| %>
+    <div class='modal-body'>
+      <% if @service.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(@service.errors.count, "error") %> prohibited this product version from being saved:</h2>
+          <ul>
+            <% @service.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <%= form.fields_for :en do |f| %>
+        <%= f.label 'English', { class: 'form-label' } %>
+        <div class='row'>
+          <div class='col'>
+            <div class='mb-3'>
+              <%= f.text_area :description, { class: 'form-control', placeholder: 'Description', value: @translation_service.translate_with_locale(:description, :en) } %>
+            </div>
+          </div>
+          <div class='col'>
+            <div class='mb-3'>
+              <%= f.text_field :name, { class: 'form-control', placeholder: 'Name', value: @translation_service.translate_with_locale(:name, :en) } %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <%= form.fields_for :et do |f| %>
+        <%= f.label 'Estonian', { class: 'form-label' } %>
+        <div class='row'>
+          <div class='col'>
+            <div class='mb-3'>
+              <%= f.text_area :description, { class: 'form-control', placeholder: 'Description', value: @translation_service.translate_with_locale(:description, :et) } %>
+            </div>
+          </div>
+          <div class='col'>
+            <div class='mb-3'>
+              <%= f.text_field :name, { class: 'form-control', placeholder: 'Name', value: @translation_service.translate_with_locale(:name, :et) } %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <%= form.fields_for :ru do |f| %>
+        <%= f.label 'Russian', { class: 'form-label' } %>
+        <div class='row'>
+          <div class='col'>
+            <div class='mb-3'>
+              <%= f.text_area :description, { class: 'form-control', placeholder: 'Description', value: @translation_service.translate_with_locale(:description, :ru) } %>
+            </div>
+          </div>
+          <div class='col'>
+            <div class='mb-3'>
+              <%= f.text_field :name, { class: 'form-control', placeholder: 'Name', value: @translation_service.translate_with_locale(:name, :ru) } %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <div class='modal-footer'>
+        <%= form.submit 'Save', class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  <% end %>

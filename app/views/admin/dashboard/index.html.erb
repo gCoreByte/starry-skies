@@ -1,11 +1,10 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Dashboard</h1>
+<%= page_title('Dashboard')  do %>
+  <%= create_button([:admin, :store]) %>
+<% end %>
+
 <div>
-  Create a new store:
-  <%= link_to 'New store', new_admin_store_path %>
-</div>
-<div id="stores">
   <div class="row">
     <div class="col-lg-12">
       <div class="card mb-3 border">
@@ -13,22 +12,12 @@
           <table class="table table-bordered table-striped">
             <thead>
               <th>Name</th>
-              <th>Package</th>
               <th>Revenue</th>
               <th>Open issues</th>
               <th>Sales</th>
               <th>Actions</th>
-            <tbody>
-              <% @stores.each do |store| %>
-                <tr>
-                  <td><%= link_to store.name, admin_store_path(store) %></td>
-                  <td><%= store.package&.name %>
-                  <td><%= store.revenue %></td>
-                  <td><%= store.open_issues %></td>
-                  <td><%= store.sales %></td>
-                  <td><%= link_to 'Show', admin_store_path(store) %>
-                </tr>
-              <% end %>
+            <tbody id="stores">
+              <%= render @stores %>
             </tbody>
           </table>
         </div>

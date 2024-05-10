@@ -2,7 +2,7 @@
 
 module UserAccounts
   class Create < ApplicationService
-    ATTRIBUTES = %i[email password].freeze
+    ATTRIBUTES = %i[email password password_confirmation].freeze
 
     attr_accessor :store, :fingerprint
     attr_writer :payload
@@ -12,6 +12,8 @@ module UserAccounts
     validate if: :user_account do
       validate_model(user_account, :base, *ATTRIBUTES)
     end
+
+    delegate(*ATTRIBUTES, to: :user_account)
 
     def payload
       @_payload ||= @payload || {}

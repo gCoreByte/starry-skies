@@ -1,0 +1,72 @@
+<div class="row" id='page_template'>
+  <div class="col-xl-6">
+    <div class="card mb-3 border">
+      <div class="card-header">
+        <%= card_title('Page template') do %>
+          <%= edit_button([:admin, @page_template]) %>
+          <%= destroy_button([:admin, @page_template]) %>
+          <% if PageTemplateStatuses::Active.new(page_template: @page_template).valid_status? %>
+            <%= activate_button([:admin, @page_template]) %>
+          <% end %>
+          <% if PageTemplateStatuses::Draft.new(page_template: @page_template).valid_status? %>
+            <%= deactivate_button([:admin, @page_template]) %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <tbody>
+            <tr>
+              <th>Key</th>
+              <td><%= @page_template.key %></td>
+            </tr>
+            <tr>
+              <th>Status</th>
+              <td><%= @page_template.status %></td>
+            </tr>
+            <tr>
+              <th>Based on</th>
+              <td><%= @page_template.based_on %></td>
+            </tr>
+            <tr>
+              <th>Created by</th>
+              <td><%= @page_template.created_by.name %></td>
+            </tr>
+            <tr>
+              <th>Created at</th>
+              <td><%= time_tag(@page_template.created_at) %></td>
+            </tr>
+            <tr>
+              <th>Updated by</th>
+              <td><%= @page_template.updated_by.name %></td>
+            </tr>
+            <tr>
+              <th>Updated at</th>
+              <td><%= time_tag(@page_template.updated_at) %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-6">
+    <div class="card mb-3 border">
+      <div class="card-header">
+        <%= card_title('Page translations') do %>
+          <%= create_button([:admin, @page_template, :page_translation]) %>
+        <% end %>
+      </div>
+      <div class='table-responsive'>
+        <table class='table table-bordered table-striped'>
+          <thead>
+            <th>Locale</th>
+            <th>Actions</th>
+          </thead>
+          <tbody id=page_translations>
+            <%= render @page_template.page_translations.order(locale: :asc) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

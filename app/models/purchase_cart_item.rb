@@ -6,6 +6,10 @@ class PurchaseCartItem < ApplicationRecord
   belongs_to :product_version
   belongs_to :product_price
 
+  validates :quantity, :total_price, presence: true
+  validates :quantity, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :total_price, numericality: { greater_than_or_equal_to: 0 }
+
   validate do
     validate_record_store(purchase_cart)
     validate_record_store(product_version)
@@ -15,4 +19,7 @@ class PurchaseCartItem < ApplicationRecord
   validate if: %i[product_version product_price] do
     raise 'Product version mismatch' if product_version_id != product_price.product_version_id
   end
+
+  delegate :price, to: :product_price
+  delegate :name, :description, :key, to: :product_version
 end

@@ -2,7 +2,7 @@
 
 module PageTemplates
   class Base < ApplicationService
-    ATTRIBUTES = %i[content key based_on].freeze
+    ATTRIBUTES = %i[key based_on].freeze
 
     attr_accessor :fingerprint
     attr_writer :payload
@@ -13,19 +13,10 @@ module PageTemplates
       validate_model(page_template, :base, *ATTRIBUTES)
     end
 
+    delegate(*ATTRIBUTES, to: :page_template)
+
     def page_template
       raise NotImplementedError
-    end
-
-    def page_template_change
-      @_page_template_change ||= PageTemplateChange.new(
-        store: store,
-        page_template: page_template,
-        content: page_template.content,
-        status: page_template.status,
-        key: page_template.key,
-        created_by: fingerprint
-      )
     end
 
     def payload
@@ -36,7 +27,6 @@ module PageTemplates
 
     def perform
       page_template.save!
-      page_template_change.save!
     end
   end
 end

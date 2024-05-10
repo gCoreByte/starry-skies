@@ -7,7 +7,6 @@ FactoryBot.define do
     updated_by { created_by }
 
     sequence(:key) { |n| "page_template_#{n}" }
-    content { 'MyText' }
     status { PageTemplate::Statuses::ACTIVE }
     based_on { 'store' }
   end

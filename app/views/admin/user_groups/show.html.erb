@@ -1,0 +1,20 @@
+<p style="color: green"><%= notice %></p>
+<p style="color: red"><%= alert %></p>
+<%= page_title '' %>
+<div class="row">
+  <div class="col-xl-6">
+    <div class="card mb-3 border">
+      <div class="card-header">
+        <%= card_title('User group details') do %>
+          <%= edit_button([:admin, @user_group]) %>
+          <%= destroy_button([:admin, @user_group]) %>
+        <% end %>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <%= render 'show', locals: { user_group: @user_group } %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

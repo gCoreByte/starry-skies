@@ -1,0 +1,9 @@
+<tr>
+  <td><%= product_price.price %></td>
+  <td><%= product_price.user_group&.key %></td>
+  <td>
+    <%= card_controls do %>
+      <%= destroy_button(:admin, product_price) %>
+    <% end %>
+  </td>
+</tr>
