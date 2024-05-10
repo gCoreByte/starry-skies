@@ -2,7 +2,7 @@
 
 module Documentations
   class Variables
-    RECORDS = %w[product_category product_price product product_version purchase_cart purchase_cart_item store].freeze
+    RECORDS = BasedOns::BasedOn.possible_based_ons
 
     def all
       RECORDS.sort.index_with do |record|

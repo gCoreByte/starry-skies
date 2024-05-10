@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Variables::VariableProvider do
-  record_types = %w[store product product_version product_price product_category purchase_cart purchase_cart_item]
+  record_types = BasedOns::BasedOn.possible_based_ons
 
   record_types.each do |record_type|
     describe "#{record_type} has variable class" do
