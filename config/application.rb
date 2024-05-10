@@ -29,7 +29,7 @@ module StarrySkies
     # config.eager_load_paths << Rails.root.join("extras")
     config.time_zone = 'UTC'
     config.i18n.load_path += Dir[Rails.root.join('config/locales/**/*.yml').to_s]
-    config.i18n.available_locales = %i[en]
+    config.i18n.available_locales = %i[en et ru]
 
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid

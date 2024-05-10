@@ -1,0 +1,22 @@
+<tbody id='user_group'>
+  <tr>
+    <th>Name</th>
+    <td><%= @user_group.name %></td>
+  </tr>
+  <tr>
+    <th>Key</th>
+    <td><%= @user_group.key %></td>
+  </tr>
+  <tr>
+    <th>Ranking</th>
+    <td><%= @user_group.ranking %></td>
+  </tr>
+  <tr>
+    <th>Created at</th>
+    <td><%= time_tag(@user_group.created_at) %></td>
+  </tr>
+  <tr>
+    <th>Updated at</th>
+    <td><%= time_tag(@user_group.updated_at) %></td>
+  </tr>
+</tbody>

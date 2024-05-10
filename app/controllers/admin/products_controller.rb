@@ -9,6 +9,7 @@ module Admin
     end
 
     def show
+      @product_versions = @product.product_versions.order(version: :desc)
     end
 
     def new
@@ -22,7 +23,10 @@ module Admin
       @product = Product.new(create_params)
 
       if @product.save
-        redirect_to admin_product_url(@product)
+        respond_to do |format|
+          format.html { redirect_to admin_product_url(@product) }
+          format.turbo_stream
+        end
       else
         render :new, status: :unprocessable_entity
       end
@@ -37,16 +41,15 @@ module Admin
     end
 
     def destroy
-      store = @product.store
       @product.destroy!
 
-      redirect_to admin_store_products_url(store: store)
+      redirect_to admin_store_products_url(@store)
     end
 
     private
 
     def set_product
-      @product = Product.find(params[:id])
+      @product = @store.products.find(params[:id])
     rescue ActiveRecord::RecordNotFound
       render :not_found, status: :not_found
     end

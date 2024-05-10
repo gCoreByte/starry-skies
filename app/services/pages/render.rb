@@ -2,9 +2,10 @@
 
 module Pages
   class Render
-    def initialize(page:, record:)
+    def initialize(page:, record:, variables: {})
       @page = page
-      @record = page.dynamic? ? record : page.record
+      @record = record
+      @variables = variables
     end
 
     def render
@@ -14,12 +15,18 @@ module Pages
     private
 
     def variables
-      variables = { @record.class.name.underscore => variable_provider }
+      variables = { @record.class.name.underscore => variable_provider }.merge(existing_variables)
       variable_provider.provides_without_self.each do |key|
         variables[key] = variable_provider.public_send(key)
       end
 
       variables
+    end
+
+    def existing_variables
+      @variables.transform_values do |value|
+        Variables::VariableProvider.new(record: value)
+      end
     end
 
     def variable_provider

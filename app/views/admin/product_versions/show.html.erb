@@ -1,0 +1,71 @@
+<p style="color: green"><%= notice %></p>
+<p style="color: red"><%= alert %></p>
+<%= page_title '' %>
+
+<div class="row">
+  <div class="col-xl-6">
+    <div class="card mb-3 border">
+      <div class="card-header">
+
+        <%= card_title('Product version details') do %>
+          <%= edit_button([:admin, @product_version]) %>
+          <%= destroy_button([:admin, @product_version]) %>
+          <% if @product_version.draft? %>
+            <%= activate_button([:admin, @product_version]) %>
+          <% end %>
+          <% if @product_version.active? %>
+            <%= deactivate_button([:admin, @product_version]) %>
+          <% end %>
+          <%= action_button([:admin, @product_version], action: :translations_form, method: :get, turbo: true, icon: 'fa-file' )%>
+        <% end %>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <%= render 'show', locals: { product_version: @product_version } %>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-6">
+    <div class="card mb-3 border">
+      <div class="card-header">
+        <%= card_title('Product prices') do %>
+          <%= create_button(:admin, @product_version, :product_price) %>
+        <% end %>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <th>Price</th>
+            <th>User group</th>
+            <th>Actions</th>
+          </thead>
+          <tbody id='product_prices'>
+            <%= render @product_prices %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card mb-3 border">
+      <div class="card-header">
+        <%= card_title('Product categories') do %>
+          <%= create_button(:admin, @product_version, :product_version_category) %>
+        <% end %>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <th>Name</th>
+            <th>Created at</th>
+            <th>Actions</th>
+          <tbody id='product_version_categories'>
+            <%= render @product_version_categories %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+</div>

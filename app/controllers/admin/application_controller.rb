@@ -13,10 +13,27 @@ module Admin
 
     private
 
+    def render_404 # rubocop:disable Naming/VariableNumber
+      respond_to do |format|
+        format.html { render file: Rails.public_path.join('404.html'), layout: false, status: :not_found }
+        format.xml  { head :not_found }
+        format.any  { head :not_found }
+      end
+    end
+
+    def permit_association(name, params)
+      return unless params.key?(name)
+
+      model_name = name.to_s.delete_suffix('_id')
+      klass = model_name.classify.constantize
+      id = params.delete(name)
+      params.merge!(name.to_sym => klass.find_by(id: id, store: @store))
+    end
+
     def authenticate
       return if @current_user
 
-      cookies[:store_id].delete
+      cookies.delete(:store_id)
       redirect_to sign_in_path
     end
 
@@ -29,6 +46,11 @@ module Admin
     end
 
     def set_store
+      unless current_user
+        @store = nil
+        return
+      end
+
       Current.store = current_user.stores.find_by(id: cookies[:store_id])
       @store = Current.store
     end

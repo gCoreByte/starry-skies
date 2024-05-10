@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark navbar-background">
   <div class="container">
     <%= link_to image_tag('starryskies.png', size: 50), root_path, class: 'navbar-brand me-4' %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -13,16 +13,7 @@
           </a>
           <ul class="dropdown-menu">
             <li class="nav-item">
-              <%= link_to 'Home', root_path, class: 'nav-link' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to 'About', about_path, class: 'nav-link' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to 'Pricing', pricing_path, class: 'nav-link' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to 'Contact Us', contact_us_path, class: 'nav-link' %>
+              <%= link_to 'Home', root_path, class: 'nav-link text-dark' %>
             </li>
           </ul>
         </li>
@@ -33,7 +24,10 @@
             </a>
             <ul class="dropdown-menu">
               <li class="nav-item">
-                <%= link_to 'Dashboard', admin_dashboard_index_path, class: 'nav-link' %>
+                <%= link_to 'Dashboard', admin_dashboard_index_path, class: 'nav-link text-dark' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'Variables', variables_admin_documentations_path, class: 'nav-link text-dark' %>
               </li>
             </ul>
           </li>
@@ -52,7 +46,7 @@
       <% if @current_user.present? %>
         <ul class="navbar-nav gap-3">
           <li class="nav-item">
-            <%= link_to 'Sign Out', session_path(Current.session), data: { turbo_method: :delete }, class: 'nav-link' %>
+            <%= button_to 'Sign Out', session_path(Current.session), method: :delete, class: 'nav-link' %>
           </li>
         </ul>
       <% end %>

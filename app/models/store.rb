@@ -1,11 +1,25 @@
 # frozen_string_literal: true
 
 class Store < ApplicationRecord
-  has_many :admin_store_permissions, dependent: nil
-  has_many :admin_store_relationships, dependent: nil
+  has_many :admin_store_permissions, dependent: :destroy
   has_many :admin_accounts, through: :admin_store_relationships
 
-  has_many :products, dependent: nil
+  has_many :products, dependent: :destroy
+  has_many :product_versions, dependent: :destroy
+  has_many :product_categories, dependent: :destroy
+  has_many :product_version_categories, dependent: :destroy
+  has_many :product_prices, dependent: :destroy
+  has_many :purchase_orders, dependent: :destroy
+  has_many :pages, dependent: :destroy
+  has_many :page_templates, dependent: :destroy
+  has_many :page_translations, dependent: :destroy
+  has_many :user_groups, dependent: :destroy
+  has_many :purchase_carts, dependent: :destroy
+  has_many :user_accounts, dependent: :destroy
+  has_many :user_sessions, dependent: :destroy
+  has_many :user_user_groups, dependent: :destroy
+  has_many :addresses, dependent: :destroy
+  has_many :admin_store_relationships, dependent: :destroy
 
   belongs_to :package, optional: true
   belongs_to :created_by, class_name: 'Fingerprint'

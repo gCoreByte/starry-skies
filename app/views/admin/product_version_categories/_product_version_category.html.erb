@@ -1,0 +1,9 @@
+<tr>
+  <td><%= link_to product_version_category.product_category.name, admin_product_category_path(product_version_category.product_category) %></td>
+  <td><%= time_tag(product_version_category.created_at) %></td>
+  <td>
+    <%= card_controls do %>
+      <%= destroy_button(:admin, product_version_category) %>
+    <% end %>
+  </td>
+</tr>

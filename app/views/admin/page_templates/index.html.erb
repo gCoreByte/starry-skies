@@ -1,0 +1,26 @@
+<p style="color: green"><%= notice %></p>
+
+<%= page_title('Page templates') do %>
+  <%= create_button(:admin, :store, :page_template) %>
+<% end %>
+
+<div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card mb-3 border">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <th>Key</th>
+              <th>Status</th>
+              <th>Based on</th>
+              <th>Actions</th>
+            <tbody id=page_templates>
+              <%= render @page_templates %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

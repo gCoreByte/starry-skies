@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe BasedOns::BasedOn do
-  record_types = %w[store product]
+  record_types = described_class.possible_based_ons
 
   record_types.each do |record_type|
     describe "#{record_type} has based_on class" do

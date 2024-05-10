@@ -7,7 +7,6 @@ RSpec.describe ProductVersions::Update do
   let!(:fingerprint) { create(:fingerprint) }
   let!(:payload) do
     {
-      description: 'New description',
       width: 1.0,
       length: 1.0,
       height: 1.0,

@@ -2,9 +2,9 @@
 
 module ProductPrices
   class Base < ApplicationService
-    ATTRIBUTES = %i[locale price currency].freeze
+    ATTRIBUTES = %i[price].freeze
 
-    attr_accessor :fingerprint
+    attr_accessor :fingerprint, :user_group
     attr_writer :payload
 
     validates :product_price, :payload, :fingerprint, presence: true
@@ -12,6 +12,8 @@ module ProductPrices
     validate if: :product_price do
       validate_model(product_price, :base, *ATTRIBUTES)
     end
+
+    delegate(*ATTRIBUTES, to: :product_price)
 
     def product_price
       raise 'Implement in subclass'

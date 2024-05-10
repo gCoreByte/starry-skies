@@ -15,7 +15,8 @@ module Stores
     def store
       @_store ||= Store.new(
         created_by: fingerprint,
-        updated_by: fingerprint
+        updated_by: fingerprint,
+        package: package # FIXME
       ).tap do |store|
         store.assign_attributes(payload.slice(*ATTRIBUTES))
       end
@@ -30,6 +31,7 @@ module Stores
     def perform
       store.save!
       relationship_service.save!
+      Stores::ExampleStore.new(store: store, fingerprint: fingerprint).save!
     end
 
     private
@@ -41,6 +43,10 @@ module Stores
         type_key: AdminStoreRelationship::TypeKeys::ADMIN,
         fingerprint: fingerprint
       )
+    end
+
+    def package
+      @_package ||= Package.find_by!(key: 'pro')
     end
   end
 end

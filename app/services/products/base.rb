@@ -2,7 +2,7 @@
 
 module Products
   class Base < ApplicationService
-    ATTRIBUTES = %i[name key].freeze
+    ATTRIBUTES = %i[key].freeze
 
     attr_writer :payload
     attr_accessor :fingerprint

@@ -28,7 +28,15 @@
 #       enabled: "ON"
 
 en:
+  back: Back
+  date:
+    formats:
+      default: "%Y-%m-%d"
+  time:
+    formats:
+      default: "%Y-%m-%d %H:%M"
   errors:
     attributes:
       base:
         cannot_have_any_admin_relationships: Cannot have any admin relationships
+        no_items: Cart has no items

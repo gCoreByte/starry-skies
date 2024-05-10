@@ -7,7 +7,9 @@ RSpec.describe ProductVersionCategories::Create do
   let!(:fingerprint) { create(:fingerprint) }
 
   subject do
-    described_class.new(product_version: product_version, product_category: product_category, fingerprint: fingerprint)
+    described_class.new(
+      store: store, product_version: product_version, product_category: product_category, fingerprint: fingerprint
+    )
   end
 
   describe '#save!' do

@@ -1,0 +1,23 @@
+<tbody id='store'>
+  <tr>
+    <th>Name</th>
+    <td><%= @store.name %></td>
+  </tr>
+  <tr>
+    <th>URL</th>
+    <td><%= @store.url %></td>
+  </tr>
+  <tr>
+    <th>Revenue</th>
+    <td><%= @store.revenue %></td>
+  </tr>
+  <tr>
+    <th>Sales</th>
+    <td><%= @store.sales %></td>
+  </tr>
+  <tr>
+    <th>Created at</th>
+    <td><%= time_tag(@store.created_at) %></td>
+  </tr>
+
+</tbody>

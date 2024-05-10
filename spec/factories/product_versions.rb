@@ -8,6 +8,13 @@ FactoryBot.define do
     created_by { association(:fingerprint) }
     updated_by { created_by }
 
+    translations do
+      {
+        'en' => { 'name' => 'translated english', 'description' => '1' },
+        'et' => { 'name' => 'translated estonian' }
+      }
+    end
+
     trait :active do
       activated_at { Time.zone.now }
       activated_by { created_by }

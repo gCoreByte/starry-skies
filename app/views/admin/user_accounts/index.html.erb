@@ -1,0 +1,23 @@
+<p style="color: green"><%= notice %></p>
+
+<%= page_title('User accounts') do %>
+<% end %>
+
+<div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card mb-3 border">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <th>Email</th>
+              <th>Actions</th>
+            <tbody id=user_accounts>
+              <%= render @user_accounts %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

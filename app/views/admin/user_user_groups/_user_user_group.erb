@@ -1,0 +1,10 @@
+<tr>
+  <td><%= user_user_group.name %></td>
+  <td><%= user_user_group.key %></td>
+  <td><%= user_user_group.ranking %></td>
+  <td>
+    <%= card_controls do %>
+      <%= destroy_button(:admin, user_user_group) %>
+    <% end %>
+  </td>
+</tr>

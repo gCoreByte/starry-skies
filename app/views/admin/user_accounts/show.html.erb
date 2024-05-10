@@ -1,0 +1,39 @@
+<p style="color: green"><%= notice %></p>
+<p style="color: red"><%= alert %></p>
+<%= page_title '' %>
+<div class="row">
+  <div class="col-xl-6">
+    <div class="card mb-3 border">
+      <div class="card-header">
+        <%= card_title('User account details') %>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <%= render 'show', locals: { user_account: @user_account } %>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-6">
+    <div class="card mb-3 border">
+      <div class="card-header">
+        <%= card_title('User groups') do %>
+          <% create_button(:admin, @user_account, :user_user_group) %>
+        <% end %>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <th>Name</th>
+            <th>Key</th>
+            <th>Ranking</th>
+            <th>Actions</th>
+          </thead>
+          <tbody id='user_user_groups'>
+            <%= render @user_user_groups %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

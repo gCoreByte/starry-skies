@@ -1,0 +1,54 @@
+<tbody id='product_version'>
+  <tr>
+    <th>Version</th>
+    <td><%= @product_version.version %></td>
+  </tr>
+  <tr>
+    <th>Weight</th>
+    <td><%= formatted_unit(@product_version.weight, @product_version.weight_unit)%></td>
+  </tr>
+  <tr>
+    <th>Height</th>
+    <td><%= formatted_unit(@product_version.height, @product_version.size_unit)%></td>
+  </tr>
+  <tr>
+    <th>Length</th>
+    <td><%= formatted_unit(@product_version.length, @product_version.size_unit)%></td>
+  </tr>
+  <tr>
+    <th>Width</th>
+    <td><%= formatted_unit(@product_version.width, @product_version.size_unit)%></td>
+  </tr>
+  <tr>
+    <th>Activated at</th>
+    <td><%= time_tag(@product_version.activated_at) %></td>
+  </tr>
+  <tr>
+    <th>Activated by</th>
+    <td><%= @product_version.activated_by&.name %></td>
+  </tr>
+  <tr>
+    <th>Deactivated at</th>
+    <td><%= time_tag(@product_version.deactivated_at) %></td>
+  </tr>
+  <tr>
+    <th>Deactivated by</th>
+    <td><%= @product_version.deactivated_by&.name %></td>
+  </tr>
+  <tr>
+    <th>Created at</th>
+    <td><%= time_tag(@product_version.created_at) %></td>
+  </tr>
+  <tr>
+    <th>Created by</th>
+    <td><%= @product_version.created_by.name %></td>
+  </tr>
+  <tr>
+    <th>Updated at</th>
+    <td><%= time_tag(@product_version.updated_at) %></td>
+  </tr>
+  <tr>
+    <th>Updated by</th>
+    <td><%= @product_version.updated_by.name %></td>
+  </tr>
+</tbody>
