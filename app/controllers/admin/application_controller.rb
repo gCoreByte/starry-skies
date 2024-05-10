@@ -3,6 +3,7 @@
 module Admin
   class ApplicationController < ActionController::Base
     before_action :set_current_request_details
+    around_action :set_locale
     before_action :set_current_user
     before_action :set_store
     before_action :set_current_store
@@ -13,6 +14,11 @@ module Admin
     attr_reader :current_user
 
     private
+
+    def set_locale(&)
+      cookies[:locale] = 'en' unless cookies[:locale]
+      I18n.with_locale(cookies[:locale], &)
+    end
 
     def render_404 # rubocop:disable Naming/VariableNumber
       respond_to do |format|

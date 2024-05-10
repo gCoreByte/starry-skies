@@ -38,6 +38,18 @@
           <% end %>
         <% end %>
       </ul>
+      <ul class="navbar-nav gap-3">
+        <div class="dropdown">
+          <button class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Locale
+          </button>
+          <div class="dropdown-menu" aria-labelledby="localeDropdown">
+            <a class="dropdown-item" href="#" onclick="changeLocale('en')">🇬🇧 English</a>
+            <a class="dropdown-item" href="#" onclick="changeLocale('et')">🇪🇪 Eesti</a>
+            <a class="dropdown-item" href="#" onclick="changeLocale('ru')">🇷🇺 Русский</a>
+          </div>
+        </div>
+      </ul>
       <% unless @current_user.present? %>
         <ul class="navbar-nav gap-3">
           <li class="nav-item">
