@@ -5,5 +5,8 @@ module Admin
     def variables
       @variables = Documentations::Variables.new.all
     end
+
+    def guide
+    end
   end
 end

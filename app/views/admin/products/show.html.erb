@@ -57,8 +57,3 @@
     </div>
   </div>
 </div>
-<div>
-  <%= link_to "Edit this product", edit_admin_product_path(@product) %> |
-  <%= link_to "Back to products", admin_store_products_path(@product.store) %>
-  <%= link_to "Destroy this product", admin_product_path(@product), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
-</div>

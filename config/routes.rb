@@ -73,6 +73,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
       resources :documentations, only: %i[] do
         collection do
           get :variables
+          get :guide
         end
       end
     end
@@ -89,7 +90,11 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
         get :success
       end
     end
-    resources :user_sessions, only: %i[new create destroy]
+    resources :user_sessions, only: %i[new create] do
+      collection do
+        delete :destroy
+      end
+    end
     # resources :pages, only: %i[index show]
     get '/p(/:slug(/:record_id))', to: 'pages#show'
     resources :purchase_carts, only: %i[show destroy] do
