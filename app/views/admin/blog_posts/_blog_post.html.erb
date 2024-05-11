@@ -1,0 +1,9 @@
+<tr>
+  <td><%= blog_post.key %></td>
+  <td>
+    <%= card_controls do %>
+      <%= show_button(:admin, blog_post) %>
+      <%= destroy_button(:admin, blog_post) %>
+    <% end %>
+  </td>
+</tr>

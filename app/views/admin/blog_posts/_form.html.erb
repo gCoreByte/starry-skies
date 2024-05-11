@@ -1,0 +1,20 @@
+<%= form_with(model: [:admin, @store, @blog_post]) do |form| %>
+  <div class='modal-body'>
+    <% if @blog_post.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(@blog_post.errors.count, "error") %></h2>
+        <ul>
+          <% @blog_post.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class='mb-3'>
+      <%= form.label :key, t('attributes.key'), { class: 'form-label' } %>
+      <%= form.text_field :key, { class: 'form-control' } %>
+    </div>
+    <div class='modal-footer'>
+      <%= form.submit t('save'), class: 'btn btn-primary' %>
+    </div>
+  <% end %>

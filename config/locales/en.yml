@@ -28,7 +28,9 @@
 #       enabled: "ON"
 
 en:
-  test: <code>test</code>
+  home_page: >-
+    Welcome to the home page. This is a proof of concept for a multilingual Estonian e-commerce platform.
+    Please register and try it out!
   back: Back
   are_you_sure: Are you sure?
   date:
@@ -91,6 +93,10 @@ en:
     finalize_purchase: Finalize purchase
     successful_purchase: Successful purchase
     account_created: Account created
+    blog_post: Blog post
+    blog_posts: Blog posts
+    blog_post_translations: Blog post translations
+    blog_post_translation: Blog post translation
   thank_you: Thank you for your purchase
   thank_you_registered: Thank you for registering
   account_created: Your account has been successfully created. You will be redirected to our homepage in 5 seconds.
@@ -147,6 +153,7 @@ en:
     postal_code: Postal code
     subdomain: Subdomain
     example_store: Example store
+    title: Title
   sessions:
     create:
       alert: Invalid email or password

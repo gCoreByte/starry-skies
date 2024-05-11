@@ -21,6 +21,8 @@ class Store < ApplicationRecord
   has_many :user_user_groups, dependent: :destroy
   has_many :addresses, dependent: :destroy
   has_many :admin_store_relationships, dependent: :destroy
+  has_many :blog_posts, dependent: :destroy
+  has_many :blog_post_translations, dependent: :destroy
 
   belongs_to :package, optional: true
   belongs_to :created_by, class_name: 'Fingerprint'

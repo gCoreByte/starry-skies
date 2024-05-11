@@ -4,7 +4,7 @@ module BasedOns
   class BasedOn
     class << self
       POSSIBLE_BASED_ONS = %w[product store product_version product_category purchase_cart purchase_cart_item
-                              user_account purchase_order address].freeze
+                              user_account purchase_order address blog_post].freeze
 
       def new(record:)
         "BasedOns::#{record.class.name}".constantize.new(record: record)

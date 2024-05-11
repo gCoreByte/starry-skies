@@ -1,0 +1,22 @@
+<%= page_title(t('titles.blog_posts')) do %>
+  <%= create_button(:admin, :store, :blog_post) %>
+<% end %>
+
+<div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card mb-3 border">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <th><%= t('attributes.key') %></th>
+              <th><%= t('attributes.actions') %></th>
+            <tbody id=blog_posts>
+              <%= render @blog_posts %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

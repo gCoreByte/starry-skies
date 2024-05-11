@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_01_213710) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_11_204732) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -66,6 +66,36 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_01_213710) do
     t.index ["created_by_id"], name: "index_admin_store_relationships_on_created_by_id"
     t.index ["store_id", "admin_account_id"], name: "idx_on_store_id_admin_account_id_05666a13a8", unique: true
     t.index ["store_id"], name: "index_admin_store_relationships_on_store_id"
+  end
+
+  create_table "blog_post_translations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "store_id", null: false
+    t.uuid "blog_post_id", null: false
+    t.uuid "created_by_id", null: false
+    t.uuid "updated_by_id", null: false
+    t.string "locale", null: false
+    t.string "title", null: false
+    t.text "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["blog_post_id", "locale"], name: "index_blog_post_translations_on_blog_post_id_and_locale", unique: true
+    t.index ["blog_post_id"], name: "index_blog_post_translations_on_blog_post_id"
+    t.index ["created_by_id"], name: "index_blog_post_translations_on_created_by_id"
+    t.index ["store_id"], name: "index_blog_post_translations_on_store_id"
+    t.index ["updated_by_id"], name: "index_blog_post_translations_on_updated_by_id"
+  end
+
+  create_table "blog_posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "store_id", null: false
+    t.uuid "created_by_id", null: false
+    t.uuid "updated_by_id", null: false
+    t.string "key", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_by_id"], name: "index_blog_posts_on_created_by_id"
+    t.index ["store_id", "key"], name: "index_blog_posts_on_store_id_and_key", unique: true
+    t.index ["store_id"], name: "index_blog_posts_on_store_id"
+    t.index ["updated_by_id"], name: "index_blog_posts_on_updated_by_id"
   end
 
   create_table "fingerprints", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -500,6 +530,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_01_213710) do
   add_foreign_key "admin_store_relationships", "admin_accounts"
   add_foreign_key "admin_store_relationships", "fingerprints", column: "created_by_id"
   add_foreign_key "admin_store_relationships", "stores"
+  add_foreign_key "blog_post_translations", "blog_posts"
+  add_foreign_key "blog_post_translations", "fingerprints", column: "created_by_id"
+  add_foreign_key "blog_post_translations", "fingerprints", column: "updated_by_id"
+  add_foreign_key "blog_post_translations", "stores"
+  add_foreign_key "blog_posts", "fingerprints", column: "created_by_id"
+  add_foreign_key "blog_posts", "fingerprints", column: "updated_by_id"
+  add_foreign_key "blog_posts", "stores"
   add_foreign_key "fingerprints", "admin_accounts"
   add_foreign_key "fingerprints", "user_accounts"
   add_foreign_key "fingerprints", "user_sessions"

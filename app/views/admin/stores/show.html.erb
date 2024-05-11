@@ -61,6 +61,13 @@
             </tr>
             <tr>
               <td>
+                <%= link_to admin_store_blog_posts_path(@store), class: 'btn btn-sm btn-primary' do %>
+                  <i class='fas fa-blog'></i> <%= t('titles.blog_posts') %>
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <td>
                 <%= link_to admin_store_user_groups_path(@store), class: 'btn btn-sm btn-primary' do %>
                   <i class='fas fa-user-group'></i> <%= t('titles.user_groups') %>
                 <% end %>
