@@ -1,26 +1,26 @@
 <tbody id='product_category'>
   <tr>
-    <th>Name</th>
+    <th><%= t('attributes.name') %></th>
     <td><%= @product_category.name %></td>
   </tr>
   <tr>
-    <th>Key</th>
+    <th><%= t('attributes.key') %></th>
     <td><%= @product_category.key %></td>
   </tr>
   <tr>
-    <th>Created by</th>
+    <th><%= t('attributes.created_by') %></th>
     <td><%= @product_category.created_by.name %></td>
   </tr>
   <tr>
-    <th>Created at</th>
+    <th><%= t('attributes.created_at') %></th>
     <td><%= time_tag(@product_category.created_at) %></td>
   </tr>
   <tr>
-    <th>Updated by</th>
+    <th><%= t('attributes.updated_by') %></th>
     <td><%= @product_category.updated_by.name %></td>
   </tr>
   <tr>
-    <th>Updated at</th>
+    <th><%= t('attributes.updated_at') %></th>
     <td><%= time_tag(@product_category.updated_at) %></td>
   </tr>
 </tbody>

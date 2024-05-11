@@ -1,4 +1,4 @@
-<%= page_title 'Page' do %>
+<%= page_title t('titles.page') do %>
   <% if @page.draft? %>
     <%= destroy_button([:admin, @page]) %>
     <%= action_button([:admin, @page], action: :live, icon: 'fa-play', type: 'success', method: :patch) %>
@@ -11,29 +11,29 @@
   <div class="col-xl-6">
     <div class="card mb-3 border">
       <div class="card-header">
-        <%= card_title('Page details') %>
+        <%= card_title(t('titles.page_details')) %>
       </div>
       <div class="table-responsive">
         <table class="table table-bordered table-striped">
           <tbody>
             <tr>
-              <th>Key</th>
+              <th><%= t('attributes.key') %></th>
               <td><%= @page.key %></td>
             </tr>
             <tr>
-              <th>Status</th>
+              <th><%= t('attributes.status') %></th>
               <td><%= @page.status %></td>
             </tr>
             <tr>
-              <th>Url</th>
+              <th><%= t('attributes.url') %></th>
               <td><%= @page.url %></td>
             </tr>
             <tr>
-              <th>Created by</th>
+              <th><%= t('attributes.created_by') %></th>
               <td><%= @page.created_by.name %></td>
             </tr>
             <tr>
-              <th>Created at</th>
+              <th><%= t('attributes.created_at') %></th>
               <td><%= time_tag(@page.created_at) %></td>
             </tr>
           </tbody>
@@ -44,7 +44,7 @@
   <div class="col-xl-6">
     <div class="card mb-3 border">
       <div class="card-header">
-        <%= card_title('Page template details') do %>
+        <%= card_title(t('titles.page_template_details')) do %>
           <%= show_button([:admin, @page.page_template]) %>
         <% end %>
       </div>
@@ -52,15 +52,15 @@
         <table class="table table-bordered table-striped">
           <tbody>
             <tr>
-              <th>Key</th>
+              <th><%= t('attributes.key') %></th>
               <td><%= @page.page_template.key %></td>
             </tr>
             <tr>
-              <th>Status</th>
+              <th><%= t('attributes.status') %></th>
               <td><%= @page.page_template.status %></td>
             </tr>
             <tr>
-              <th>Based on</th>
+              <th><%= t('attributes.based_on') %></th>
               <td><%= @page.page_template.based_on %></td>
             </tr>
           </tbody>

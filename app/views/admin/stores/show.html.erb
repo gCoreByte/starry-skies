@@ -7,9 +7,7 @@
   <div class="col-xl-6">
     <div class="card mb-3 border">
       <div class="card-header">
-        <h2 class="card-title">
-          Store Details
-        </h2>
+        <%= card_title(t('titles.store_details'))%>
       </div>
       <div class="table-responsive">
         <table class="table table-bordered table-striped">
@@ -21,9 +19,7 @@
   <div class="col-xl-6">
     <div class="card mb-3 border">
       <div class="card-header">
-        <h2 class="card-title">
-          Store Data
-        </h2>
+        <%= card_title(t('titles.store_data')) %>
       </div>
       <div class="table-responsive">
         <table class="table table-bordered table-striped">
@@ -31,49 +27,49 @@
             <tr>
               <td>
                 <%= link_to admin_store_products_path(@store), class: 'btn btn-sm btn-primary' do %>
-                  <i class="fas fa-box"></i> Products
+                  <i class="fas fa-box"></i> <%= t('titles.products') %>
                 <% end %>
               </td>
             </tr>
             <tr>
               <td>
                 <%= link_to admin_store_product_categories_path(@store), class: 'btn btn-sm btn-primary' do %>
-                  <i class="fas fa-table-columns"></i> Categories
+                  <i class="fas fa-table-columns"></i> <%= t('titles.categories') %>
                 <% end %>
               </td>
             </tr>
             <tr>
               <td>
               <%= link_to admin_store_purchase_orders_path(@store), class: 'btn btn-sm btn-primary' do %>
-                <i class='fas fa-cart-shopping'></i> Orders
+                <i class='fas fa-cart-shopping'></i> <%= t('titles.key') %>
               <% end %>
               </td>
             </tr>
             <tr>
               <td>
                 <%= link_to admin_store_pages_path(@store), class: 'btn btn-sm btn-primary' do %>
-                  <i class='fas fa-file'></i> Pages
+                  <i class='fas fa-file'></i> <%= t('titles.pages') %>
                 <% end %>
               </td>
             </tr>
             <tr>
               <td>
                 <%= link_to admin_store_page_templates_path(@store), class: 'btn btn-sm btn-primary' do %>
-                  <i class='fas fa-file-lines'></i> Page templates
+                  <i class='fas fa-file-lines'></i> <%= t('titles.page_templates') %>
                 <% end %>
               </td>
             </tr>
             <tr>
               <td>
                 <%= link_to admin_store_user_groups_path(@store), class: 'btn btn-sm btn-primary' do %>
-                  <i class='fas fa-file-lines'></i> User groups
+                  <i class='fas fa-file-lines'></i> <%= t('titles.user_groups') %>
                 <% end %>
               </td>
             </tr>
             <tr>
               <td>
                 <%= link_to admin_store_user_accounts_path(@store), class: 'btn btn-sm btn-primary' do %>
-                  <i class='fas fa-file-lines'></i> User accounts
+                  <i class='fas fa-file-lines'></i> <%= t('titles.user_accounts') %>
                 <% end %>
               </td>
             </tr>

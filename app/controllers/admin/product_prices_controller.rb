@@ -55,9 +55,9 @@ module Admin
       @service = ProductPrices::Destroy.new(product_price: @product_price, fingerprint: fingerprint)
       @product_version = @product_price.product_version
       if @service.save
-        flash.notice = 'Product price was successfully destroyed.'
+        flash.notice = t('.success')
       else
-        flash.alert = 'Product price could not be destroyed.'
+        flash.alert = t('.alert')
       end
       redirect_to admin_product_version_url(@product_version)
     end

@@ -1,4 +1,4 @@
-<%= page_title('Purchase orders') do %>
+<%= page_title(t('titles.purchase_orders')) do %>
 <% end %>
 
 <div>
@@ -8,9 +8,9 @@
         <div class="table-responsive">
           <table class="table table-bordered table-striped">
             <thead>
-              <th>Name</th>
-              <th>Status</th>
-              <th>Created at</th>
+              <th><%= t('attributes.name') %></th>
+              <th><%= t('attributes.status') %></th>
+              <th><%= t('attributes.created_at') %></th>
             <tbody id='purchase_orders'>
               <%= render @purchase_orders %>
             </tbody>

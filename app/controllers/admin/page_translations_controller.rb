@@ -59,9 +59,9 @@ module Admin
     def destroy
       @service = PageTranslations::Destroy.new(page_translation: @page_translation, fingerprint: fingerprint)
       if @service.save
-        flash.notice = 'Page template was successfully destroyed.'
+        flash.notice = t('.success')
       else
-        flash.alert = 'Page template could not be destroyed.'
+        flash.alert = t('.alert')
       end
       redirect_to admin_page_template_url(@page_template)
     end

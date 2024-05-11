@@ -1,4 +1,4 @@
-<%= page_title('Product categories') do %>
+<%= page_title(t('titles.product_categories')) do %>
   <%= create_button(:admin, :store, :product_category) %>
 <% end %>
 
@@ -9,9 +9,9 @@
         <div class="table-responsive">
           <table class="table table-bordered table-striped">
             <thead>
-              <th>Name</th>
-              <th>Key</th>
-              <th>Created at</th>
+              <th><%= t('attributes.name') %></th>
+              <th><%= t('attributes.key') %></th>
+              <th><%= t('attributes.created_at') %></th>
             <tbody id=product_categories>
               <%= render @product_categories %>
             </tbody>

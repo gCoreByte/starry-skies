@@ -1,14 +1,14 @@
 <tbody id='user_account'>
   <tr>
-    <th>Email</th>
+    <th><%= t('attributes.email') %></th>
     <td><%= @user_account.email %></td>
   </tr>
   <tr>
-    <th>Created at</th>
+    <th><%= t('attributes.created_at') %></th>
     <td><%= time_tag(@user_account.created_at) %></td>
   </tr>
   <tr>
-    <th>Updated at</th>
+    <th><%= t('attributes.updated_at') %>t</th>
     <td><%= time_tag(@user_account.updated_at) %></td>
   </tr>
 </tbody>

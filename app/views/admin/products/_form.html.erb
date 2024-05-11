@@ -2,7 +2,7 @@
   <div class='modal-body'>
     <% if product.errors.any? %>
       <div style="color: red">
-        <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+        <h2><%= pluralize(product.errors.count, "error") %></h2>
         <ul>
           <% product.errors.each do |error| %>
             <li><%= error.full_message %></li>
@@ -11,12 +11,12 @@
       </div>
     <% end %>
     <div class='mb-3'>
-      <%= form.label :key, { class: 'form-label' } %>
+      <%= form.label :key, t('attributes.key'), { class: 'form-label' } %>
       <%= form.text_field :key, { class: 'form-control' } %>
     </div>
   </div>
 
   <div class='modal-footer'>
-    <%= form.submit 'Save', class: 'btn btn-primary' %>
+    <%= form.submit t('save'), class: 'btn btn-primary' %>
   </div>
 <% end %>

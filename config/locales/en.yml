@@ -40,3 +40,155 @@ en:
       base:
         cannot_have_any_admin_relationships: Cannot have any admin relationships
         no_items: Cart has no items
+  new: New
+  edit: Edit
+  save: Save
+  titles:
+    dashboard: Dashboard
+    guide: Guide
+    variables: Variables
+    page_template: Page template
+    page_templates: Page templates
+    page_translations: Page translations
+    preview: Preview
+    pages: Pages
+    page: Page
+    page_details: Page details
+    page_template_details: Page template details
+    product_categories: Product categories
+    product_category_details: Product category details
+    product_version_usages: Product version usages
+    product_version_details: Product version details
+    product_prices: Product prices
+    translations: Translations
+    products: Products
+    product_details: Product details
+    active_version: Active version
+    product_versions: Product versions
+    purchase_orders: Purchase orders
+    purchase_order: Purchase order
+    purchase_order_details: Purchase order details
+    address: Address
+    order_items: Order items
+    store_details: Store details
+    store_data: Store data
+    categories: Categories
+    orders: Orders
+    user_groups: User groups
+    user_accounts: User accounts
+    user_account_details: User account details
+  attributes:
+    name: Name
+    revenue: Revenue
+    sales: Sales
+    actions: Actions
+    key: Key
+    based_on: Based on
+    status: Status
+    created_by: Created by
+    created_at: Created at
+    updated_by: Updated by
+    updated_at: Updated at
+    locale: Locale
+    content: Content
+    url: URL
+    price: Price
+    user_group: User group
+    product_category: Product category
+    width: Width
+    height: Height
+    length: Length
+    weight: Weight
+    weight_unit: Weight unit
+    size_unit: Size unit
+    version: Version
+    activated_at: Activated at
+    activated_by: Activated by
+    deactivated_at: Deactivated at
+    deactivated_by: Deactivated by
+    english: English
+    description: Description
+    estonian: Estonian
+    russian: Russian
+    active_version: Active version
+    reference_number: Reference number
+    first_name: First name
+    last_name: Last name
+    address: Address
+    country: Country
+    product_version: Product version
+    quantity: Quantity
+    total: Total
+    email: Email
+    ranking: Ranking
+  sessions:
+    create:
+      alert: Invalid email or password
+  admin:
+    page_templates:
+      destroy:
+        success: Page template was successfully destroyed.
+        alert: Page template could not be destroyed.
+      activate:
+        success: Page template is now active.
+        alert: Page template could not be activated.
+      deactivate:
+        success: Page template is now draft.
+        alert: Page template could not be set to draft.
+    page_translations:
+      destroy:
+        success: Page translation was successfully destroyed.
+        alert: Page translation could not be destroyed.
+    pages:
+      destroy:
+        success: Page was successfully destroyed.
+        alert: Page could not be destroyed.
+      draft:
+        success: Page successfully saved as draft.
+        alert: Failed to save page as draft.
+      live:
+        success: Page is now live.
+        alert: Page could not be set to live.
+    product_categories:
+      destroy:
+        success: Product category was successfully destroyed.
+        alert: Product category could not be destroyed.
+    product_prices:
+      destroy:
+        success: Product price was successfully destroyed.
+        alert: Product price could not be destroyed.
+    product_version_categories:
+      destroy:
+        success: Product version category was successfully destroyed.
+        alert: Product version category could not be destroyed.
+    product_versions:
+      destroy:
+        success: Product version was successfully destroyed.
+        alert: Product version could not be destroyed.
+      activate:
+        success: Product version was successfully activated.
+        alert: Product version could not be activated.
+      deactivate:
+        success: Product version was successfully deactivated.
+        alert: Product version could not be deactivated.
+    purchase_orders:
+      processing:
+        success: Purchase order is now being processed.
+        alert: Purchase order could not be set to processing.
+      in_transit:
+        success: Purchase order is now in transit.
+        alert: Purchase order could not be set to in transit.
+      completed:
+        success: Purchase order is now completed.
+        alert: Purchase order could not be completed.
+      failed:
+        success: Purchase order is now failed.
+        alert: Purchase order could not be set to failed.
+    user_groups:
+      destroy:
+        success: User group was successfully destroyed.
+        alert: User group could not be destroyed.
+    user_user_groups:
+      destroy:
+        success: User group was successfully removed.
+        alert: User group could not be removed.

@@ -50,9 +50,9 @@ module Admin
       @service = ProductVersions::Destroy.new(product_version: @product_version, fingerprint: fingerprint)
       @product = @product_version.product
       if @service.save
-        flash.notice = 'Product version was successfully destroyed.'
+        flash.notice = t('.success')
       else
-        flash.alert = 'Product version could not be destroyed.'
+        flash.alert = t('.alert')
       end
       redirect_to admin_product_url(@product)
     end
@@ -60,9 +60,9 @@ module Admin
     def activate
       @service = ProductVersions::Activate.new(product_version: @product_version, fingerprint: fingerprint)
       if @service.save
-        flash.notice = 'Product version was successfully activated.'
+        flash.notice = t('.success')
       else
-        flash.alert = 'Product version could not be activated.'
+        flash.alert = t('.alert')
       end
       redirect_to admin_product_version_url(@product_version)
     end
@@ -70,9 +70,9 @@ module Admin
     def deactivate
       @service = ProductVersions::Deactivate.new(product_version: @product_version, fingerprint: fingerprint)
       if @service.save
-        flash.notice = 'Product version was successfully deactivated.'
+        flash.notice = t('.success')
       else
-        flash.alert = 'Product version could not be deactivated.'
+        flash.alert = t('.alert')
       end
       redirect_to admin_product_version_url(@product_version)
     end

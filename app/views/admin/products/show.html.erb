@@ -7,9 +7,7 @@
   <div class="col-xl-6">
     <div class="card mb-3 border">
       <div class="card-header">
-        <h2 class="card-title">
-          Product Details
-        </h2>
+        <%= card_title(t('titles.product_details'))%>
       </div>
       <div class="table-responsive">
         <table class="table table-bordered table-striped">
@@ -21,12 +19,12 @@
   <div class="col-xl-6">
     <div class="card mb-3 border">
       <div class="card-header">
-        <%= card_title('Active version') %>
+        <%= card_title(t('titles.active_version')) %>
       </div>
       <div class="table-responsive">
         <table class="table table-bordered table-striped">
           <tbody>
-            <th>Active version</th>
+            <th><%= t('attributes.active_version') %></th>
             <td><%= link_to(@product.product_version.title, admin_product_version_path(@product.product_version)) if @product.product_version %></td>
           </tbody>
         </table>
@@ -34,17 +32,17 @@
     </div>
     <div class="card mb-3 border">
       <div class="card-header">
-        <%= card_title('Product versions') do %>
+        <%= card_title(t('titles.product_versions')) do %>
           <%= create_button(:admin, @product, :product_version) %>
         <% end %>
       </div>
       <div class="table-responsive">
         <table class="table table-bordered table-striped">
           <thead>
-            <th>Version</th>
-            <th>Activated at</th>
-            <th>Deactivated at</th>
-            <th>Actions</th>
+            <th><%= t('attributes.version') %></th>
+            <th><%= t('attributes.activatedd_at') %></th>
+            <th><%= t('attributes.deactivated_at') %></th>
+            <th><%= t('attributes.actions') %></th>
           <tbody id='product_versions'>
             <%= render @product_versions %>
           </tbody>

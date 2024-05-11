@@ -33,9 +33,9 @@ module Admin
                                                        fingerprint: fingerprint)
       @product_version = @product_version_category.product_version
       if @service.save
-        flash.notice = 'Product version category was successfully destroyed.'
+        flash.notice = t('.success')
       else
-        flash.alert = 'Product version category could not be destroyed.'
+        flash.alert = t('.alert')
       end
       redirect_to admin_product_version_url(@product_version)
     end

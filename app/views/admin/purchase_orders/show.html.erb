@@ -1,10 +1,10 @@
-<%= page_title('Purchase Order') do %>
+<%= page_title(t('titles.purchase_order')) do %>
 <% end %>
 <div class="row">
   <div class="col-xl-6">
     <div class="card mb-3 border">
       <div class="card-header">
-        <%= card_title('Purchase Order Details') do %>
+        <%= card_title(t('titles.purchase_order_details')) do %>
           <% if PurchaseOrderStatuses::Processing.new(purchase_order: @purchase_order).valid_state? %>
             <%= action_button([:admin, @purchase_order], action: :processing, icon: 'fa-box', confirm: true)  %>
           <% end %>
@@ -29,19 +29,19 @@
   <div class="col-xl-6">
     <div class="card mb-3 border">
       <div class="card-header">
-        <%= card_title('Address') %>
+        <%= card_title(t('titles.address')) %>
       </div>
       <div class="table-responsive">
         <table class="table table-bordered table-striped">
           <tbody>
             <tr>
-              <th>Address</th>
+              <th><%= t('attributes.address') %></th>
               <td>
                 <%= @purchase_order.address.address %>
               </td>
             </tr>
             <tr>
-              <th>Country</th>
+              <th><%= t('attributes.country') %></th>
               <td>
                 <%= @purchase_order.address.country %>
               </td>
@@ -52,15 +52,15 @@
     </div>
     <div class="card mb-3 border">
       <div class="card-header">
-        <%= card_title('Order items') %>
+        <%= card_title(t('titles.order_items')) %>
       </div>
       <div class="table-responsive">
         <table class="table table-bordered table-striped">
           <thead>
-            <th>Product Version</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Total</th>
+            <th><%= t('attributes.product_version') %></th>
+            <th><%= t('attributes.quantity') %></th>
+            <th><%= t('attributes.price') %></th>
+            <th><%= t('attributes.total') %></th>
           </thead>
           <tbody id='order_items'>
             <%= render @purchase_order.purchase_cart_items %>
