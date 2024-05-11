@@ -51,10 +51,10 @@ module Admin
     def destroy
       @service = PageTemplates::Destroy.new(page_template: @page_template, fingerprint: fingerprint)
       if @service.save
-        flash.notice = 'Page template was successfully destroyed.'
+        flash.notice = t('.success')
         redirect_to admin_page_template_url(@page_template)
       else
-        flash.alert = 'Page template could not be destroyed.'
+        flash.alert = t('.alert')
         redirect_to admin_store_page_templates_url(@store)
       end
     end
@@ -77,9 +77,9 @@ module Admin
     def activate
       @service = PageTemplateStatuses::Active.new(page_template: @page_template, fingerprint: fingerprint)
       if @service.save
-        flash.notice = 'Page template is now active.'
+        flash.notice = t('.success')
       else
-        flash.alert = 'Page template could not be set to active.'
+        flash.alert = t('.alert')
       end
       redirect_to admin_page_template_url(@page_template)
     end
@@ -87,9 +87,9 @@ module Admin
     def deactivate
       @service = PageTemplateStatuses::Draft.new(page_template: @page_template, fingerprint: fingerprint)
       if @service.save
-        flash.notice = 'Page template is returned to draft.'
+        flash.notice = t('.success')
       else
-        flash.alert = 'Page template could not be set to draft.'
+        flash.alert = t('.alert')
       end
       redirect_to admin_page_template_url(@page_template)
     end

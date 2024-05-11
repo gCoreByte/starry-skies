@@ -97,3 +97,5 @@ gem 'liquid', '~> 5.4'
 gem 'font-awesome-sass', '~> 6.5'
 
 gem 'solid_queue', '~> 0.3.0'
+
+gem 'redcarpet', '~> 3.6'

@@ -1,22 +1,22 @@
 <tbody id='user_group'>
   <tr>
-    <th>Name</th>
+    <th><%= t('attributes.name') %></th>
     <td><%= @user_group.name %></td>
   </tr>
   <tr>
-    <th>Key</th>
+    <th><%= t('attributes.key') %></th>
     <td><%= @user_group.key %></td>
   </tr>
   <tr>
-    <th>Ranking</th>
+    <th><%= t('attributes.ranking') %></th>
     <td><%= @user_group.ranking %></td>
   </tr>
   <tr>
-    <th>Created at</th>
+    <th><%= t('attributes.created_at') %></th>
     <td><%= time_tag(@user_group.created_at) %></td>
   </tr>
   <tr>
-    <th>Updated at</th>
+    <th><%= t('attributes.updated_at') %></th>
     <td><%= time_tag(@user_group.updated_at) %></td>
   </tr>
 </tbody>

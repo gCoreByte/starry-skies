@@ -5,10 +5,6 @@ class SessionsController < ApplicationController
 
   before_action :set_session, only: :destroy
 
-  def index
-    @sessions = Current.admin_account.sessions.order(created_at: :desc)
-  end
-
   def new
   end
 
@@ -19,14 +15,14 @@ class SessionsController < ApplicationController
 
       redirect_to admin_dashboard_index_path
     else
-      flash.alert = 'Invalid email or password' # FIXME: Localize
+      flash.alert = t('.alert') # FIXME: Localize
       redirect_to sign_in_path(email_hint: params[:email])
     end
   end
 
   def destroy
     @session.destroy
-    redirect_to(sessions_path)
+    redirect_to(root_path)
   end
 
   private

@@ -1,7 +1,5 @@
-<p style="color: green"><%= notice %></p>
-
-<%= page_title('Products') do %>
-  <%= link_to '', new_admin_store_product_path, class: 'btn btn-success fas fa-plus', data: { turbo: true, turbo_frame: 'modal' } %>
+<%= page_title(t('titles.products')) do %>
+  <%= create_button(:admin, @store, :product) %>
 <% end %>
 
 <div>
@@ -11,9 +9,9 @@
         <div class="table-responsive">
           <table class="table table-bordered table-striped">
             <thead>
-              <th>Key</th>
-              <th>Created at</th>
-              <th>Actions</th>
+              <th><%= t('attributes.key') %></th>
+              <th><%= t('attributes.created_at') %></th>
+              <th><%= t('attributes.actions') %></th>
             <tbody id='products'>
               <%= render @products %>
             </tbody>

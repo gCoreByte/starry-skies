@@ -23,9 +23,9 @@ module Admin
 
     def destroy
       if @user_user_group.destroy
-        flash.notice = 'User group was successfully removed.'
+        flash.notice = t('.success')
       else
-        flash.alert = 'User group could not be removed.'
+        flash.alert = t('.alert')
       end
       redirect_to admin_user_account_url(@user_account)
     end

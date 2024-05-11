@@ -1,5 +1,3 @@
-<p style="color: green"><%= notice %></p>
-<p style="color: red"><%= alert %></p>
 <%= page_title '' %>
 
 <div class="row">
@@ -7,7 +5,7 @@
     <div class="card mb-3 border">
       <div class="card-header">
 
-        <%= card_title('Product version details') do %>
+        <%= card_title(t('titles.product_version_details')) do %>
           <%= edit_button([:admin, @product_version]) %>
           <%= destroy_button([:admin, @product_version]) %>
           <% if @product_version.draft? %>
@@ -29,16 +27,16 @@
   <div class="col-xl-6">
     <div class="card mb-3 border">
       <div class="card-header">
-        <%= card_title('Product prices') do %>
+        <%= card_title(t('titles.product_prices')) do %>
           <%= create_button(:admin, @product_version, :product_price) %>
         <% end %>
       </div>
       <div class="table-responsive">
         <table class="table table-bordered table-striped">
           <thead>
-            <th>Price</th>
-            <th>User group</th>
-            <th>Actions</th>
+            <th><%= t('attributes.price') %></th>
+            <th><%= t('attributes.user_group') %></th>
+            <th><%= t('attributes.actions') %></th>
           </thead>
           <tbody id='product_prices'>
             <%= render @product_prices %>
@@ -48,16 +46,16 @@
     </div>
     <div class="card mb-3 border">
       <div class="card-header">
-        <%= card_title('Product categories') do %>
+        <%= card_title(t('titles.product_categories')) do %>
           <%= create_button(:admin, @product_version, :product_version_category) %>
         <% end %>
       </div>
       <div class="table-responsive">
         <table class="table table-bordered table-striped">
           <thead>
-            <th>Name</th>
-            <th>Created at</th>
-            <th>Actions</th>
+            <th><%= t('attributes.name') %></th>
+            <th><%= t('attributes.created_at') %></th>
+            <th><%= t('attributes.actions') %></th>
           <tbody id='product_version_categories'>
             <%= render @product_version_categories %>
           </tbody>
@@ -65,7 +63,4 @@
       </div>
     </div>
   </div>
-</div>
-
-<div>
 </div>

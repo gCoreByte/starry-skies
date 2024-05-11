@@ -14,12 +14,11 @@ module Admin
     def edit
     end
 
-    def create # rubocop:disable Metrics/MethodLength
+    def create
       service = Stores::Create.new(admin_account: current_user, fingerprint: fingerprint, payload: create_params)
 
       @store = service.store
-      if service.valid?
-        service.save!
+      if service.save
         respond_to do |format|
           format.html { redirect_to admin_store_url(@store) }
           format.turbo_stream
@@ -56,7 +55,9 @@ module Admin
     end
 
     def create_params
-      params.require(:store).permit(:name, :url, locales: []).merge!(created_by: fingerprint, updated_by: fingerprint)
+      params.require(:store).permit(:name, :url, :example_store, locales: []).merge!(
+        created_by: fingerprint, updated_by: fingerprint
+      )
     end
 
     def update_params

@@ -51,10 +51,10 @@ module Admin
     def destroy
       @service = Pages::Destroy.new(page: @page, fingerprint: fingerprint)
       if @service.save
-        flash.notice = 'Page was successfully destroyed.'
+        flash.notice = t('.success')
         redirect_to admin_store_pages_url(@store)
       else
-        flash.alert = 'Page could not be destroyed.'
+        flash.alert = t('.alert')
         redirect_to admin_page_url(@page)
       end
     end
@@ -62,9 +62,9 @@ module Admin
     def draft
       @service = PageStatuses::Draft.new(page: @page, fingerprint: fingerprint)
       if @service.save
-        flash.notice = 'Page successfully turned to draft.'
+        flash.notice = t('.success')
       else
-        flash.alert = 'Failed to turn page to draft.'
+        flash.alert = t('.alert')
       end
       redirect_to admin_page_url(@page)
     end
@@ -72,9 +72,9 @@ module Admin
     def live
       @service = PageStatuses::Live.new(page: @page, fingerprint: fingerprint)
       if @service.save
-        flash.notice = 'Page successfully turned to live.'
+        flash.notice = t('.success')
       else
-        flash.alert = 'Failed to turn page to live.'
+        flash.alert = t('.alert')
       end
       redirect_to admin_page_url(@page)
     end

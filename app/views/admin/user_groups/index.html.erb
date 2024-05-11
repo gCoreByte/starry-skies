@@ -1,6 +1,4 @@
-<p style="color: green"><%= notice %></p>
-
-<%= page_title('User Groups') do %>
+<%= page_title(t('titles.user_groups')) do %>
   <%= create_button(:admin, :store, :user_group) %>
 <% end %>
 
@@ -11,10 +9,10 @@
         <div class="table-responsive">
           <table class="table table-bordered table-striped">
             <thead>
-              <th>Name</th>
-              <th>Key</th>
-              <th>Ranking</th>
-              <th>Actions</th>
+              <th><%= t('attributes.name') %></th>
+              <th><%= t('attributes.key') %></th>
+              <th><%= t('attributes.ranking') %></th>
+              <th><%= t('attributes.actions') %></th>
             <tbody id=user_groups>
               <%= render @user_groups %>
             </tbody>

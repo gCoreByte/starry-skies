@@ -1,6 +1,4 @@
-<p style="color: green"><%= notice %></p>
-
-<%= page_title('User accounts') do %>
+<%= page_title(t('titles.user_accounts')) do %>
 <% end %>
 
 <div>
@@ -10,8 +8,8 @@
         <div class="table-responsive">
           <table class="table table-bordered table-striped">
             <thead>
-              <th>Email</th>
-              <th>Actions</th>
+              <th><%= t('attributes.email') %></th>
+              <th><%= t('attributes.actions') %></th>
             <tbody id=user_accounts>
               <%= render @user_accounts %>
             </tbody>

@@ -45,10 +45,10 @@ module Admin
 
     def destroy
       if @user_group.destroy
-        flash.notice = 'User group was successfully destroyed.'
+        flash.notice = t('.success')
         redirect_to admin_store_user_groups_url(@store)
       else
-        flash.alert = 'User group could not be destroyed.'
+        flash.alert = t('.alert')
         redirect_to admin_user_group_url(@user_group)
       end
     end

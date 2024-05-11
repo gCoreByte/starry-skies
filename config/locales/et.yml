@@ -1,0 +1,219 @@
+# Files in the config/locales directory are used for internationalization and
+# are automatically loaded by Rails. If you want to use locales other than
+# English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t "hello"
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t("hello") %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more about the API, please read the Rails Internationalization guide
+# at https://guides.rubyonrails.org/i18n.html.
+#
+# Be aware that YAML interprets the following case-insensitive strings as
+# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
+# must be quoted to be interpreted as strings. For example:
+#
+#     en:
+#       "yes": yup
+#       enabled: "ON"
+
+et:
+  back: Tagasi
+  are_you_sure: Kas olete kindel?
+  date:
+    formats:
+      default: "%Y-%m-%d"
+  time:
+    formats:
+      default: "%Y-%m-%d %H:%M"
+  errors:
+    attributes:
+      base:
+        cannot_have_any_admin_relationships: Ei saa omada ühtegi administraatori suhet
+        no_items: Ostukorvis pole ühtegi toodet
+  new: Uus
+  edit: Muuda
+  save: Salvesta
+  titles:
+    dashboard: Juhtpaneel
+    guide: Juhend
+    variables: Muutujad
+    page_template: Lehe mall
+    page_templates: Lehe mallid
+    page_translations: Lehe tõlked
+    preview: Eelvaade
+    pages: Lehed
+    page: Leht
+    page_details: Lehe detailid
+    page_template_details: Lehe malli detailid
+    product_categories: Toote kategooriad
+    product_category_details: Toote kategooria detailid
+    product_version_usages: Toote versiooni kasutused
+    product_version_details: Toote versiooni detailid
+    product_prices: Toote hinnad
+    translations: Tõlked
+    products: Tooted
+    product_details: Toote detailid
+    active_version: Aktiivne versioon
+    product_versions: Toote versioonid
+    purchase_orders: Ostutellimused
+    purchase_order: Ostutellimus
+    purchase_order_details: Ostutellimuse detailid
+    address: Aadress
+    order_items: Tellimuse üksused
+    store_details: Poe detailid
+    store_data: Poe andmed
+    categories: Kategooriad
+    orders: Tellimused
+    user_groups: Kasutajagrupid
+    user_accounts: Kasutajakontod
+    user_account_details: Kasutajakonto detailid
+    user_group_details: Kasutajagrupi detailid
+    sign_up: Registreeri
+    sign_in: Logi sisse
+    home: Avaleht
+    account_management: Konto haldamine
+    stores: Poed
+    store: Pood
+    locale: Lokaat
+    sign_out: Logi välja
+    finalize_purchase: Ostu lõpuleviimine
+    successful_purchase: Ost õnnestus
+    account_created: Teie konto on edukalt loodud. Teid suunatakse meie avalehele 5 sekundi pärast.
+  thank_you: Täname ostu eest
+  thank_you_registered: Täname registreerumise eest
+  account_created: Teie konto on edukalt loodud. Teid suunatakse meie avalehele 5 sekundi pärast.
+  order_processed: Teie tellimus on edukalt töödeldud. Teid suunatakse meie avalehele 5 sekundi pärast.
+  attributes:
+    name: Nimi
+    revenue: Tulu
+    sales: Müük
+    actions: Tegevused
+    key: Võti
+    based_on: Põhineb
+    status: Olek
+    created_by: Loodud
+    created_at: Loodud kell
+    updated_by: Uuendatud
+    updated_at: Uuendatud kell
+    locale: Lokaat
+    content: Sisu
+    url: URL
+    price: Hind
+    user_group: Kasutajagrupp
+    product_category: Toote kategooria
+    width: Laius
+    height: Kõrgus
+    length: Pikkus
+    weight: Kaal
+    weight_unit: Kaalu ühik
+    size_unit: Suuruse ühik
+    version: Versioon
+    activated_at: Aktiveeritud kell
+    activated_by: Aktiveeritud
+    deactivated_at: Deaktiveeritud kell
+    deactivated_by: Deaktiveeritud
+    english: Inglise
+    description: Kirjeldus
+    estonian: Eesti
+    russian: Vene
+    active_version: Aktiivne versioon
+    reference_number: Viitenumber
+    first_name: Eesnimi
+    last_name: Perekonnanimi
+    address: Aadress
+    country: Riik
+    product_version: Toote versioon
+    quantity: Kogus
+    total: Kokku
+    email: E-post
+    ranking: Edetabel
+    password: Parool
+    password_confirmation: Parooli kinnitus
+    phone_number: Telefoninumber
+    city: Linn
+    state: Osariik
+    postal_code: Postiindeks
+    subdomain: Alamdomeen
+    example_store: Näidispood
+  sessions:
+    create:
+      alert: Vigane e-posti aadress või parool
+  admin:
+    page_templates:
+      destroy:
+        success: Lehe mall on edukalt kustutatud.
+        alert: Lehe malli ei saanud kustutada.
+      activate:
+        success: Lehe mall on nüüd aktiivne.
+        alert: Lehe malli ei saa aktiveerida.
+      deactivate:
+        success: Lehe mall on nüüd mustandis.
+        alert: Lehe malli ei saa mustandisse seada.
+    page_translations:
+      destroy:
+        success: Lehe tõlge on edukalt kustutatud.
+        alert: Lehe tõlget ei saanud kustutada.
+    pages:
+      destroy:
+        success: Leht on edukalt kustutatud.
+        alert: Lehte ei saanud kustutada.
+      draft:
+        success: Leht on edukalt salvestatud mustandina.
+        alert: Lehte ei saa salvestada mustandina.
+      live:
+        success: Leht on nüüd avaldatud.
+        alert: Lehte ei saa avaldada.
+    product_categories:
+      destroy:
+        success: Toote kategooria on edukalt kustutatud.
+        alert: Toote kategooriat ei saa kustutada.
+    product_prices:
+      destroy:
+        success: Toote hind on edukalt kustutatud.
+        alert: Toote hinda ei saa kustutada.
+    product_version_categories:
+      destroy:
+        success: Toote versiooni kategooria on edukalt kustutatud.
+        alert: Toote versiooni kategooriat ei saa kustutada.
+    product_versions:
+      destroy:
+        success: Toote versioon on edukalt kustutatud.
+        alert: Toote versiooni ei saa kustutada.
+      activate:
+        success: Toote versioon on nüüd aktiveeritud.
+        alert: Toote versiooni ei saa aktiveerida.
+      deactivate:
+        success: Toote versioon on nüüd deaktiveeritud.
+        alert: Toote versiooni ei saa deaktiveerida.
+    purchase_orders:
+      processing:
+        success: Ostutellimus on nüüd töötlemisel.
+        alert: Ostutellimust ei saa töötlemisele määrata.
+      in_transit:
+        success: Ostutellimus on nüüd teel.
+        alert: Ostutellimust ei saa teele määrata.
+      completed:
+        success: Ostutellimus on nüüd lõpule viidud.
+        alert: Ostutellimust ei saa lõpule viia.
+      failed:
+        success: Ostutellimus on nüüd ebaõnnestunud.
+        alert: Ostutellimust ei saa määrata ebaõnnestunuks.
+    user_groups:
+      destroy:
+        success: Kasutajagrupp on edukalt kustutatud.
+        alert: Kasutajagruppi ei saa kustutada.
+    user_user_groups:
+      destroy:
+        success: Kasutajagrupp on edukalt eemaldatud.
+        alert: Kasutajagruppi ei saa eemaldada.

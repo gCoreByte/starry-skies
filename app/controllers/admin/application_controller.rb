@@ -3,8 +3,10 @@
 module Admin
   class ApplicationController < ActionController::Base
     before_action :set_current_request_details
+    around_action :set_locale
     before_action :set_current_user
     before_action :set_store
+    before_action :set_current_store
     before_action :authenticate
 
     layout 'main'
@@ -12,6 +14,11 @@ module Admin
     attr_reader :current_user
 
     private
+
+    def set_locale(&)
+      cookies[:locale] = 'en' unless cookies[:locale]
+      I18n.with_locale(cookies[:locale], &)
+    end
 
     def render_404 # rubocop:disable Naming/VariableNumber
       respond_to do |format|
@@ -55,9 +62,14 @@ module Admin
       @store = Current.store
     end
 
+    def set_current_store
+      @current_store = @store || current_user.stores.find_by(id: cookies[:store_id])
+    end
+
     def set_current_request_details
       Current.user_agent = request.user_agent
       Current.ip_address = request.ip
+      @request = request
     end
 
     def fingerprint

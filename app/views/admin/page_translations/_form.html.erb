@@ -2,7 +2,7 @@
   <div class='modal-body'>
     <% if @service.errors.any? %>
       <div style="color: red">
-        <h2><%= pluralize(@service.errors.count, "error") %> prohibited this product category from being saved:</h2>
+        <h2><%= pluralize(@service.errors.count, "error") %></h2>
         <ul>
           <% @service.errors.each do |error| %>
             <li><%= error.full_message %></li>
@@ -11,14 +11,14 @@
       </div>
     <% end %>
     <div class='mb-3'>
-      <%= form.label :content, { class: 'form-label' } %>
+      <%= form.label :content, t('attributes.content'), { class: 'form-label' } %>
       <%= form.text_area :content, { class: 'form-control' } %>
     </div>
     <div class='mb-3'>
-      <%= form.label :locale, { class: 'form-label' } %>
+      <%= form.label :locale, t('attributes.locale'), { class: 'form-label' } %>
       <%= form.select :locale, I18n.available_locales, {}, { class: 'form-select' } %>
     </div>
     <div class='modal-footer'>
-      <%= form.submit 'Save', class: 'btn btn-primary' %>
+      <%= form.submit t('save'), class: 'btn btn-primary' %>
     </div>
   <% end %>

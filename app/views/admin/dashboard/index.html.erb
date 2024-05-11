@@ -1,6 +1,4 @@
-<p style="color: green"><%= notice %></p>
-
-<%= page_title('Dashboard')  do %>
+<%= page_title(t('titles.dashboard'))  do %>
   <%= create_button([:admin, :store]) %>
 <% end %>
 
@@ -11,11 +9,10 @@
         <div class="table-responsive">
           <table class="table table-bordered table-striped">
             <thead>
-              <th>Name</th>
-              <th>Revenue</th>
-              <th>Open issues</th>
-              <th>Sales</th>
-              <th>Actions</th>
+              <th><%= t('attributes.name') %></th>
+              <th><%= t('attributes.revenue') %></th>
+              <th><%= t('attributes.sales') %></th>
+              <th><%= t('attributes.actions') %></th>
             <tbody id="stores">
               <%= render @stores %>
             </tbody>

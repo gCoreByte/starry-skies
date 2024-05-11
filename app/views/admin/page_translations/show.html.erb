@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "modal" do %>
   <div class="modal-header">
-    <h1 class="modal-title">Preview</h1>
+    <h1 class="modal-title"><%= t('titles.preview') %></h1>
   </div>
   <div class='modal-body'>
     <%= @content.html_safe %>

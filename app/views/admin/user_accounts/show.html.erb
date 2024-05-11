@@ -1,11 +1,9 @@
-<p style="color: green"><%= notice %></p>
-<p style="color: red"><%= alert %></p>
 <%= page_title '' %>
 <div class="row">
   <div class="col-xl-6">
     <div class="card mb-3 border">
       <div class="card-header">
-        <%= card_title('User account details') %>
+        <%= card_title(t('titles.user_account_details')) %>
       </div>
       <div class="table-responsive">
         <table class="table table-bordered table-striped">
@@ -17,17 +15,17 @@
   <div class="col-xl-6">
     <div class="card mb-3 border">
       <div class="card-header">
-        <%= card_title('User groups') do %>
+        <%= card_title(t('titles.user_groups')) do %>
           <% create_button(:admin, @user_account, :user_user_group) %>
         <% end %>
       </div>
       <div class="table-responsive">
         <table class="table table-bordered table-striped">
           <thead>
-            <th>Name</th>
-            <th>Key</th>
-            <th>Ranking</th>
-            <th>Actions</th>
+            <th><%= t('attributes.name') %></th>
+            <th><%= t('attributes.key') %></th>
+            <th><%= t('attributes.ranking') %></th>
+            <th><%= t('attributes.actions') %></th>
           </thead>
           <tbody id='user_user_groups'>
             <%= render @user_user_groups %>

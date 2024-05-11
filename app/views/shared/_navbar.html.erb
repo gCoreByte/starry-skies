@@ -13,40 +13,57 @@
           </a>
           <ul class="dropdown-menu">
             <li class="nav-item">
-              <%= link_to 'Home', root_path, class: 'nav-link text-dark' %>
+              <%= link_to t('titles.home'), root_path, class: 'nav-link text-dark' %>
             </li>
           </ul>
         </li>
         <% if @current_user.present? %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Account Management
+              <%= t('titles.account_management') %>
             </a>
             <ul class="dropdown-menu">
               <li class="nav-item">
-                <%= link_to 'Dashboard', admin_dashboard_index_path, class: 'nav-link text-dark' %>
+                <%= link_to t('titles.stores'), admin_dashboard_index_path, class: 'nav-link text-dark' %>
               </li>
               <li class="nav-item">
-                <%= link_to 'Variables', variables_admin_documentations_path, class: 'nav-link text-dark' %>
+                <%= link_to t('titles.variables'), variables_admin_documentations_path, class: 'nav-link text-dark' %>
               </li>
             </ul>
           </li>
+          <% if @current_store.present? %>
+            <li class="nav-item">
+              <%= link_to t('titles.store'), admin_store_path(@current_store), class: 'nav-link' %>
+            </li>
+          <% end %>
         <% end %>
+      </ul>
+      <ul class="navbar-nav gap-3">
+        <div class="dropdown">
+          <button class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <%= t('titles.locale') %>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="localeDropdown">
+            <a class="dropdown-item" href="#" onclick="changeLocale('en')">🇬🇧 English</a>
+            <a class="dropdown-item" href="#" onclick="changeLocale('et')">🇪🇪 Eesti</a>
+            <a class="dropdown-item" href="#" onclick="changeLocale('ru')">🇷🇺 Русский</a>
+          </div>
+        </div>
       </ul>
       <% unless @current_user.present? %>
         <ul class="navbar-nav gap-3">
           <li class="nav-item">
-            <%= link_to 'Sign Up', sign_up_path, class: 'nav-link' %>
+            <%= link_to t('titles.sign_up'), sign_up_path, class: 'nav-link' %>
           </li>
           <li class="nav-item">
-            <%= link_to 'Sign In', sign_in_path, class: 'nav-link' %>
+            <%= link_to t('titles.sign_in'), sign_in_path, class: 'nav-link' %>
           </li>
         </ul>
       <% end %>
       <% if @current_user.present? %>
         <ul class="navbar-nav gap-3">
           <li class="nav-item">
-            <%= button_to 'Sign Out', session_path(Current.session), method: :delete, class: 'nav-link' %>
+            <%= button_to t('titles.sign_out'), session_path(Current.session), method: :delete, class: 'nav-link' %>
           </li>
         </ul>
       <% end %>

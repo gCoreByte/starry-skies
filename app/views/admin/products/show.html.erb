@@ -1,5 +1,3 @@
-<p style="color: green"><%= notice %></p>
-
 <%= page_title(@product.key) do %>
   <%= edit_button(:admin, @product) %>
   <%= destroy_button(:admin, @product) %>
@@ -9,9 +7,7 @@
   <div class="col-xl-6">
     <div class="card mb-3 border">
       <div class="card-header">
-        <h2 class="card-title">
-          Product Details
-        </h2>
+        <%= card_title(t('titles.product_details'))%>
       </div>
       <div class="table-responsive">
         <table class="table table-bordered table-striped">
@@ -23,14 +19,12 @@
   <div class="col-xl-6">
     <div class="card mb-3 border">
       <div class="card-header">
-        <%= card_title('Active version') do %>
-          <%= link_to '', new_admin_product_product_version_path(@product), class: 'btn btn-warning fas fa-pencil', data: { turbo: true, turbo_frame: 'modal' } %>
-        <% end %>
+        <%= card_title(t('titles.active_version')) %>
       </div>
       <div class="table-responsive">
         <table class="table table-bordered table-striped">
           <tbody>
-            <th>Active version</th>
+            <th><%= t('attributes.active_version') %></th>
             <td><%= link_to(@product.product_version.title, admin_product_version_path(@product.product_version)) if @product.product_version %></td>
           </tbody>
         </table>
@@ -38,17 +32,17 @@
     </div>
     <div class="card mb-3 border">
       <div class="card-header">
-        <%= card_title('Product versions') do %>
-          <%= link_to '', new_admin_product_product_version_path(@product), class: 'btn btn-success fas fa-plus', data: { turbo: true, turbo_frame: 'modal' } %>
+        <%= card_title(t('titles.product_versions')) do %>
+          <%= create_button(:admin, @product, :product_version) %>
         <% end %>
       </div>
       <div class="table-responsive">
         <table class="table table-bordered table-striped">
           <thead>
-            <th>Version</th>
-            <th>Activated at</th>
-            <th>Deactivated at</th>
-            <th>Actions</th>
+            <th><%= t('attributes.version') %></th>
+            <th><%= t('attributes.activatedd_at') %></th>
+            <th><%= t('attributes.deactivated_at') %></th>
+            <th><%= t('attributes.actions') %></th>
           <tbody id='product_versions'>
             <%= render @product_versions %>
           </tbody>

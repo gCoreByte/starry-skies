@@ -56,9 +56,9 @@ module Admin
     def destroy
       @service = ProductCategories::Destroy.new(product_category: @product_category, fingerprint: fingerprint)
       if @service.save
-        flash.notice = 'Product category was successfully destroyed.'
+        flash.notice = t('.success')
       else
-        flash.alert = 'Product category could not be destroyed.'
+        flash.alert = t('.alert')
       end
       redirect_to admin_store_product_categories_url(@store)
     end

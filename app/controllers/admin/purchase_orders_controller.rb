@@ -29,9 +29,9 @@ module Admin
     def processing
       @service = PurchaseOrderStatuses::Processing.new(purchase_order: @purchase_order, fingerprint: fingerprint)
       if @service.save
-        flash.notice = 'Purchase order is now processing.'
+        flash.notice = t('.success')
       else
-        flash.alert = 'Purchase order could not be set to processing.'
+        flash.alert = t('.alert')
       end
       redirect_to admin_purchase_order_url(@purchase_order)
     end
@@ -39,9 +39,9 @@ module Admin
     def in_transit
       @service = PurchaseOrderStatuses::InTransit.new(purchase_order: @purchase_order, fingerprint: fingerprint)
       if @service.save
-        flash.notice = 'Purchase order is now in transit.'
+        flash.notice = t('.success')
       else
-        flash.alert = 'Purchase order could not be set to in transit.'
+        flash.alert = t('.alert')
       end
       redirect_to admin_purchase_order_url(@purchase_order)
     end
@@ -49,9 +49,9 @@ module Admin
     def completed
       @service = PurchaseOrderStatuses::Complete.new(purchase_order: @purchase_order, fingerprint: fingerprint)
       if @service.save
-        flash.notice = 'Purchase order is now completed.'
+        flash.notice = t('.success')
       else
-        flash.alert = 'Purchase order could not be completed.'
+        flash.alert = t('.alert')
       end
       redirect_to admin_purchase_order_url(@purchase_order)
     end
@@ -59,9 +59,9 @@ module Admin
     def failed
       @service = PurchaseOrderStatuses::Fail.new(purchase_order: @purchase_order, fingerprint: fingerprint)
       if @service.save
-        flash.notice = 'Purchase order is now failed.'
+        flash.notice = t('.success')
       else
-        flash.alert = 'Purchase order could not be set to failed.'
+        flash.alert = t('.alert')
       end
       redirect_to admin_purchase_order_url(@purchase_order)
     end

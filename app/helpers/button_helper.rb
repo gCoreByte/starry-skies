@@ -4,7 +4,7 @@ module ButtonHelper
   def back_button
     link_to 'javascript:history.back()', class: 'btn btn-sm btn-white' do
       concat tag.i(class: 'fas fa-chevron-left')
-      concat ' Back'
+      concat " #{t('back')}"
     end
   end
 
