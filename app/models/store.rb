@@ -15,6 +15,7 @@ class Store < ApplicationRecord
   has_many :page_translations, dependent: :destroy
   has_many :user_groups, dependent: :destroy
   has_many :purchase_carts, dependent: :destroy
+  has_many :purchase_cart_items, dependent: :destroy
   has_many :user_accounts, dependent: :destroy
   has_many :user_sessions, dependent: :destroy
   has_many :user_user_groups, dependent: :destroy
@@ -31,13 +32,13 @@ class Store < ApplicationRecord
   validates :url, uniqueness: true, allow_nil: true
 
   def revenue
-    # FIXME
-    0
+    purchase_cart_items.joins(:purchase_cart).where(
+      purchase_cart: { status: PurchaseCart::Statuses::BILLED }
+    ).sum(&:total_price)
   end
 
   def sales
-    # FIXME
-    0
+    purchase_orders.count
   end
 
   def open_issues

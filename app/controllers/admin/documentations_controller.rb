@@ -7,6 +7,8 @@ module Admin
     end
 
     def guide
+      file = Rails.root.join("app/views/admin/documentations/guide/#{I18n.locale}.md")
+      @content = ::MARKDOWN_RENDERER.render(file.read)
     end
   end
 end

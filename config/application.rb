@@ -9,6 +9,8 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 
 MAX_PRICE = 999_999_999
+MARKDOWN_RENDERER = Redcarpet::Markdown.new(Redcarpet::Render::HTML, fenced_code_blocks: true,
+                                                                     disable_indented_code_blocks: true)
 
 module StarrySkies
   class Application < Rails::Application

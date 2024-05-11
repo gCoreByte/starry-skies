@@ -1,5 +1,99 @@
 <%= page_title('Guide') %>
+
 <div class="p-3">
-  <h1>Getting Started</hh1>
-  <p>
+  <%= @content.html_safe %>
 </div>
+<%#
+<div class="p-3">
+  <div class="pb-3">
+    <h2>Welcome</h1>
+    <p>
+      Welcome to your newest e-store platform! This is only a proof of concept build with only the bare essentials added. Currently, some features are missing: discounts, campaigns, picture uploads and custom domains. Rest assured, they are being worked on!
+    </p>
+  </div>
+  <div class="pb-3">
+    <h2>Getting started</h2>
+    <p>Lets get acquainted with the platform. Open the account dashboard by going to <code>Account Management &gt; Dashboard</code>. First, create a store. Pick out a name for your store and then a fitting subdomain. For example, a store with the subdomain <code>my-cool-store</code> can be accessed at <code>my-cool-store.corebyte.ee</code>. To make things easier, it's possible to generate an example store in the options.</p>
+  </div>
+  <div class="pb-3">
+    <h2>Store overview</h2>
+    <p>Click on the blue eye next to your freshly created store or click on it's name to get to the store overview.</p>
+    <p>From the store's overview page it's possible to manage every aspect of your new store, from products to web pages. It also provides a quick overview of sales made and revenue generated.</p>
+    <br>
+    <h3>Attention</h3>
+    <p>Many items require a key to be created. The key is a unique human-readable value to make recognising records easier. Keys are always unique while names are not.</p>
+  </div>
+  <div class="pb-3">
+    <h3>Categories</h3>
+    <p>To begin, let&#39;s create some categories. These can be useful for helping customers sort your various items. Click on the <code>Categories</code> button and press the green + button. This will allow you to create your own category. These categories can be added to product versions later.</p>
+  </div>
+  <div class="pb-3">
+    <h3 id="products">Products</h3>
+    <p>Next, lets create some products. Products have versions, which allows you to keep track of previous versions of the same product, e.g. different descriptions, dimensions and so on.
+      Create a product by clicking the green + button and then adding a key. Open up the newly created product to be able to see it&#39;s data and create a product version.</p>
+  </div>
+  <div class="pb-3">
+    <h3 id="product-versions">Product versions</h3>
+    <p>Product versions contain all the info for a single version of a product. This includes translations for their names and descriptions, their dimensions and various other attributes. All of these attributes are optional - you do not have to add them if you do not want to.
+      Here you can also add different prices for users. At least one price should have a blank user group if you want everyone to buy it! User groups will be explained further on. You can also add categories to a product here.
+      On the left in the details window, there is a blue button with a page on it. Here you can add translations for the product.
+      Once the product has a price, it can be activated from the green play button. Once activated, it will be included in the store.</p>
+  </div>
+  <div class="pb-3">
+    <h3 id="orders">Orders</h3>
+    <p>Here you have an overview of all the placed orders. Orders can have 5 different statuses: <code>created</code>, <code>processing</code>, <code>in_transit</code>, <code>completed</code> and <code>failed</code>.
+      A short explanation of the statuses:</p>
+    <ul>
+      <li><code>created</code> - A customer has placed an order and it is awaiting confirmation.</li>
+      <li><code>processing</code> - Their order has been accepted and is waiting to be shipped.</li>
+      <li><code>in_transit</code> - Their order has been shipped.</li>
+      <li><code>completed</code> - The order has arrived to the customer.</li>
+      <li><code>failed</code> - Something has gone wrong and the order could not be completed. This can happen for various reasons - the user cancelled their order, something was out of stock etc.</li>
+    </ul>
+    Currently, you should have no orders as nobody has bought anything yet.
+  </div>
+  <div class="pb-3">
+    <h3 id="user-accounts">User accounts</h3>
+    <p>In this view you can find an overview of all the accounts created on your store. It&#39;s possible to add groups to the various accounts here. These groups will later have different prices in your store.</p>
+  </div>
+  <div class="pb-3">
+    <h3 id="user-groups">User groups</h3>
+    <p>Here you can create different user groups. The higher the ranking, the higher its priority is. For example, when a user has 2 different groups <code>loyal</code> with a ranking of 1 and <code>great</code> with a ranking of 2, the user will see the prices of <code>loyal</code> groups first, then prices of <code>great</code> groups if applicable and only then will they see the global price.</p>
+  </div>
+  <div class="pb-3">
+    <h3 id="page-templates">Page templates</h3>
+    <p>This is the most difficult part of the guide to understand but also the most important. Using page templates, you can create your own pages. A page template has a key and a based on value. The based on value dictates what sort of record the page will expect.</p>
+    <p>Upon creating a page template, you must now create the translations. Currently, there are 3 different locales: <code>en</code>, <code>et</code> and <code>ru</code>. The content for each translation is the HTML code that will be rendered. To make your pages dynamic, you can use Liquid variables inside your HTML code. To see what variables are available for each based on record, see the Variables documentation page.</p>
+    <br>
+    <h4 id="liquid-variables">Liquid variables</h4>
+    <p>Liquid variables can be accessed with <code>{{ record.variable }}</code>. When generated, these will be replaced with the value. Liquid can also be used for more complex actions, such as loops and conditionals. For a complete documentation of Liquid, see their official documentation at <a href="https://github.com/Shopify/liquid/wiki/Liquid-for-Designers">https://github.com/Shopify/liquid/wiki/Liquid-for-Designers</a>.</p>
+    <p>Once you have created the page template, make sure to activate it from the green play button. This will ensure you can use this template in your pages.</p>
+  </div>
+  <div class="pb-3">
+    <h3 id="pages">Pages</h3>
+    <p>Here you can create your web page. Give it a key to identify it, a unique URL and select a page template to use. The page is not accessible until you make it live by pressing the green play button.</p>
+    <p>The page will be accessible at the following url: <code>/p/&lt;page_url&gt;/&lt;record_id&gt;</code>, where <code>page_url</code> is the URL selected for the page and <code>record_id</code> is the ID of a record that has the same type as the templates <code>based_on</code>. It&#39;s important to note that page templates with a <code>based_on</code> value of <code>store</code>,<code>purchase_cart</code> or <code>user_account</code> do not need a <code>record_id</code> - they can be accessed with only <code>/p/&lt;user_id&gt;</code>.</p>
+    <p>Locales are set by a cookie - <code>locale</code>. This cookie will default to <code>en</code>, but can be set to <code>et</code> or <code>ru</code> to access the other languages.</p>
+  </div>
+  <div class="pb-3">
+    <h3>API usage</h3>
+    <p>An API in this context is a web URL that is accessed to do some sort of action. From a browser, these are almost always accessed through the use of Javascript. Don't worry! They are very simple to use and an example is also provided below.
+      Some parts of the store require the usage of an API, such as adding and removing items from a users cart. These can be accessed by using Javascript. An example button will be provided below.</p>
+    <p>Currently, there are only 2 API endpoints:</p>
+    <ul>
+      <li><code>purchase_carts/add_item</code></li>
+      <li><code>purchase_carts/remove_item</code></li>
+    </ul>
+    Both use the PATCH HTTP method and take their input in the following JSON format:
+    <pre>
+item: {
+  key: 'product_key_here',
+  quantity: quantity_here
+}
+    </pre>
+
+    For example, to create a button that adds a product to the cart, you could use the following code on a product-based page:
+    <pre>
+
+  </div>
+</div> %>

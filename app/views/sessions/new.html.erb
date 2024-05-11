@@ -1,29 +1,20 @@
-<h1>Sign in</h1>
+<h1><%= t('titles.sign_in') %></h1>
 
 <div class='col-4'>
 <%= form_with(url: sign_in_path) do |form| %>
   <div class="mb-3">
-    <%= form.label :email, { class: 'form-label'} %>
+    <%= form.label :email, t('attributes.email'), { class: 'form-label'} %>
     <%= form.email_field :email, value: params[:email_hint], required: true, autofocus: true, class: 'form-control' %>
   </div>
 
   <div class="mb-3">
-    <%= form.label :password, { class: 'form-label'} %>
+    <%= form.label :password, t('attributes.password'), { class: 'form-label'} %>
     <%= form.password_field :password, required: true, autocomplete: "current-password", class: 'form-control' %>
   </div>
 
   <div class="py-3">
-    <%= form.submit "Sign in", class: 'btn btn-primary' %>
-    <%= link_to "Sign up", sign_up_path, class: 'btn btn-primary mx-3' %>
+    <%= form.submit t('titles.sign_in'), class: 'btn btn-primary' %>
+    <%= link_to t('titles.sign_up'), sign_up_path, class: 'btn btn-primary mx-3' %>
   </div>
 <% end %>
-</div>
-
-<br>
-
-
-<br>
-
-<div>
-
 </div>

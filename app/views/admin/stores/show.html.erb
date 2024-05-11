@@ -41,7 +41,7 @@
             <tr>
               <td>
               <%= link_to admin_store_purchase_orders_path(@store), class: 'btn btn-sm btn-primary' do %>
-                <i class='fas fa-cart-shopping'></i> <%= t('titles.key') %>
+                <i class='fas fa-cart-shopping'></i> <%= t('titles.orders') %>
               <% end %>
               </td>
             </tr>
@@ -62,14 +62,14 @@
             <tr>
               <td>
                 <%= link_to admin_store_user_groups_path(@store), class: 'btn btn-sm btn-primary' do %>
-                  <i class='fas fa-file-lines'></i> <%= t('titles.user_groups') %>
+                  <i class='fas fa-user-group'></i> <%= t('titles.user_groups') %>
                 <% end %>
               </td>
             </tr>
             <tr>
               <td>
                 <%= link_to admin_store_user_accounts_path(@store), class: 'btn btn-sm btn-primary' do %>
-                  <i class='fas fa-file-lines'></i> <%= t('titles.user_accounts') %>
+                  <i class='fas fa-user'></i> <%= t('titles.user_accounts') %>
                 <% end %>
               </td>
             </tr>

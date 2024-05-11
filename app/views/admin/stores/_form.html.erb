@@ -2,7 +2,7 @@
   <div class="modal-body">
     <% if store.errors.any? %>
       <div style="color: red">
-        <h2><%= pluralize(store.errors.count, "error") %> prohibited this store from being saved:</h2>
+        <h2><%= pluralize(store.errors.count, "error") %></h2>
         <ul>
           <% store.errors.each do |error| %>
             <li><%= error.full_message %></li>
@@ -11,20 +11,19 @@
       </div>
     <% end %>
     <div class="mb-3">
-      <%= form.label :name, { class: 'form-label'} %>
+      <%= form.label :name, t('attributes.name'), { class: 'form-label'} %>
       <%= form.text_field :name, { class: 'form-control' } %>
     </div>
     <div class="mb-3">
-      <%= form.label :url, { class: 'form-label' } %>
+      <%= form.label :url, t('attributes.subdomain'), { class: 'form-label' } %>
       <%= form.text_field :url, { class: 'form-control' } %>
     </div>
     <div class="mb-3 form-check">
       <%= form.check_box :example_store, { class: 'form-check-input' } %>
-      <%= form.label :example_store, { class: 'form-check-label' } %>
+      <%= form.label :example_store, t('attributes.example_store'), { class: 'form-check-label' } %>
     </div>
   </div>
   <div class="modal-footer">
-    <%= form.submit 'Submit', class: 'btn btn-primary' %>
-    <button type="button" class='btn btn-danger' data-bs-dismiss='modal'>Close</button>
+    <%= form.submit t('save'), class: 'btn btn-primary' %>
   </div>
 <% end %>

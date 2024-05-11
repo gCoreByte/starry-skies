@@ -1,10 +1,10 @@
 <tbody id='store'>
   <tr>
-    <th>Name</th>
+    <th><%= t('attributes.name') %></th>
     <td><%= @store.name %></td>
   </tr>
   <tr>
-    <th>URL</th>
+    <th><%= t('attributes.subdomain') %></th>
     <td>
       <% if @request.port != 80 %>
         <a href="<%= "http://#{@store.url}.#{@request.domain}:#{@request.port}" %>"><%= @store.url %></a>
@@ -14,15 +14,15 @@
     </td>
   </tr>
   <tr>
-    <th>Revenue</th>
+    <th><%= t('attributes.revenue') %></th>
     <td><%= @store.revenue %></td>
   </tr>
   <tr>
-    <th>Sales</th>
+    <th><%= t('attributes.sales') %></th>
     <td><%= @store.sales %></td>
   </tr>
   <tr>
-    <th>Created at</th>
+    <th><%= t('attributes.created_at') %></th>
     <td><%= time_tag(@store.created_at) %></td>
   </tr>
 
