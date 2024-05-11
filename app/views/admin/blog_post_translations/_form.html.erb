@@ -1,0 +1,28 @@
+<%= form_with(model: [:admin, @blog_post, @blog_post_translation]) do |form| %>
+  <div class='modal-body'>
+    <% if @blog_post_translation.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(@blog_post_translation.errors.count, "error") %></h2>
+        <ul>
+          <% @blog_post_translation.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class='mb-3'>
+      <%= form.label :title, t('attributes.title'), { class: 'form-label' } %>
+      <%= form.text_field :title, { class: 'form-control' } %>
+    </div>
+    <div class='mb-3'>
+      <%= form.label :content, t('attributes.content'), { class: 'form-label' } %>
+      <%= form.text_area :content, { class: 'form-control' } %>
+    </div>
+    <div class='mb-3'>
+      <%= form.label :locale, t('attributes.locale'), { class: 'form-label' } %>
+      <%= form.select :locale, I18n.available_locales, {}, { class: 'form-select' } %>
+    </div>
+    <div class='modal-footer'>
+      <%= form.submit t('save'), class: 'btn btn-primary' %>
+    </div>
+  <% end %>

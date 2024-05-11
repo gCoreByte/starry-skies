@@ -1,0 +1,58 @@
+<div class="row" id='blog_post'>
+  <div class="col-xl-6">
+    <div class="card mb-3 border">
+      <div class="card-header">
+        <%= card_title(t('titles.blog_post')) do %>
+          <%= edit_button([:admin, @blog_post]) %>
+          <%= destroy_button([:admin, @blog_post]) %>
+        <% end %>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <tbody>
+            <tr>
+              <th><%= t('attributes.key') %></th>
+              <td><%= @blog_post.key %></td>
+            </tr>
+            <tr>
+              <th><%= t('attributes.created_by') %></th>
+              <td><%= @blog_post.created_by.name %></td>
+            </tr>
+            <tr>
+              <th><%= t('attributes.created_at') %></th>
+              <td><%= time_tag(@blog_post.created_at) %></td>
+            </tr>
+            <tr>
+              <th><%= t('attributes.updated_by') %></th>
+              <td><%= @blog_post.updated_by.name %></td>
+            </tr>
+            <tr>
+              <th><%= t('attributes.updated_at') %></th>
+              <td><%= time_tag(@blog_post.updated_at) %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-6">
+    <div class="card mb-3 border">
+      <div class="card-header">
+        <%= card_title(t('titles.blog_post_translations')) do %>
+          <%= create_button([:admin, @blog_post, :blog_post_translation]) %>
+        <% end %>
+      </div>
+      <div class='table-responsive'>
+        <table class='table table-bordered table-striped'>
+          <thead>
+            <th><%= t('attributes.locale') %></th>
+            <th><%= t('attributes.actions') %></th>
+          </thead>
+          <tbody id=blog_post_translations>
+            <%= render @blog_post.blog_post_translations.order(locale: :asc) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

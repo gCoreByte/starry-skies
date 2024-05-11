@@ -29,6 +29,9 @@
               <li class="nav-item">
                 <%= link_to t('titles.variables'), variables_admin_documentations_path, class: 'nav-link text-dark' %>
               </li>
+              <li class="nav-item">
+                <%= link_to t('titles.guide'), guide_admin_documentations_path, class: 'nav-link text-dark' %>
+              </li>
             </ul>
           </li>
           <% if @current_store.present? %>

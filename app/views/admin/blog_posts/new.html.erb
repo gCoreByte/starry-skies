@@ -1,0 +1,6 @@
+<%= turbo_frame_tag "modal" do %>
+  <div class="modal-header">
+    <h1 class="modal-title"><%= t('new') %></h1>
+  </div>
+  <%= render 'form', store: @store, blog_post: @blog_post %>
+<% end %>

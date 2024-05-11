@@ -28,6 +28,9 @@
 #       enabled: "ON"
 
 et:
+  home_page: >-
+    Tere tulemast avalehele. See on mitmekeelse Eesti e-kaubanduse platvormi kontseptsioon.
+    Palun registreeruge ja proovige seda!
   back: Tagasi
   are_you_sure: Kas olete kindel?
   date:
@@ -90,6 +93,10 @@ et:
     finalize_purchase: Ostu lõpuleviimine
     successful_purchase: Ost õnnestus
     account_created: Teie konto on edukalt loodud. Teid suunatakse meie avalehele 5 sekundi pärast.
+    blog_post: Blogi postitus
+    blog_posts: Blogi postitused
+    blog_post_translations: Blogi postituse tõlked
+    blog_post_translation: Blogi postituse tõlge
   thank_you: Täname ostu eest
   thank_you_registered: Täname registreerumise eest
   account_created: Teie konto on edukalt loodud. Teid suunatakse meie avalehele 5 sekundi pärast.
@@ -146,6 +153,7 @@ et:
     postal_code: Postiindeks
     subdomain: Alamdomeen
     example_store: Näidispood
+    title: Pealkiri
   sessions:
     create:
       alert: Vigane e-posti aadress või parool

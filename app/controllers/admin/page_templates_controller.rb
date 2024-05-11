@@ -52,10 +52,10 @@ module Admin
       @service = PageTemplates::Destroy.new(page_template: @page_template, fingerprint: fingerprint)
       if @service.save
         flash.notice = t('.success')
-        redirect_to admin_page_template_url(@page_template)
+        redirect_to admin_store_page_templates_url(@store)
       else
         flash.alert = t('.alert')
-        redirect_to admin_store_page_templates_url(@store)
+        redirect_to admin_page_template_url(@page_template)
       end
     end
 
