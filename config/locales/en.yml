@@ -162,6 +162,9 @@ en:
   sessions:
     create:
       alert: Invalid email or password
+  registrations:
+    create:
+      success: Thank you for registering. Make sure to check out the guide for more information.
   admin:
     page_templates:
       destroy:

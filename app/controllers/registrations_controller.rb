@@ -14,7 +14,7 @@ class RegistrationsController < ApplicationController
       session_record = @admin_account.sessions.create!
       cookies.signed.permanent[:session_token] = { value: session_record.id, httponly: true }
 
-      send_email_verification
+      flash.notice = t('.success')
       redirect_to root_path
     else
       render :new, status: :unprocessable_entity

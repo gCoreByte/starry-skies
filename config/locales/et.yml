@@ -38,6 +38,9 @@ et:
   activate: Aktiveeri
   translations_form: Tõlked
   show: Vaata
+  registrations:
+    create:
+      success: Aitäh registreerimise eest. Vaadake meie juhendit, et leida infot oma poe ülesseadmise kohta.
   date:
     formats:
       default: "%Y-%m-%d"
