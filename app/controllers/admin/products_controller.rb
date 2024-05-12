@@ -17,6 +17,7 @@ module Admin
     end
 
     def edit
+      @store = nil
     end
 
     def create
@@ -33,8 +34,12 @@ module Admin
     end
 
     def update
+      @store = nil
       if @product.update(update_params)
-        redirect_to admin_product_url(@product)
+        respond_to do |format|
+          format.html { redirect_to admin_product_url(@product) }
+          format.turbo_stream
+        end
       else
         render :edit, status: :unprocessable_entity
       end

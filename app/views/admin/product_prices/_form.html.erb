@@ -12,7 +12,7 @@
     <% end %>
     <div class='mb-3'>
       <%= form.label :price, t('attributes.price'), { class: 'form-label' } %>
-      <%= form.number_field :price, { class: 'form-control' } %>
+      <%= form.number_field :price, { class: 'form-control', step: 0.01 } %>
     </div>
     <div class='mb-3'>
       <%= form.label :user_group, t('attributes.user_group'), { class: 'form-label' } %>

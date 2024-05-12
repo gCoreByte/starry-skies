@@ -33,6 +33,11 @@ en:
     Please register and try it out!
   back: Back
   are_you_sure: Are you sure?
+  delete: Delete
+  deactivate: Deactivate
+  activate: Activate
+  translations_form: Translations
+  show: Show
   date:
     formats:
       default: "%Y-%m-%d"

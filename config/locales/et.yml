@@ -33,6 +33,11 @@ et:
     Palun registreeruge ja proovige seda!
   back: Tagasi
   are_you_sure: Kas olete kindel?
+  delete: Kustuta
+  deactivate: Deaktiveeri
+  activate: Aktiveeri
+  translations_form: Tõlked
+  show: Vaata
   date:
     formats:
       default: "%Y-%m-%d"
