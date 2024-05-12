@@ -21,6 +21,8 @@ To begin, let's create some categories. These can be useful for helping customer
 
 ### Products
 
+Products only contain the key and keep track of all their versions. To give the product some attributes, prices etc, create a product version.
+
 Next, lets create some products. Products have versions, which allows you to keep track of previous versions of the same product, e.g. different descriptions, dimensions and so on.
 Create a product by clicking the green + button and then adding a key. Open up the newly created product to be able to see it's data and create a product version.
 

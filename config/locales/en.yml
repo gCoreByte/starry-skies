@@ -34,6 +34,11 @@ en:
     THIS IS A TESTING SITE - DO NOT TRACK IS NOT RESPECTED FOR TESTING PURPOSES
   back: Back
   are_you_sure: Are you sure?
+  delete: Delete
+  deactivate: Deactivate
+  activate: Activate
+  translations_form: Translations
+  show: Show
   date:
     formats:
       default: "%Y-%m-%d"
@@ -158,6 +163,9 @@ en:
   sessions:
     create:
       alert: Invalid email or password
+  registrations:
+    create:
+      success: Thank you for registering. Make sure to check out the guide for more information.
   admin:
     page_templates:
       destroy:

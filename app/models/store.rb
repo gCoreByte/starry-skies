@@ -33,6 +33,10 @@ class Store < ApplicationRecord
   validates :url, length: { maximum: 100 }, allow_nil: true # FIXME: URL validation
   validates :url, uniqueness: true, allow_nil: true
 
+  def url=(value)
+    super(value&.downcase)
+  end
+
   def revenue
     purchase_cart_items.joins(:purchase_cart).where(
       purchase_cart: { status: PurchaseCart::Statuses::BILLED }

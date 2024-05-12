@@ -26,6 +26,8 @@ Create a product by clicking the green + button and then adding a key. Open up t
 
 ### Product versions
 
+Products only contain the key and keep track of all their versions. To give the product some attributes, prices etc, create a product version.
+
 Product versions contain all the info for a single version of a product. This includes translations for their names and descriptions, their dimensions and various other attributes. All of these attributes are optional - you do not have to add them if you do not want to.
 Here you can also add different prices for users. At least one price should have a blank user group if you want everyone to buy it! User groups will be explained further on. You can also add categories to a product here.
 On the left in the details window, there is a blue button with a page on it. Here you can add translations for the product.

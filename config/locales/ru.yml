@@ -34,6 +34,11 @@ ru:
     THIS IS A TESTING SITE - DO NOT TRACK IS NOT RESPECTED FOR TESTING PURPOSES
   back: Back
   are_you_sure: Are you sure?
+  delete: Delete
+  deactivate: Deactivate
+  activate: Activate
+  translations_form: Translations
+  show: Show
   date:
     formats:
       default: "%Y-%m-%d"
@@ -102,6 +107,9 @@ ru:
   thank_you_registered: Thank you for registering
   account_created: Your account has been successfully created. You will be redirected to our homepage in 5 seconds.
   order_processed: Your order has been successfully processed. You will be redirected to our homepage in 5 seconds.
+  registrations:
+    create:
+      success: Thank you for registering. Make sure to check out the guide for more information.
   attributes:
     name: Name
     revenue: Revenue
